@@ -17,19 +17,19 @@ const Login = () => {
             <label className="text-[20px] font-[300] mb-[10px] block">
               Email address <sup className="text-[#C9312E]">*</sup>
             </label>
-            <input type="email" className="input input-bordered w-full" />
+            <input type="email" className="input input-bordered w-full h-[56px]" />
           </div>
           <div className="mb-[33px]">
             <label className="text-[20px] font-[300] mb-[10px] block">
               Password <sup className="text-[#C9312E]">*</sup>
             </label>
-            <input type="password" className="input input-bordered w-full" />
+            <input type="password" className="input input-bordered w-full h-[56px]" />
           </div>
           <div className="mb-[42px]">
             <label className="text-[20px] font-[300] mb-[10px] block">
               Key
             </label>
-            <input type="email" className="input input-bordered w-full" />
+            <input type="email" className="input input-bordered w-full h-[56px]" />
           </div>
           <div className="flex justify-center gap-[30px] mb-[30px]">
             <Link to="/register">

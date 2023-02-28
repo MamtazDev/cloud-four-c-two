@@ -1,4 +1,5 @@
 import React from 'react';
+import BlueButton from '../../utils/BlueButton';
 
 const Account = () => {
     return (
@@ -50,7 +51,7 @@ const Account = () => {
                     </ul>
                 </div>
                 <div className='text-center mt-[30px]'>
-                    <button>Change Password</button>
+                  <BlueButton>Change password</BlueButton>
                 </div>
             </div>
         </div>

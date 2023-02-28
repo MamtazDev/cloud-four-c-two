@@ -1,0 +1,35 @@
+.search_bg {
+  background-image: url("../../assets/Search.png");
+  background-repeat: no-repeat;
+  background-position: left 3% center;
+}
+.outline_btn {
+  border: 1px solid #3853a4;
+  border-radius: 5px;
+  padding: 8px 33px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+.card_box {
+  width: 276px;
+  background: #fffbfb;
+  box-shadow: 0px 4px 108px -47px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  /* padding-top: 32px;
+  padding-bottom: 63px; */
+}
+.code_box {
+  width: 179px;
+  background: #fffbfb;
+  box-shadow: 0px 4px 108px -47px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  padding-top: 32px;
+  padding-bottom: 63px;
+}
+.img_box {
+  background: rgba(56, 83, 164, 0.13);
+  backdrop-filter: blur(178.5px);
+  border-radius: 12px;
+  height: 145px;
+}

@@ -31,3 +31,14 @@
     background-color: rgba(0, 0, 0, 0.5); /* set the overlay color with alpha value */
     background-blend-mode: multiply;
 }
+
+label.label{
+    width: 112px;
+}
+
+@media screen and (max-width: 991px) {
+    .user__set{
+        width: unset;
+        max-width: unset;
+    }
+}

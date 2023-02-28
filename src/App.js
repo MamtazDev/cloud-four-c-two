@@ -1,15 +1,18 @@
-import './App.css';
-import Account from './components/Account/Account';
-import Sidebar from './components/Account/Sidebar';
-import Login from './components/Register/Login';
+
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Login from "./components/Register/Login";
+import Register from "./components/Register/Register";
 
 function App() {
   return (
-  <div>
-    {/* <Login/> */}
-    <Sidebar />
-    <Account />
-  </div>
+    <div>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </div>
+
   );
 }
 

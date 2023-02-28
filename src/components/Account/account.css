@@ -1,0 +1,19 @@
+.bar__bottom .img-wrapper{
+    position: relative;
+}
+
+.bar__bottom .img-wrapper::before{
+    position: absolute;
+    content: "";
+    height:  100%;
+    width: 0px;
+    background: #c9312e;
+    left: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: 0.2s ease-in-out;
+}
+
+.bar__bottom .img-wrapper:hover::before{
+    width: 15px;
+}

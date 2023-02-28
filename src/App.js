@@ -1,10 +1,14 @@
 import './App.css';
+import Account from './components/Account/Account';
+import Sidebar from './components/Account/Sidebar';
 import Login from './components/Register/Login';
 
 function App() {
   return (
   <div>
-    <Login/>
+    {/* <Login/> */}
+    <Sidebar />
+    <Account />
   </div>
   );
 }

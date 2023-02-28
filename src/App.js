@@ -6,6 +6,7 @@ import Register from "./components/Register/Register";
 
 function App() {
   return (
+
     <div>
       <Routes>
         <Route path="/" element={<Login />} />

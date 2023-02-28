@@ -2,6 +2,7 @@ import React from "react";
 import "./Register.css";
 import loginLogo from "../../assets/login_logo.png";
 import BlueButton from "../../utils/BlueButton";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -31,7 +32,9 @@ const Login = () => {
             <input type="email" className="input input-bordered w-full" />
           </div>
           <div className="flex justify-center gap-[30px] mb-[30px]">
+            <Link to="/register">
             <BlueButton>Register</BlueButton>
+            </Link>
             <BlueButton>Log In</BlueButton>
           </div>
           <p className=" text-[20px] font-[300] text-center">

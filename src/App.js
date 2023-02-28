@@ -5,7 +5,7 @@ import Login from './components/Register/Login';
 
 function App() {
   return (
-  <div>
+  <div className='flex'>
     {/* <Login/> */}
     <Sidebar />
     <Account />

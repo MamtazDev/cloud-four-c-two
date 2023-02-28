@@ -14,10 +14,10 @@ const Sidebar = () => {
                 <img className='px-[45px] mb-[66px]' src={SideLogo} alt="logo" />
                 <img className='px-[45px] cursor-pointer' src={Person} alt="image" />
             </div>
-            <div className='bar__bottom'>
-                <div className='img-wrapper'><img className='px-[45px] mb-[62px] cursor-pointer' src={Home} alt="image" /></div>
-                <div className='img-wrapper'><img className='px-[45px] mb-[62px] cursor-pointer' src={Info} alt="image" /></div>
-                <div className='img-wrapper'><img className='px-[45px] cursor-pointer' src={User} alt="image" /></div>
+            <div className='bar__bottom flex flex-col items-center'>
+                <div className='img-wrapper mb-[12px]'><img className='px-[45px] py-[25px] cursor-pointer' src={Home} alt="image"/></div>
+                <div className='img-wrapper mb-[12px]'><img className='px-[45px] py-[25px] cursor-pointer' src={Info} alt="image"/></div>
+                <div className='img-wrapper mb-[62px]'><img className='px-[45px] py-[25px] cursor-pointer' src={User} alt="image"/></div>
                 {/* <p>asdf</p> */}
             </div>
         </div>

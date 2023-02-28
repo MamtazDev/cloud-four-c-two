@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <div className="py-[60px]">
         
-    <div className="login_container shadow ">
+    <div className="login_container ">
       <img className="mx-auto mb-[71px]" src={loginLogo} alt="" />
       <p className="text-center text-[#C9312E] text-[36px] font-[500] mb-[50px]">
         Login to your account

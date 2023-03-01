@@ -6,8 +6,9 @@ import Manage from "./components/MangeUser/Manage";
 import NodeInfo from "./components/MangeUser/NodeInfo";
 import AddUser from "./components/Projects/AddUser";
 import Project from "./components/Projects/Project";
+import ProjectCopy from "./components/Projects/ProjectCopy";
 import ProjectDetails from "./components/Projects/ProjectDetails";
-
+import ProjectUpload from "./components/Projects/ProjectUpload";
 import StartSession from "./components/Projects/StartSession";
 
 import ProjectReport from "./components/Projects/ProjectReport";
@@ -35,6 +36,8 @@ function App() {
 
 
           <Route path='startSession' element={<StartSession />}></Route>
+          <Route path='projectCopy' element={<ProjectCopy />}></Route>
+          <Route path='projectUpload' element={<ProjectUpload />}></Route>
 
           
 

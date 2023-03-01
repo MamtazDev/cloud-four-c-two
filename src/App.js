@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Account from "./components/Account/Account";
+import Help from "./components/Help.js/Help";
 import Manage from "./components/MangeUser/Manage";
 import Project from "./components/Projects/Project";
 import ProjectDetails from "./components/Projects/ProjectDetails";
@@ -20,6 +21,7 @@ function App() {
           <Route path="project" element={<Project />}></Route>
           <Route path="projectDetails" element={<ProjectDetails />}></Route>
           <Route path="projectReport" element={<ProjectReport />}></Route>
+          <Route path="help" element={<Help />}></Route>
           <Route path="manage" element={<Manage />}></Route>
         </Route>
 

@@ -7,7 +7,11 @@ import NodeInfo from "./components/MangeUser/NodeInfo";
 import AddUser from "./components/Projects/AddUser";
 import Project from "./components/Projects/Project";
 import ProjectDetails from "./components/Projects/ProjectDetails";
+
+import StartSession from "./components/Projects/StartSession";
+
 import ProjectReport from "./components/Projects/ProjectReport";
+
 import Login from "./components/Register/Login";
 import Register from "./components/Register/Register";
 import Sidebar from "./components/shared/Sidebar";
@@ -25,8 +29,15 @@ function App() {
           <Route path="projectReport" element={<ProjectReport />}></Route>
           <Route path="help" element={<Help />}></Route>
           <Route path="manage" element={<Manage />}></Route>
+
           <Route path="nodeInfo" element={<NodeInfo />}></Route>
           <Route path="addUser" element={<AddUser />}></Route>
+
+
+          <Route path='startSession' element={<StartSession />}></Route>
+
+          
+
         </Route>
 
         <Route path="/register" element={<Register />} />

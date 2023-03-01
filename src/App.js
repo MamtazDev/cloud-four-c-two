@@ -1,3 +1,4 @@
+
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Project from "./components/Projects/Project";
@@ -6,6 +7,7 @@ import Register from "./components/Register/Register";
 
 function App() {
   return (
+
     <div>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -13,6 +15,7 @@ function App() {
         <Route path="/project" element={<Project />} />
       </Routes>
     </div>
+
   );
 }
 

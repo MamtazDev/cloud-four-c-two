@@ -1,0 +1,43 @@
+ .Mange__User td{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+/*.Mange__User tr{
+    margin-bottom: 20px;
+} */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead {
+    background: linear-gradient(0deg, #3853A4 0%, rgba(56, 83, 164, 0.858042) 53.13%, rgba(56, 83, 164, 0.55) 100%);
+    border-radius: 4px;
+    /* padding: 21px 13px; */
+    color: #Fff;
+  }
+
+  thead th{
+    margin-bottom: 20px;
+  }
+  
+td {
+    padding: 12px 0;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  th{
+    padding: 12px;
+  }
+  
+  tr:nth-child(even) {
+    
+  }
+  
+  tr:not(:first-child) {
+    margin-top: 20px;
+  }

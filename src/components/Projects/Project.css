@@ -48,3 +48,7 @@ border-color: rgba(56, 83, 164, 0.45);
 .cencelation button:last-child{
   color: #3853A4; 
 }
+
+.menu[class*=" p-"]:not(.menu[class*=" p-0"]) li>*{
+  border-radius: 36px !important;
+}

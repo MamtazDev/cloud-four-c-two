@@ -6,8 +6,8 @@
 .outline_btn {
   border: 1px solid #3853a4;
   border-radius: 5px;
-  padding: 8px 33px;
-  font-weight: 400;
+  /* padding: 8px 33px; */
+  /* font-weight: 400; */
   font-size: 16px;
   line-height: 20px;
 }

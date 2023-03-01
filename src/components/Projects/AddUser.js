@@ -1,7 +1,6 @@
 import React from "react";
 import ProjectButton from "../../utils/ProjectButton";
 import ProjectButton3 from "../../utils/ProjectButton3";
-import ProjectButton4 from "../../utils/ProjectButton4";
 import arrow from "../../assets/right-arrow.png";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
@@ -79,8 +78,10 @@ const AddUser = () => {
 </div>
            
 
-            <ProjectButton3>Cancel</ProjectButton3>
-            <ProjectButton4>Accept</ProjectButton4>
+            <div className="cencelation">
+              <ProjectButton3>Cancel</ProjectButton3>
+              <ProjectButton3>Accept</ProjectButton3>
+            </div>
           </div>
         </div>
       </div>

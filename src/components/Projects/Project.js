@@ -6,8 +6,25 @@ import code from "../../assets/code.png";
 import close from "../../assets/close.png";
 import more from "../../assets/more.png";
 import staff from "../../assets/staff.png";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Project = () => {
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  };
   return (
     <div className="bg-[#FFFBFB] py-[61px] px-[57px]">
       <div className="grid grid-cols-3 gap-[61px] mb-[34px] ">
@@ -61,8 +78,42 @@ const Project = () => {
         <div className="card_box p-[7px]">
           <div className="img_box">
             <div className="flex justify-between px-[12px] pt-[9px] pb-[22px]">
-              <img src={close} alt="" />
-              <img src={more} alt="" />
+              <img onClick={handleDelete} src={close} alt="" />
+
+              <div className="dropdown dropdown-right">
+                <label tabIndex={0}>
+                  <img src={more} alt="" />
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
+                >
+                  <li>
+                    <Link to="/dashboard/projectDetails">Project details</Link>
+                  </li>
+                  <li>
+                    <a>Share</a>
+                  </li>
+                  <li>
+                    <a>Leave project</a>
+                  </li>
+                  <li>
+                    <a>start session</a>
+                  </li>
+                  <li>
+                    <a>copy project</a>
+                  </li>
+                  <li>
+                    <a>edit project</a>
+                  </li>
+                  <li>
+                    <a>disable project</a>
+                  </li>
+                  <li>
+                    <a>delete project</a>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <img className="mx-auto mb-[-30px]" src={staff} alt="" />

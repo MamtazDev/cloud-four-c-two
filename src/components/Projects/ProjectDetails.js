@@ -83,7 +83,7 @@ const ProjectDetails = () => {
         </div>
       </div>
       {/* user part */}
-      <div>
+      <div className="mb-[22px]">
         <div className="flex items-center justify-between mb-[12px]">
           <p className="text-[16px] font-[500]">Users</p>
           <BlueButton>Add user</BlueButton>
@@ -124,7 +124,7 @@ const ProjectDetails = () => {
         <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
           <div className="flex ">
             <p className="font-[500] w-[210px] pl-[17px] py-[20px]">
-         Session 01
+              Session 01
             </p>
 
             <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
@@ -142,12 +142,8 @@ const ProjectDetails = () => {
           </div>
           <div className="flex text-[16px]">
             <p className="w-[210px] font-[500] pl-[17px] py-[20px]"></p>
-            <p className="font-[500] py-[20px] mr-[97px]">
-            Remove (ANALYST)
-            </p>
-            <p className="font-[500] py-[20px]">
-            Change role (ANALYST)
-            </p>
+            <p className="font-[500] py-[20px] mr-[97px]">Remove (ANALYST)</p>
+            <p className="font-[500] py-[20px]">Change role (ANALYST)</p>
           </div>
         </div>
       </div>

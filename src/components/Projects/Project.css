@@ -6,8 +6,8 @@
 .outline_btn {
   border: 1px solid #3853a4;
   border-radius: 5px;
-  padding: 8px 33px;
-  font-weight: 400;
+  /* padding: 8px 33px; */
+  /* font-weight: 400; */
   font-size: 16px;
   line-height: 20px;
 }
@@ -32,4 +32,11 @@
   backdrop-filter: blur(178.5px);
   border-radius: 12px;
   height: 145px;
+}
+.session_bg{
+  /* background-color: rgba(240, 244, 255, 1); */
+  background: #F0F4FF;
+border-width: 0px 1.5px 1.5px 1.5px;
+border-style: solid;
+border-color: rgba(56, 83, 164, 0.45);
 }

@@ -30,17 +30,11 @@ function App() {
           <Route path="projectReport" element={<ProjectReport />}></Route>
           <Route path="help" element={<Help />}></Route>
           <Route path="manage" element={<Manage />}></Route>
-
           <Route path="nodeInfo" element={<NodeInfo />}></Route>
           <Route path="addUser" element={<AddUser />}></Route>
-
-
-          <Route path='startSession' element={<StartSession />}></Route>
-          <Route path='projectCopy' element={<ProjectCopy />}></Route>
-          <Route path='projectUpload' element={<ProjectUpload />}></Route>
-
-          
-
+          <Route path="startSession" element={<StartSession />}></Route>
+          <Route path="projectCopy" element={<ProjectCopy />}></Route>
+          <Route path="projectUpload" element={<ProjectUpload />}></Route>
         </Route>
 
         <Route path="/register" element={<Register />} />

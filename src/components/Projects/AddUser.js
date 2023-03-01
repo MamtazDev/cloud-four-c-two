@@ -1,7 +1,6 @@
 import React from "react";
 import ProjectButton from "../../utils/ProjectButton";
 import ProjectButton3 from "../../utils/ProjectButton3";
-import arrow from "../../assets/right-arrow.png";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
 import imgSeen from '../../assets/person1.png'
@@ -154,6 +153,7 @@ const AddUser = () => {
               Filter
             </button>
             <div className="dropdown dropdown-right">
+
   <label tabIndex={0}> <button className="flex  items-center justify-center w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px  font-[500] rounded-[8px] p-[8px] mb-[10px]">
               Role <MdKeyboardArrowRight />
             </button></label>
@@ -163,6 +163,7 @@ const AddUser = () => {
   </ul>
 </div>
            
+
 
             <div className="cencelation flex flex-col items-center">
               <ProjectButton3>Cancel</ProjectButton3>

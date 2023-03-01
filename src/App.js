@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Account from "./components/Account/Account";
 import Manage from "./components/MangeUser/Manage";
+import NodeInfo from "./components/MangeUser/NodeInfo";
 import Project from "./components/Projects/Project";
 import ProjectDetails from "./components/Projects/ProjectDetails";
 import Login from "./components/Register/Login";
@@ -14,11 +15,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
-        <Route path="dashboard" element={<Sidebar />}>
-          <Route index element={<Account />}></Route>
-          <Route path="project" element={<Project />}></Route>
-          <Route path="projectDetails" element={<ProjectDetails />}></Route>
-           <Route path='manage' element={<Manage />}></Route>
+        <Route path="dashboard" element={<Sidebar/>} >
+          <Route index element={<Account/>}></Route>
+          <Route path='project' element={<Project />}></Route>
+          <Route path='manage' element={<Manage />}></Route>
+              <Route path="projectDetails" element={<ProjectDetails />}></Route>
+          <Route path='nodeInfo' element={<NodeInfo />}></Route>
+
 
         </Route>
 

@@ -23,10 +23,10 @@ const Project = () => {
         </div>
       </div>
       <div className="flex gap-[20px] mb-[20px]">
-        <button className="outline_btn" type="">
+        <button className="outline_btn py-[8px] px-[33px]" type="">
           Disabled
         </button>
-        <button className="outline_btn" type="">
+        <button className="outline_btn py-[8px] px-[33px]" type="">
           Deleted
         </button>
       </div>
@@ -54,7 +54,7 @@ const Project = () => {
           <p className="text-[16px] font-[500] text-center mb-[8px]">Code</p>
 
           <p className="text-center text-[10px]">
-            Got a code to join a team? <br/> Enter it above
+            Got a code to join a team? <br /> Enter it above
           </p>
         </div>
 

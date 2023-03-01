@@ -15,7 +15,7 @@ import TableBtn from '../../utils/TableBtn';
 
 const Manage = () => {
     return (
-        <div className='Mange__User px-[57px] py-[61px]'>
+        <div className='Mange__User px-[57px] py-[61px] overflow-x-auto'>
             <div className='top__btn flex items-center mb-[82px]'>
                 <BlueButton>Test Filter</BlueButton>
                 <button className='gray__btn text-[20px] font-[500] leading-[30px] ml-[20px] px-[38px] py-[18px] rounded-[5px] bg-[#f0f4ff] bordered-[1px]'>Show Deleted</button>
@@ -93,7 +93,7 @@ const Manage = () => {
                 <tr>
                     <td><img src={Person1} alt="User Image"/></td>
                     <td>Sajib Ahmed</td>
-                    <td>Sajib Value</td>
+                    <td>Sajib</td>
                     <td>Ahmed</td>
                     <td>Admin</td>
                     <td>Active</td>
@@ -109,7 +109,7 @@ const Manage = () => {
                 <tr>
                     <td><img src={Person2} alt="User Image"/></td>
                     <td>Sajib Ahmed</td>
-                    <td>Sajib Value</td>
+                    <td>Sajib</td>
                     <td>Ahmed</td>
                     <td>Admin</td>
                     <td>Active</td>
@@ -125,7 +125,7 @@ const Manage = () => {
                 <tr>
                     <td><img src={Person3} alt="User Image"/></td>
                     <td>Sajib Ahmed</td>
-                    <td>Sajib Value</td>
+                    <td>Sajib</td>
                     <td>Ahmed</td>
                     <td>Admin</td>
                     <td>Active</td>
@@ -141,7 +141,7 @@ const Manage = () => {
                 <tr>
                     <td><img src={Person4} alt="User Image"/></td>
                     <td>Sajib Ahmed</td>
-                    <td>Sajib Value</td>
+                    <td>Sajib</td>
                     <td>Ahmed</td>
                     <td>Admin</td>
                     <td>Active</td>
@@ -157,7 +157,7 @@ const Manage = () => {
                 <tr>
                     <td><img src={Person5} alt="User Image"/></td>
                     <td>Sajib Ahmed</td>
-                    <td>Sajib Value</td>
+                    <td>Sajib</td>
                     <td>Ahmed</td>
                     <td>Admin</td>
                     <td>Active</td>
@@ -173,7 +173,7 @@ const Manage = () => {
                 <tr>
                     <td><img src={Person6} alt="User Image"/></td>
                     <td>Sajib Ahmed</td>
-                    <td>Sajib Value</td>
+                    <td>Sajib</td>
                     <td>Ahmed</td>
                     <td>Admin</td>
                     <td>Active</td>
@@ -189,7 +189,7 @@ const Manage = () => {
                 <tr>
                     <td><img src={Person7} alt="User Image"/></td>
                     <td>Sajib Ahmed</td>
-                    <td>Sajib Value</td>
+                    <td>Sajib</td>
                     <td>Ahmed</td>
                     <td>Admin</td>
                     <td>Active</td>
@@ -205,7 +205,7 @@ const Manage = () => {
                 <tr>
                     <td><img src={Person8} alt="User Image"/></td>
                     <td>Sajib Ahmed</td>
-                    <td>Sajib Value</td>
+                    <td>Sajib</td>
                     <td>Ahmed</td>
                     <td>Admin</td>
                     <td>Active</td>

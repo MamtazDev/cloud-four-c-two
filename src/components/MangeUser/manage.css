@@ -8,36 +8,45 @@
     margin-bottom: 20px;
 } */
 
-table {
+.Mange__User table {
     width: 100%;
     border-collapse: collapse;
   }
 
-  thead {
+  .Mange__User thead {
     background: linear-gradient(0deg, #3853A4 0%, rgba(56, 83, 164, 0.858042) 53.13%, rgba(56, 83, 164, 0.55) 100%);
     border-radius: 4px;
     /* padding: 21px 13px; */
     color: #Fff;
   }
 
-  thead th{
+  .Mange__User thead th{
     margin-bottom: 20px;
   }
   
-td {
+  .Mange__User td {
     padding: 12px 0;
     text-align: left;
     box-sizing: border-box;
   }
 
-  th{
+  .Mange__User th{
     padding: 12px;
   }
   
-  tr:nth-child(even) {
+  .Mange__User tr:nth-child(even) {
     
   }
   
-  tr:not(:first-child) {
+  .Mange__User tr:not(:first-child) {
     margin-top: 20px;
+  }
+
+  .node__info tr td{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    padding: 20px 0;
+    background: linear-gradient(0deg, rgba(56, 83, 164, 0.2) 0%, rgba(56, 83, 164, 0.171608) 53.13%, rgba(56, 83, 164, 0.11) 100%);
   }

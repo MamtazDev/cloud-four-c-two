@@ -1,5 +1,6 @@
 import React from "react";
 import BlueButton from "../../utils/BlueButton";
+import './account.css'
 
 const Account = () => {
   return (
@@ -10,35 +11,36 @@ const Account = () => {
             {" "}
             <a href="#!">My Account</a> / <a href="#!">Edit user</a>{" "}
           </h3>
-          <div className="h-[262px] w-[262px] leading-[262px] mx-[auto] mt-[44px] mb-[80px] rounded-[50%] choose__Img">
-            <p className="">Change Image</p>
+          <div className="h-[200px] sm:h-[262px] w-[200px] sm:w-[262px] leading-[200px] sm:leading-[262px] mx-[auto] mt-[44px] mb-[80px] rounded-[50%] choose__Img">
+            <p className="text-white">Change Image</p>
           </div>
         </div>
-        <div className="user__log flex items-center justify-between w-[full] max-w-[656px]">
-          {/* <div className='flex w-full max-w-[420px] justify-between text-[20px] font-[500] leading-[24px]'>
-                        <div className='label'>Username</div>
-                        <div className='label'>My_cernamnet_username</div>
-                    </div>
-                    <div className='flex justify-between items-center w-full max-w-[656px] text-[20px] leading-[24px]'>
-                        <div className='label'>First Name</div>
-                        <input className='border' type="text" />
-                        <a href='#!'>Change</a>
-                    </div>
-                    <div className='flex justify-between items-center w-full max-w-[656px] text-[20px] leading-[24px]'>
-                        <div className='label'>Last Name</div>
-                        <input className='border' type="text" />
-                        <a href='#!'>Change</a>
-                    </div>
-                    <div className='flex justify-between items-center w-full max-w-[656px] text-[20px] leading-[24px]'>
-                        <div className='label'>Email</div>
-                        <input className='border' type="text" />
-                        <a href='#!'>Update</a>
-                    </div> */}
-          <ul className="userInfo text-[20px] font-[400] leading-[24px]">
+        <div className="user__log flex flex-col justify-between w-[full] max-w-[656px]">
+          <div className='flex w-full max-w-[400px] md:max-w-[465px] mb-[30px] justify-between text-[20px] font-[500] leading-[24px]'>
+              <div className='label'>Username</div>
+              <div className='label'>My_cernamnet_username</div>
+          </div>
+          <div className='flex justify-between items-center w-full max-w-[656px] mb-[25px] text-[20px] leading-[24px]'>
+              <label className='label'>First Name</label>
+              <input className='border h-[40px] w-[288px] rounded-[7px]' type="text" />
+              <a href='#!'>Change</a>
+          </div>
+          <div className='flex justify-between items-center w-full max-w-[656px] mb-[25px] text-[20px] leading-[24px]'>
+              <label className='label'>Last Name</label>
+              <input className='border h-[40px] w-[288px] rounded-[7px]' type="text" />
+              <a href='#!'>Change</a>
+          </div>
+          <div className='flex justify-between items-center w-full max-w-[656px] mb-[25px] text-[20px] leading-[24px]'>
+              <label className='label'>Email</label>
+              <input className='border h-[40px] w-[288px] rounded-[7px]' type="text" />
+              <a href='#!'>Update</a>
+          </div>
+          {/* <ul className="userInfo text-[20px] font-[400] leading-[24px]">
             <li className="text-[24px] font-[500] mb-[30px]">Username</li>
             <li className="mb-[25px]">First Name</li>
             <li className="mb-[25px]">Last Name</li>
-            <li>Email</li>
+            <li className="mb-[25px]">Email</li>
+            <li className="invisible mb-[30px]">Last Name</li>
           </ul>
           <ul className="users__login flex flex-col">
             <li className="text-[24px] font-[500] mb-[30px]">
@@ -62,10 +64,12 @@ const Account = () => {
             <li>
               <a href="#!">Update</a>
             </li>
-          </ul>
+          </ul> */}
         </div>
-        <div className="text-center mt-[30px]">
+        <div className="flex justify-between items-center w-full max-w-[656px] mb-[25px] text-[20px] leading-[24px]">
+          <label className='label invisible'>Last Name</label>
           <BlueButton>Change password</BlueButton>
+          <a className="invisible" href='#!'>Change</a>
         </div>
       </div>
     </div>

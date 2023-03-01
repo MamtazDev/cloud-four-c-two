@@ -2,6 +2,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Account from "./components/Account/Account";
+import Manage from "./components/MangeUser/Manage";
 import Project from "./components/Projects/Project";
 import Login from "./components/Register/Login";
 import Register from "./components/Register/Register";
@@ -15,12 +16,13 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="dashboard" element={<Sidebar/>} >
           <Route index element={<Account/>}></Route>
-          <Route path='project' element={<Project/>}></Route>
-       
+          <Route path='project' element={<Project />}></Route>
+          <Route path='manage' element={<Manage />}></Route>
           
         </Route>
+
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/project" element={<Project />} /> */}
+        {/* <Route path="/account" element={<Account />} /> */}
       </Routes>
     </div>
 

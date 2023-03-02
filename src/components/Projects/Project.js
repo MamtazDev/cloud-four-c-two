@@ -40,10 +40,10 @@ const Project = () => {
         </div>
       </div>
       <div className="flex gap-[20px] mb-[20px]">
-        <button className="outline_btn py-[8px] px-[33px]" type="">
+        <button className="outfit outline_btn py-[8px] px-[33px]" type="">
           Disabled
         </button>
-        <button className="outline_btn py-[8px] px-[33px]" type="">
+        <button className="outfit outline_btn py-[8px] px-[33px]" type="">
           Deleted
         </button>
       </div>
@@ -51,7 +51,7 @@ const Project = () => {
       <div className="flex flex-wrap gap-[21px]">
         <div className="card_box pt-[32px]">
           <img className="mx-auto mb-[15px]" src={picture} alt="" />
-          <p className="text-[16px] font-[500] text-center mb-[27px]">
+          <p className="commissioner text-[16px] font-[500] text-center mb-[27px]">
             Create a project
           </p>
           <div className="text-center">
@@ -68,9 +68,9 @@ const Project = () => {
             placeholder="Enter code"
             className="input input-bordered w-full h-[56px] mb-[27px]"
           />
-          <p className="text-[16px] font-[500] text-center mb-[8px]">Code</p>
+          <p className="commissioner text-[16px] font-[500] text-center mb-[8px]">Code</p>
 
-          <p className="text-center text-[10px]">
+          <p className="commissioner text-center text-[10px]">
             Got a code to join a team? <br /> Enter it above
           </p>
         </div>
@@ -86,41 +86,41 @@ const Project = () => {
                 </label>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
+                  className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
                 >
                   <li>
-                    <Link to="/dashboard/projectDetails">Project details</Link>
+                    <Link className="commissioner" to="/dashboard/projectDetails">Project details</Link>
                   </li>
                   <li>
-                    <a>Share</a>
+                    <a className="commissioner">Share</a>
                   </li>
                   <li>
-                    <Link to="/dashboard/projectDetails">Leave project</Link>
+                    <Link className="commissioner" to="/dashboard/projectDetails">Leave project</Link>
                   </li>
                   <li>
-                    <Link to="/dashboard/startSession">start session</Link>
+                    <Link className="commissioner" to="/dashboard/startSession">start session</Link>
                   </li>
                   <li>
-                    <Link to="/dashboard/projectCopy">copy project</Link>
+                    <Link className="commissioner" to="/dashboard/projectCopy">copy project</Link>
                   </li>
                   <li>
-                    <Link to="/dashboard/projectUpload">edit project</Link>
+                    <Link className="commissioner" to="/dashboard/projectUpload">edit project</Link>
                   </li>
                   <li>
-                    <a>disable project</a>
+                    <a className="commissioner">disable project</a>
                   </li>
                   <li>
-                    <a>delete project</a>
+                    <a className="commissioner">delete project</a>
                   </li>
                 </ul>
               </div>
             </div>
 
             <img className="mx-auto mb-[-30px]" src={staff} alt="" />
-            <p className="text-[16px] font-[500] mt-[35px] mb-[8px] text-center">
+            <p className="commissioner text-[16px] font-[500] mt-[35px] mb-[8px] text-center">
               Staff
             </p>
-            <p className="text-[14px] font-[400] text-center">
+            <p className="commissioner text-[14px] font-[400] text-center">
               School administration and <br /> development
             </p>
           </div>

@@ -43,7 +43,7 @@ const Sidebar = () => {
           <div className="sideBar py-[36px] bg-[#E1E5F1] h-screen	flex flex-col items-center w-[156px]">
             <div className="bar__top mb-[180px]">
               <img className="px-[45px] mb-[66px]" src={SideLogo} alt="logo" />
-              <Link to="/dashboard/nodeInfo">
+              <Link to="/dashboard">
                 <img
                   className="px-[45px] cursor-pointer"
                   src={Person}
@@ -52,13 +52,13 @@ const Sidebar = () => {
               </Link>
             </div>
             <div className="bar__bottom flex flex-col items-center">
-              <div className="img-wrapper mb-[12px]">
+              <Link to="dashboard/project" className="img-wrapper mb-[12px]">
                 <img
                   className="px-[45px] py-[25px] cursor-pointer"
                   src={Home}
                   alt="image"
                 />
-              </div>
+              </Link>
               <Link to="/dashboard/nodeInfo" className="img-wrapper mb-[12px]">
                 <img
                   className="px-[45px] py-[25px] cursor-pointer"

@@ -40,7 +40,7 @@ const Sidebar = () => {
         <div className="drawer-side">
           <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
 
-          <div className="sideBar py-[36px] bg-[#E1E5F1] h-screen	flex flex-col items-center w-[156px]">
+          <div className="sideBar py-[36px] bg-[#E1E5F1] h-screen	flex flex-col items-center w-[176px]">
             <div className="bar__top mb-[180px]">
               <Link to="/dashboard/project">
                 <img

@@ -1,44 +1,61 @@
-.bar__bottom .img-wrapper{
-    position: relative;
+.bar__bottom .img-wrapper {
+  position: relative;
 }
 
-.bar__bottom .img-wrapper::before{
-    position: absolute;
-    content: "";
-    height:  100%;
-    width: 0px;
-    background: #c9312e;
-    left: 0;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    transition: 0.2s ease-in-out;
+.bar__bottom .img-wrapper::before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 0px;
+  background: #c9312e;
+  left: 0;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  transition: 0.2s ease-in-out;
 }
 
-.bar__bottom .img-wrapper:hover::before{
-    width: 15px;
+.bar__bottom .img-wrapper:hover::before {
+  width: 15px;
 }
 
-
-.user__set{
-    width: 100%;
-    /* max-width: 908px; */
-    max-width: 656px;
-    margin: 40px 100px;
+.user__set {
+  width: 100%;
+  /* max-width: 908px; */
+  max-width: 656px;
+  margin: 40px 100px;
 }
 
-.choose__Img{
-    background-image: url(../../assets/profile.png);
-    background-color: rgba(0, 0, 0, 0.5); /* set the overlay color with alpha value */
-    background-blend-mode: multiply;
+.choose__Img {
+  background-image: url(../../assets/profile.png);
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* set the overlay color with alpha value */
+  background-blend-mode: multiply;
 }
 
-label.label{
-    width: 112px;
+label.label {
+  width: 112px;
+}
+.change {
+  opacity: 0;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+  transition: 0.3s ease-in;
+}
+.profile:hover .change {
+  opacity: 1;
+}
+.profile:hover .profile_img {
+  opacity: 0.75;
 }
 
 @media screen and (max-width: 991px) {
-    .user__set{
-        width: unset;
-        max-width: unset;
-    }
+  .user__set {
+    width: unset;
+    max-width: unset;
+  }
 }

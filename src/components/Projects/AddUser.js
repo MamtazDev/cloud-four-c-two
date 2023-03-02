@@ -89,7 +89,7 @@ const AddUser = () => {
                 </label>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 right-[0]"
+                  className="dropdown-content menu p-2  bg-base-100 rounded-box w-52 right-[0]"
                 >
                   <li>
                     <a className="commissioner text-[#3853A4] ">

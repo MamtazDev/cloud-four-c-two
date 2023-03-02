@@ -26,15 +26,15 @@ const Project = () => {
     });
   };
   return (
-    <div className="bg-[#FFFBFB] py-[61px] px-[57px]">
-      <div className="grid grid-cols-3 gap-[61px] mb-[34px] ">
+    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px]">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-[61px] mb-[34px] ">
         <div className="col-span-2">
           <input
             type="search"
             className="search_bg pl-16 input input-bordered w-full rounded-[60px] h-[58px] "
           />
         </div>
-        <div className="flex gap-[18px]">
+        <div className="flex gap-1 lg:gap-[18px]">
           <BlueButton>Create Project</BlueButton>
           <BlueButton>Upload Project</BlueButton>
         </div>
@@ -98,13 +98,13 @@ const Project = () => {
                     <a>Leave project</a>
                   </li>
                   <li>
-                    <a>start session</a>
+                    <Link to="/dashboard/startSession">start session</Link>
                   </li>
                   <li>
-                    <a>copy project</a>
+                  <Link to="/dashboard/projectCopy">copy project</Link>
                   </li>
                   <li>
-                    <a>edit project</a>
+                  <Link to="/dashboard/projectUpload">edit project</Link>
                   </li>
                   <li>
                     <a>disable project</a>

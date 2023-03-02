@@ -1,7 +1,6 @@
 import React from "react";
 import ProjectButton from "../../utils/ProjectButton";
 import ProjectButton3 from "../../utils/ProjectButton3";
-import arrow from "../../assets/right-arrow.png";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
 const AddUser = () => {
@@ -68,15 +67,24 @@ const AddUser = () => {
               Filter
             </button>
             <div className="dropdown dropdown-right">
-  <label tabIndex={0}> <button className="flex  items-center justify-center w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px  font-[500] rounded-[8px] p-[8px] mb-[10px]">
-              Role <MdKeyboardArrowRight />
-            </button></label>
-  <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-  </ul>
-</div>
-           
+              <label tabIndex={0}>
+                {" "}
+                <button className="flex  items-center justify-center w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px  font-[500] rounded-[8px] p-[8px] mb-[10px]">
+                  Role <MdKeyboardArrowRight />
+                </button>
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a>Item 1</a>
+                </li>
+                <li>
+                  <a>Item 2</a>
+                </li>
+              </ul>
+            </div>
 
             <div className="cencelation">
               <ProjectButton3>Cancel</ProjectButton3>

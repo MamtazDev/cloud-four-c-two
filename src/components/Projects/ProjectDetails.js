@@ -4,7 +4,6 @@ import girl from "../../assets/girl.png";
 import bob from "../../assets/bob.png";
 import sarah from "../../assets/sarah.png";
 
-
 const ProjectDetails = () => {
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] p-4">

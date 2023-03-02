@@ -20,7 +20,7 @@ const ProjectUpload = () => {
                 <ProjectButton2>project description</ProjectButton2>
                 <div className='copy__img border-[1px] overflow-hidden w-[302px] bordered rounded-[8px]'>
                     <img className='relative z-[99]' src={uploadImg} alt="image" />
-                    <button className='w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]'>Pick new image</button>
+                    <button className='commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]'>Pick new image</button>
                 </div>
 
                 <div className='cencelation flex justify-between w-[253px] mt-[20px]'>

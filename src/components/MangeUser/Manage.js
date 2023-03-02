@@ -1,26 +1,28 @@
-import React from 'react';
-import BlueButton from '../../utils/BlueButton';
-import './manage.css'
+import React from "react";
+import BlueButton from "../../utils/BlueButton";
+import "./manage.css";
 
-import Person1 from '../../assets/person1.png'
-import Person2 from '../../assets/person2.png'
-import Person3 from '../../assets/person3.png'
-import Person4 from '../../assets/person4.png'
-import Person5 from '../../assets/person5.png'
-import Person6 from '../../assets/person6.png'
-import Person7 from '../../assets/person7.png'
-import Person8 from '../../assets/person8.png'
+import Person1 from "../../assets/person1.png";
+import Person2 from "../../assets/person2.png";
+import Person3 from "../../assets/person3.png";
+import Person4 from "../../assets/person4.png";
+import Person5 from "../../assets/person5.png";
+import Person6 from "../../assets/person6.png";
+import Person7 from "../../assets/person7.png";
+import Person8 from "../../assets/person8.png";
 
-import TableBtn from '../../utils/TableBtn';
+import TableBtn from "../../utils/TableBtn";
 
 const Manage = () => {
-    return (
-        <div className='Mange__User px-[57px] py-[61px] overflow-x-auto'>
-            <div className='top__btn flex items-center mb-[82px]'>
-                <BlueButton>Test Filter</BlueButton>
-                <button className='gray__btn text-[20px] font-[500] leading-[30px] ml-[20px] px-[38px] py-[18px] rounded-[5px] bg-[#f0f4ff] bordered-[1px]'>Show Deleted</button>
-            </div>
-            {/* <div className='manage__info'>
+  return (
+    <div className="Mange__User px-[57px] py-[61px] overflow-x-auto">
+      <div className="top__btn flex items-center mb-[82px]">
+        <BlueButton>Test Filter</BlueButton>
+        <button className="gray__btn text-[20px] font-[500] leading-[30px] ml-[20px] px-[38px] py-[18px] rounded-[5px] bg-[#f0f4ff] bordered-[1px]">
+          Show Deleted
+        </button>
+      </div>
+      {/* <div className='manage__info'>
                 <table className='w-full'>
                     <tr className='bg-[red]'>
                         <td className='w-[6%]'>Image</td>
@@ -77,151 +79,48 @@ const Manage = () => {
                 <table><tr><td className='h-[20px] w-full'></td></tr></table>
             </div> */}
 
-            <table style={{width: '100%'}}>
-            <thead>
-                <tr>
-                <th className='text-left'>Image</th>
-                <th className='text-left'>Username</th>
-                <th className='text-left'>First Name</th>
-                <th className='text-left'>Last Name</th>
-                <th className='text-left'>Account Type</th>
-                <th className='text-left'>Status</th>
-                <th className='text-center'>Accounts/Edit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src={Person1} alt="User Image"/></td>
-                    <td>Sajib Ahmed</td>
-                    <td>Sajib</td>
-                    <td>Ahmed</td>
-                    <td>Admin</td>
-                    <td>Active</td>
-                    <td>
-                        <div className='flex justify-between'>
-                        <TableBtn>Active/<br/>Deactivate</TableBtn>
-                        <TableBtn>Report</TableBtn>
-                        <TableBtn>Delete</TableBtn>
-                        <TableBtn>Edit</TableBtn>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><img src={Person2} alt="User Image"/></td>
-                    <td>Sajib Ahmed</td>
-                    <td>Sajib</td>
-                    <td>Ahmed</td>
-                    <td>Admin</td>
-                    <td>Active</td>
-                    <td>
-                        <div className='flex justify-between'>
-                        <TableBtn>Active/<br/>Deactivate</TableBtn>
-                        <TableBtn>Report</TableBtn>
-                        <TableBtn>Delete</TableBtn>
-                        <TableBtn>Edit</TableBtn>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><img src={Person3} alt="User Image"/></td>
-                    <td>Sajib Ahmed</td>
-                    <td>Sajib</td>
-                    <td>Ahmed</td>
-                    <td>Admin</td>
-                    <td>Active</td>
-                    <td>
-                        <div className='flex justify-between'>
-                        <TableBtn>Active/<br/>Deactivate</TableBtn>
-                        <TableBtn>Report</TableBtn>
-                        <TableBtn>Delete</TableBtn>
-                        <TableBtn>Edit</TableBtn>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><img src={Person4} alt="User Image"/></td>
-                    <td>Sajib Ahmed</td>
-                    <td>Sajib</td>
-                    <td>Ahmed</td>
-                    <td>Admin</td>
-                    <td>Active</td>
-                    <td>
-                        <div className='flex justify-between'>
-                        <TableBtn>Active/<br/>Deactivate</TableBtn>
-                        <TableBtn>Report</TableBtn>
-                        <TableBtn>Delete</TableBtn>
-                        <TableBtn>Edit</TableBtn>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><img src={Person5} alt="User Image"/></td>
-                    <td>Sajib Ahmed</td>
-                    <td>Sajib</td>
-                    <td>Ahmed</td>
-                    <td>Admin</td>
-                    <td>Active</td>
-                    <td>
-                        <div className='flex justify-between'>
-                        <TableBtn>Active/<br/>Deactivate</TableBtn>
-                        <TableBtn>Report</TableBtn>
-                        <TableBtn>Delete</TableBtn>
-                        <TableBtn>Edit</TableBtn>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><img src={Person6} alt="User Image"/></td>
-                    <td>Sajib Ahmed</td>
-                    <td>Sajib</td>
-                    <td>Ahmed</td>
-                    <td>Admin</td>
-                    <td>Active</td>
-                    <td>
-                        <div className='flex justify-between'>
-                        <TableBtn>Active/<br/>Deactivate</TableBtn>
-                        <TableBtn>Report</TableBtn>
-                        <TableBtn>Delete</TableBtn>
-                        <TableBtn>Edit</TableBtn>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><img src={Person7} alt="User Image"/></td>
-                    <td>Sajib Ahmed</td>
-                    <td>Sajib</td>
-                    <td>Ahmed</td>
-                    <td>Admin</td>
-                    <td>Active</td>
-                    <td>
-                        <div className='flex justify-between'>
-                        <TableBtn>Active/<br/>Deactivate</TableBtn>
-                        <TableBtn>Report</TableBtn>
-                        <TableBtn>Delete</TableBtn>
-                        <TableBtn>Edit</TableBtn>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><img src={Person8} alt="User Image"/></td>
-                    <td>Sajib Ahmed</td>
-                    <td>Sajib</td>
-                    <td>Ahmed</td>
-                    <td>Admin</td>
-                    <td>Active</td>
-                    <td>
-                        <div className='flex justify-between'>
-                        <TableBtn>Active/<br/>Deactivate</TableBtn>
-                        <TableBtn>Report</TableBtn>
-                        <TableBtn>Delete</TableBtn>
-                        <TableBtn>Edit</TableBtn>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
-    );
+      <table style={{ width: "100%" }}>
+        <thead>
+          <tr className="commissioner">
+            <th className="text-left">Image</th>
+            <th className="text-left">Username</th>
+            <th className="text-left">First Name</th>
+            <th className="text-left">Last Name</th>
+            <th className="text-left">Account Type</th>
+            <th className="text-left">Status</th>
+            <th className="text-center">Accounts/Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+            {
+                [1,2,3,4,5,6,7].map((i)=> <tr>
+                <td>
+                  <img src={Person1} alt="User Image" />
+                </td>
+                <td>Sajib Ahmed</td>
+                <td>Sajib</td>
+                <td>Ahmed</td>
+                <td>Admin</td>
+                <td>Active</td>
+                <td>
+                  <div className="flex justify-between">
+                    <TableBtn>
+                      Active/
+                      <br />
+                      Deactivate
+                    </TableBtn>
+                    <TableBtn>Report</TableBtn>
+                    <TableBtn>Delete</TableBtn>
+                    <TableBtn>Edit</TableBtn>
+                  </div>
+                </td>
+              </tr>)
+            }
+         
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default Manage;

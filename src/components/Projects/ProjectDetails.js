@@ -4,6 +4,7 @@ import girl from "../../assets/girl.png";
 import bob from "../../assets/bob.png";
 import sarah from "../../assets/sarah.png";
 
+
 const ProjectDetails = () => {
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] p-4">
@@ -14,13 +15,13 @@ const ProjectDetails = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px] mb-[40px]">
           <div>
             <button
-              className="outline_btn w-full mb-[20px] py-[18px] font-[500]"
+              className="commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
               type=""
             >
               Edit Name
             </button>
             <button
-              className="outline_btn w-full py-[18px] font-[500] mb-[20px]"
+              className="commissioner outline_btn w-full py-[18px] font-[500] mb-[20px]"
               type=""
             >
               Edit description
@@ -57,31 +58,31 @@ const ProjectDetails = () => {
         {/* session part */}
         <div className="mb-[22px]">
           <div className="flex items-center justify-between mb-[12px]">
-            <p className="text-[16px] font-[500]">Sessions</p>
+            <p className="commissioner text-[16px] font-[500]">Sessions</p>
             <BlueButton>New session</BlueButton>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
             <div className="flex ">
-              <p className="font-[500] w-[210px] pl-[17px] py-[20px]">
+              <p className="commissioner font-[500] w-[210px] pl-[17px] py-[20px]">
                 Sessions 01{" "}
               </p>
 
-              <p className=" session_bg w-[111px] py-[20px] text-center font-[400]">
+              <p className="commissioner session_bg w-[111px] py-[20px] text-center font-[400]">
                 Join
               </p>
-              <p className=" session_bg w-[226px] py-[20px] text-center font-[400]">
+              <p className="commissioner session_bg w-[226px] py-[20px] text-center font-[400]">
                 Delete (ANALYST)
               </p>
             </div>
             <div className="flex text-[16px]">
-              <p className="w-[210px] font-[500] pl-[17px] py-[20px]">
+              <p className="commissioner w-[210px] font-[500] pl-[17px] py-[20px]">
                 Sessions 02{" "}
               </p>
 
-              <p className=" session_bg  w-[111px] py-[20px] text-center font-[400]">
+              <p className="commissioner session_bg  w-[111px] py-[20px] text-center font-[400]">
                 Join
               </p>
-              <p className=" session_bg  w-[226px] py-[20px] text-center font-[400]">
+              <p className="commissioner session_bg  w-[226px] py-[20px] text-center font-[400]">
                 Delete (ANALYST)
               </p>
             </div>

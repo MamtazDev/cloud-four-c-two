@@ -26,7 +26,7 @@ const Project = () => {
     });
   };
   return (
-    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px]">
+    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] rounded-l-[50px]">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[61px] mb-[34px] ">
         <div className="col-span-2">
           <input
@@ -78,11 +78,11 @@ const Project = () => {
         <div className="card_box p-[7px]">
           <div className="img_box">
             <div className="flex justify-between px-[12px] pt-[9px] pb-[22px]">
-              <img onClick={handleDelete} src={close} alt="" />
+              <img className="pointer" onClick={handleDelete} src={close} alt="" />
 
               <div className="dropdown dropdown-right">
                 <label tabIndex={0}>
-                  <img src={more} alt="" />
+                  <img className="pointer" src={more} alt="" />
                 </label>
                 <ul
                   tabIndex={0}

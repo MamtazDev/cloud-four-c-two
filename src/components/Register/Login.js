@@ -6,16 +6,16 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="py-[60px]">
+    <div className=" py-[60px]">
       <div className="login_container ">
         <img className="mx-auto mb-[71px]" src={loginLogo} alt="" />
-        <p className="text-center text-[#C9312E] text-[36px] font-[500] mb-[50px] font_family">
+        <p className="outfit text-center text-[#C9312E] text-[36px] font-[500] mb-[50px] font_family">
           Login to your account
         </p>
         <form>
           <div className="mb-[33px]">
-            <label className="text-[20px] font-[300] mb-[10px] block">
-            Username <sup className="text-[#C9312E]">*</sup>
+            <label className=" outfit text-[20px] font-[300] mb-[10px] block">
+              Username <sup className="text-[#C9312E]">*</sup>
             </label>
             <input
               type="text"
@@ -24,7 +24,7 @@ const Login = () => {
             />
           </div>
           <div className="mb-[33px]">
-            <label className="text-[20px] font-[300] mb-[10px] block">
+            <label className="outfit text-[20px] font-[300] mb-[10px] block">
               Password <sup className="text-[#C9312E]">*</sup>
             </label>
             <input
@@ -34,7 +34,7 @@ const Login = () => {
             />
           </div>
           <div className="mb-[42px]">
-            <label className="text-[20px] font-[300] mb-[10px] block">
+            <label className="outfit text-[20px] font-[300] mb-[10px] block">
               Key <sup className="text-[#C9312E]">*</sup>
             </label>
             <input
@@ -53,7 +53,7 @@ const Login = () => {
             </Link>
           </div>
           <p className="pointer text-[20px] font-[300] text-center">
-            <span className="key">I forgot my password or lost my key</span>
+            <span className="key outfit">I forgot my password or lost my key</span>
           </p>
         </form>
       </div>

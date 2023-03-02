@@ -95,7 +95,7 @@ const Project = () => {
                     <a>Share</a>
                   </li>
                   <li>
-                    <a>Leave project</a>
+                    <Link to="/dashboard/projectDetails">Leave project</Link>
                   </li>
                   <li>
                     <Link to="/dashboard/startSession">start session</Link>

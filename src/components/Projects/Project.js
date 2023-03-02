@@ -52,10 +52,10 @@ const Project = () => {
         <div className="card_box pt-[32px]">
           <img className="mx-auto mb-[15px]" src={picture} alt="" />
           <p className="text-[16px] font-[500] text-center mb-[27px]">
-            Create a team
+            Create a project
           </p>
           <div className="text-center">
-            <BlueButton> Create a team</BlueButton>
+            <BlueButton> Create a project</BlueButton>
           </div>
         </div>
 
@@ -101,10 +101,10 @@ const Project = () => {
                     <Link to="/dashboard/startSession">start session</Link>
                   </li>
                   <li>
-                  <Link to="/dashboard/projectCopy">copy project</Link>
+                    <Link to="/dashboard/projectCopy">copy project</Link>
                   </li>
                   <li>
-                  <Link to="/dashboard/projectUpload">edit project</Link>
+                    <Link to="/dashboard/projectUpload">edit project</Link>
                   </li>
                   <li>
                     <a>disable project</a>

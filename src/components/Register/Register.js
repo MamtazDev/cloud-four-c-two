@@ -17,7 +17,7 @@ const Register = () => {
         <form>
           <div className="mb-[33px]">
             <label className="text-[20px] font-[300] mb-[10px] block">
-              Username * <sup className="text-[#C9312E]">*</sup>
+              Username  <sup className="text-[#C9312E]">*</sup>
             </label>
             <input
               type="text"

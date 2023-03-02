@@ -29,7 +29,7 @@ function App() {
           <Route path="projectDetails" element={<ProjectDetails />}></Route>
           <Route path="projectReport" element={<ProjectReport />}></Route>
           <Route path="help" element={<Help />}></Route>
-          <Route path="manage" element={<Manage />}></Route>
+          <Route path="manageUser" element={<Manage />}></Route>
           <Route path="nodeInfo" element={<NodeInfo />}></Route>
           <Route path="addUser" element={<AddUser />}></Route>
           <Route path="startSession" element={<StartSession />}></Route>

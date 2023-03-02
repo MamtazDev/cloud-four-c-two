@@ -42,7 +42,7 @@ const Sidebar = () => {
 
           <div className="sideBar py-[36px] bg-[#E1E5F1] h-screen	flex flex-col items-center w-[156px]">
             <div className="bar__top mb-[180px]">
-              <Link to="/">
+              <Link to="/dashboard/project">
                 <img
                   className="px-[45px] mb-[66px]"
                   src={SideLogo}
@@ -72,7 +72,7 @@ const Sidebar = () => {
                   alt="image"
                 />
               </Link>
-              <Link to="/dashboard/nodeInfo" className="img-wrapper mb-[62px]">
+              <Link to="/dashboard/manageUser" className="img-wrapper mb-[62px]">
                 <img
                   className="px-[45px] py-[25px] cursor-pointer"
                   src={User}

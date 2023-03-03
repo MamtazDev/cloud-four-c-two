@@ -3,13 +3,9 @@ import BlueButton from "../../utils/BlueButton";
 import "./account.css";
 
 const Account = () => {
-  const [fileName, setFileName] = useState(null);
   const [file, setFile] = useState(null);
   const inputRef = useRef();
   const onFileChangeCapture = (e) => {
-    const name = e.target.files[0].name;
-    console.log(name);
-    setFileName(name);
     setFile(URL.createObjectURL(e.target.files[0]));
   };
 
@@ -33,7 +29,7 @@ const Account = () => {
               onChangeCapture={onFileChangeCapture}
               className="file-input w-full hidden  border-0 bg-white"
             />
-            {fileName === null ? (
+            {file === null ? (
               <div
                 onClick={inputHandler}
                 className="profile relative cursor-pointer mt-[44px] mb-[80px]"
@@ -47,11 +43,7 @@ const Account = () => {
                   Change Image
                 </p>
 
-                {/* <div className="h-[200px] sm:h-[262px] w-[200px] sm:w-[262px] leading-[200px] sm:leading-[262px] mx-[auto] mt-[44px] mb-[80px] rounded-[50%] choose__Img">
-                  <p className="commissioner text-white font-[500]">
-                    Change Image
-                  </p>
-                </div> */}
+               
               </div>
             ) : (
               <div

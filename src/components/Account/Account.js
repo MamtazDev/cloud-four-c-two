@@ -13,7 +13,7 @@ const Account = () => {
     inputRef.current.click();
   };
   return (
-    <div className="user__set ">
+    <div className="user__set bg-white lg:rounded-l-[50px] h-full">
       <div className="user__inner">
         <div className="user__info text-center">
           <h3 className="commissioner text-[30px] font-[600] leading-[37px]">
@@ -42,8 +42,6 @@ const Account = () => {
                 <p className="commissioner absolute text-white change font-[500]">
                   Change Image
                 </p>
-
-               
               </div>
             ) : (
               <div

@@ -34,13 +34,13 @@ const Sidebar = () => {
           type="checkbox"
           className="drawer-toggle"
         />
-        <div className="drawer-content">
+        <div  className="drawer-content lg:ml-[-50px]">
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
           <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
 
-          <div className="sideBar py-[36px] bg-[#E1E5F1] h-screen	flex flex-col items-center w-[176px]">
+          <div className="sideBar py-[36px] bg-[#E1E5F1] h-screen	flex flex-col items-center w-[226px]">
             <div className="bar__top mb-[180px]">
               <Link to="/dashboard/project">
                 <img

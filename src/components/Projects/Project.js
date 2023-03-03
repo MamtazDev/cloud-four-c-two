@@ -26,7 +26,7 @@ const Project = () => {
     });
   };
   return (
-    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] rounded-l-[50px]">
+    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px] h-full">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[61px] mb-[34px] ">
         <div className="col-span-2">
           <input

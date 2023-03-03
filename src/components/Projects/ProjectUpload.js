@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import ProjectButton from "../../utils/ProjectButton";
 import ProjectButton2 from "../../utils/ProjectButton2";
 import ProjectButton3 from "../../utils/ProjectButton3";
-
 import uploadImg from "../../assets/uploadproject.png";
 import Dataimg from "../../assets/Data.png";
 
@@ -68,11 +67,6 @@ const ProjectUpload = () => {
               </button>
             </div>
           )}
-
-          {/* <img className="relative z-[99]" src={copyImg} alt="image" />
-          <button className="commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
-            Pick new image
-          </button> */}
         </div>
 
         <div className="cencelation flex justify-between w-[253px] mt-[20px]">

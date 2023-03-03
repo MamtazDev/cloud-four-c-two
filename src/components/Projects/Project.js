@@ -26,7 +26,7 @@ const Project = () => {
     });
   };
   return (
-    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] rounded-l-[50px]">
+    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px] h-full">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[61px] mb-[34px] ">
         <div className="col-span-2">
           <input
@@ -36,7 +36,9 @@ const Project = () => {
         </div>
         <div className="flex gap-1 lg:gap-[18px]">
           <BlueButton>Create Project</BlueButton>
-          <BlueButton>Upload Project</BlueButton>
+          <Link to="/dashboard/projectUpload">
+            <BlueButton>Upload Project</BlueButton>
+          </Link>
         </div>
       </div>
       <div className="flex gap-[20px] mb-[20px]">
@@ -68,7 +70,9 @@ const Project = () => {
             placeholder="Enter code"
             className="input input-bordered w-full h-[56px] mb-[27px]"
           />
-          <p className="commissioner text-[16px] font-[500] text-center mb-[8px]">Code</p>
+          <p className="commissioner text-[16px] font-[500] text-center mb-[8px]">
+            Code
+          </p>
 
           <p className="commissioner text-center text-[10px]">
             Got a code to join a team? <br /> Enter it above
@@ -78,7 +82,12 @@ const Project = () => {
         <div className="card_box p-[7px]">
           <div className="img_box">
             <div className="flex justify-between px-[12px] pt-[9px] pb-[22px]">
-              <img className="pointer" onClick={handleDelete} src={close} alt="" />
+              <img
+                className="pointer"
+                onClick={handleDelete}
+                src={close}
+                alt=""
+              />
 
               <div className="dropdown dropdown-right">
                 <label tabIndex={0}>
@@ -89,22 +98,41 @@ const Project = () => {
                   className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
                 >
                   <li>
-                    <Link className="commissioner" to="/dashboard/projectDetails">Project details</Link>
+                    <Link
+                      className="commissioner"
+                      to="/dashboard/projectDetails"
+                    >
+                      Project details
+                    </Link>
                   </li>
                   <li>
                     <a className="commissioner">Share</a>
                   </li>
                   <li>
-                    <Link className="commissioner" to="/dashboard/projectDetails">Leave project</Link>
+                    <Link
+                      className="commissioner"
+                      to="/dashboard/projectDetails"
+                    >
+                      Leave project
+                    </Link>
                   </li>
                   <li>
-                    <Link className="commissioner" to="/dashboard/startSession">start session</Link>
+                    <Link className="commissioner" to="/dashboard/startSession">
+                      start session
+                    </Link>
                   </li>
                   <li>
-                    <Link className="commissioner" to="/dashboard/projectCopy">copy project</Link>
+                    <Link className="commissioner" to="/dashboard/projectCopy">
+                      copy project
+                    </Link>
                   </li>
                   <li>
-                    <Link className="commissioner" to="/dashboard/projectUpload">edit project</Link>
+                    <Link
+                      className="commissioner"
+                      to="/dashboard/projectUpload"
+                    >
+                      edit project
+                    </Link>
                   </li>
                   <li>
                     <a className="commissioner">disable project</a>

@@ -22,7 +22,7 @@
   width: 100%;
   /* max-width: 908px; */
   max-width: 656px;
-  margin: 40px 100px;
+  padding: 40px 100px;
 }
 
 .choose__Img {
@@ -52,6 +52,11 @@ label.label {
 .profile:hover .profile_img {
   opacity: 0.75;
 }
+@media screen and (min-width: 992px) {
+  .drawer-content {
+    z-index: 9999 !important;
+  }
+}
 
 @media screen and (max-width: 991px) {
   .user__set {
@@ -59,3 +64,4 @@ label.label {
     max-width: unset;
   }
 }
+

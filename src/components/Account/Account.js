@@ -13,7 +13,7 @@ const Account = () => {
     inputRef.current.click();
   };
   return (
-    <div className="user__set bg-white lg:rounded-l-[50px] h-full">
+    <div className="user__set bg-white lg:rounded-l-[50px] h-full p-[40px] md:px-[100px] md:py-[40px]">
       <div className="user__inner">
         <div className="user__info text-center">
           <h3 className="commissioner text-[30px] font-[600] leading-[37px]">
@@ -130,10 +130,10 @@ const Account = () => {
             </li>
           </ul> */}
         </div>
-        <div className="flex justify-between items-center mb-[25px] text-[20px] leading-[24px]">
-          <label className="label invisible commissioner">Last Name</label>
+        <div className="flex justify-center md:justify-between  items-center mb-[25px] text-[20px] leading-[24px]">
+          <label className="label hidden md:block invisible commissioner">Last Name</label>
           <BlueButton>Change password</BlueButton>
-          <a className="invisible" href="#!">
+          <a className="hidden md:block invisible" href="#!">
             Change
           </a>
         </div>

@@ -15,6 +15,18 @@ const ProjectUpload = () => {
   const inputHandler = () => {
     inputRef.current.click();
   };
+
+  const [filename, setFilename] = useState("");
+  const filenameRef = useRef();
+  const onFileChange = (e) => {
+    const name = e.target.files[0].name;
+    console.log(name);
+    setFilename(name);
+  };
+
+  const filenameHandler = () => {
+    filenameRef.current.click();
+  };
   return (
     <div className="bg-white lg:rounded-l-[50px] project__copy w-full h-full flex justify-center items-center">
       <div className="copy__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-[593px]">
@@ -23,13 +35,40 @@ const ProjectUpload = () => {
           <ProjectButton3>Project name</ProjectButton3>
           <ProjectButton3>
             {" "}
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
               <img className="mr-[5px]" src={Dataimg} alt="image" /> File Picker
-            </div>{" "}
+            </div>{" "} */}
+            <div className="">
+              <input
+                type="file"
+                ref={filenameRef}
+          
+                onChangeCapture={onFileChange}
+                className="file-input w-full hidden  border-0 bg-white"
+              />
+              {filename === "" ? (
+                <div
+                  onClick={filenameHandler}
+                  className="flex items-center justify-between"
+                >
+                  <img className="mr-[5px]" src={Dataimg} alt="image" /> File
+                  Picker
+                </div>
+              ) : (
+                <div
+                  onClick={filenameHandler}
+                  className="flex items-center justify-between"
+                >
+                  {filename}
+                </div>
+              )}
+            </div>
           </ProjectButton3>
         </div>
 
         <ProjectButton2>project description</ProjectButton2>
+
+
         <div className="copy__img border-[1px] overflow-hidden w-[302px] bordered rounded-[8px]">
           <input
             type="file"

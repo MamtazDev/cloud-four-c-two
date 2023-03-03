@@ -64,13 +64,13 @@ const Account = () => {
             <p className="commissioner text-white font-[500]">Change Image</p>
           </div> */}
         </div>
-        <div className="user__log flex flex-col justify-between w-[full] max-w-[656px]">
-          <div className="flex w-full max-w-[400px] md:max-w-[465px] mb-[30px] justify-between text-[20px] font-[500] leading-[24px]">
+        <div className="user__log flex flex-col justify-between">
+          <div className="flex w-full max-w-[400px] md:max-w-[445px] mb-[30px] justify-between text-[20px] font-[500] leading-[24px]">
             <div className="label commissioner">Username</div>
             <div className="label commissioner">My_cernamnet_username</div>
           </div>
-          <div className="flex justify-between items-center w-full max-w-[656px] mb-[25px] text-[20px] leading-[24px]">
-            <label className="label commissioner">First Name</label>
+          <div className="flex justify-between items-center mb-[25px] text-[20px] leading-[24px]">
+            <label className="label commissioner p-0 text-[20px]">First Name</label>
             <input
               className="border h-[40px] w-[288px] rounded-[7px]"
               type="text"
@@ -79,8 +79,8 @@ const Account = () => {
               Change
             </a>
           </div>
-          <div className="flex justify-between items-center w-full max-w-[656px] mb-[25px] text-[20px] leading-[24px]">
-            <label className="label commissioner">Last Name</label>
+          <div className="flex justify-between items-center w-full mb-[25px] text-[20px] leading-[24px]">
+            <label className="label commissioner p-0">Last Name</label>
             <input
               className="border h-[40px] w-[288px] rounded-[7px]"
               type="text"
@@ -89,8 +89,8 @@ const Account = () => {
               Change
             </a>
           </div>
-          <div className="flex justify-between items-center w-full max-w-[656px] mb-[25px] text-[20px] leading-[24px]">
-            <label className="label commissioner">Email</label>
+          <div className="flex justify-between items-center w-full mb-[25px] text-[20px] leading-[24px]">
+            <label className="label commissioner p-0">Email</label>
             <input
               className="border h-[40px] w-[288px] rounded-[7px]"
               type="text"
@@ -130,7 +130,7 @@ const Account = () => {
             </li>
           </ul> */}
         </div>
-        <div className="flex justify-between items-center w-full max-w-[656px] mb-[25px] text-[20px] leading-[24px]">
+        <div className="flex justify-between items-center mb-[25px] text-[20px] leading-[24px]">
           <label className="label invisible commissioner">Last Name</label>
           <BlueButton>Change password</BlueButton>
           <a className="invisible" href="#!">

@@ -2,12 +2,11 @@ import React from "react";
 import ProjectButton from "../../utils/ProjectButton";
 import ProjectButton3 from "../../utils/ProjectButton3";
 import { MdKeyboardArrowRight } from "react-icons/md";
-
 import imgSeen from "../../assets/person1.png";
 
 const AddUser = () => {
   return (
-    <div className="addUser w-full  xl:h-full flex justify-center items-center">
+    <div className="addUser bg-white lg:rounded-l-[50px]  w-full  xl:h-full flex justify-center items-center">
       <div className="addUser__inner p-12 max-w-[900px] border-[1px] rounded-[16px] border-[#d5d5d5]">
         <ProjectButton>Add User</ProjectButton>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

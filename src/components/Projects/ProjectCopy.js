@@ -16,7 +16,7 @@ const ProjectCopy = () => {
     inputRef.current.click();
   };
   return (
-    <div className="project__copy w-full h-full flex justify-center items-center">
+    <div className="bg-white lg:rounded-l-[50px] project__copy w-full h-full flex justify-center items-center">
       <div className="copy__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-[593px]">
         <ProjectButton>Copy this porject</ProjectButton>
         <ProjectButton2>New project Name</ProjectButton2>

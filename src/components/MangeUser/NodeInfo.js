@@ -3,7 +3,7 @@ import "./manage.css";
 
 const NodeInfo = () => {
   return (
-    <div className="node__info overflow-x-auto py-[54px] lg:pt-[196px] px-[57px]">
+    <div className="node__info bg-[#FFFBFB] lg:rounded-l-[50px] h-full overflow-x-auto lg:py-[54px] lg:pt-[196px] lg:px-[57px] p-4">
       <table className="w-[1032px]">
         {[1, 2, 3, 4, 5, 6, 7].map((i) => (
           <tr>

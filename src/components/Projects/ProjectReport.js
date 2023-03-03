@@ -3,7 +3,7 @@ import BlueButton from "../../utils/BlueButton";
 
 const ProjectReport = () => {
   return (
-    <div className="p-[60px]">
+    <div className="bg-[#FFFBFB] lg:rounded-l-[50px] h-full lg:p-[60px] p-4">
       <div className="mb-[82px]">
         <BlueButton>Back to project</BlueButton>
       </div>

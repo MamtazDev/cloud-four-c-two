@@ -32,7 +32,7 @@ const Login = () => {
           navigate("/dashboard/project");
         }
       });
-    console.log("clicked");
+  
   };
 
   const handleClicked = () => {
@@ -80,14 +80,15 @@ const Login = () => {
           </div>
           <div className="flex justify-center gap-[30px] mb-[30px]">
             <Link to="/register">
-              <BlueButton handleSubmit={handleClicked}>Register</BlueButton>
+              <BlueButton>Register</BlueButton>
             </Link>
-            <Link
-            //  to="/dashboard/project"
+
+            <button
+              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              type="submit"
             >
-              <BlueButton>Log In</BlueButton>
-            </Link>
-            <button type="submit">gsdjgkld</button>
+              Log In
+            </button>
           </div>
           <p className="pointer text-[20px] font-[300] text-center">
             <span className="key outfit">

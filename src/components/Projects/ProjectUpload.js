@@ -35,14 +35,10 @@ const ProjectUpload = () => {
           <ProjectButton3>Project name</ProjectButton3>
           <ProjectButton3>
             {" "}
-            {/* <div className="flex items-center justify-between">
-              <img className="mr-[5px]" src={Dataimg} alt="image" /> File Picker
-            </div>{" "} */}
             <div className="">
               <input
                 type="file"
                 ref={filenameRef}
-          
                 onChangeCapture={onFileChange}
                 className="file-input w-full hidden  border-0 bg-white"
               />
@@ -67,7 +63,6 @@ const ProjectUpload = () => {
         </div>
 
         <ProjectButton2>project description</ProjectButton2>
-
 
         <div className="copy__img border-[1px] overflow-hidden w-[302px] bordered rounded-[8px]">
           <input

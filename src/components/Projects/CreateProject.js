@@ -14,9 +14,42 @@ const CreateProject = () => {
     reader.readAsDataURL(file);
   };
   console.log(base64Image);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const project_name = e.target.project_name.value;
+    const project_description = e.target.project_description.value;
+    const project_path_to_execute = e.target.project_path_to_execute.value;
+
+    const data = {
+      project_name,
+      project_description,
+      project_path_to_execute,
+      project_image: base64Image,
+    };
+    console.log(data);
+
+    fetch("https://app.cloud4c2.com/api/project/create", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "Invalid token: JsonWebTokenError") {
+          alert(data.message);
+        } else {
+          e.target.reset();
+          window.location.reload(true);
+        }
+      });
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-[33px]">
           <label className="outfit text-[20px] font-[300] mb-[10px] block">
             Project Name <sup className="text-[#C9312E]">*</sup>
@@ -33,7 +66,7 @@ const CreateProject = () => {
           </label>
           <textarea
             className="input input-bordered w-full"
-            name="O project_description"
+            name="project_description"
           ></textarea>
         </div>
         <div className="mb-[33px]">
@@ -65,8 +98,7 @@ const CreateProject = () => {
           <input
             type="text"
             className="input input-bordered w-full h-[56px]"
-            name="project_path_to_execute
-            "
+            name="project_path_to_execute"
           />
         </div>
 

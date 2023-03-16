@@ -8,6 +8,7 @@ import more from "../../assets/more.png";
 import staff from "../../assets/staff.png";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import CreateProject from "./CreateProject";
 
 const Project = () => {
   const handleDelete = () => {
@@ -35,7 +36,29 @@ const Project = () => {
           />
         </div>
         <div className="flex gap-1 lg:gap-[18px]">
-          <BlueButton>Create Project</BlueButton>
+          {/* The button to open modal */}
+          <label
+            className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+            htmlFor="my-modal-3"
+          >
+            {" "}
+            Create Project
+          </label>
+
+          {/* Put this part before </body> tag */}
+          <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+          <div className="modal">
+            <div className="modal-box relative">
+              <label
+                htmlFor="my-modal-3"
+                className="btn btn-sm btn-circle absolute right-2 top-2"
+              >
+                ✕
+              </label>
+              <CreateProject />
+            </div>
+          </div>
+
           <Link to="/dashboard/projectUpload">
             <BlueButton>Upload Project</BlueButton>
           </Link>
@@ -60,24 +83,6 @@ const Project = () => {
             <BlueButton> Create a project</BlueButton>
           </div>
         </div>
-
-        {/* <div className="code_box px-[7px]">
-          <div>
-            <img className="mx-auto" src={code} alt="" />
-          </div>
-          <input
-            type="number"
-            placeholder="Enter code"
-            className="input input-bordered w-full h-[56px] mb-[27px]"
-          />
-          <p className="commissioner text-[16px] font-[500] text-center mb-[8px]">
-            Code
-          </p>
-
-          <p className="commissioner text-center text-[10px]">
-            Got a code to join a team? <br /> Enter it above
-          </p>
-        </div> */}
 
         <div className="card_box p-[7px]">
           <div className="img_box">

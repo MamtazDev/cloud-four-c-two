@@ -3,13 +3,12 @@ import "./account.css";
 
 const Account = () => {
   const [file, setFile] = useState(null);
-  const [base64Image, setBase64Image] = useState('');
+  const [base64Image, setBase64Image] = useState("");
 
   const inputRef = useRef();
   const onFileChangeCapture = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
-
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -21,8 +20,6 @@ const Account = () => {
 
     reader.readAsDataURL(file);
   };
-
-  // console.log(base64Image)
 
   const inputHandler = () => {
     inputRef.current.click();
@@ -39,7 +36,7 @@ const Account = () => {
       last_name,
       email,
       password,
-      image: base64Image
+      image: base64Image,
     };
     console.log(data);
 

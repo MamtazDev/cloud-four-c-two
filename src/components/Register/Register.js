@@ -1,5 +1,4 @@
 import React from "react";
-import BlueButton from "../../utils/BlueButton";
 import "./Register.css";
 import loginLogo from "../../assets/login_logo.png";
 import { useNavigate } from "react-router-dom";

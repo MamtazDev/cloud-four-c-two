@@ -24,20 +24,16 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === "denied") {
-          alert(data.message);
-        } else {
+        if (data.message === "logged in.") {
           e.target.reset();
           window.location.reload(true);
           navigate("/dashboard/project");
+        } else {
+          alert("Log in is not successful");
         }
       });
-  
   };
 
-  const handleClicked = () => {
-    console.log("register");
-  };
   return (
     <div className=" py-[60px]">
       <div className="login_container ">

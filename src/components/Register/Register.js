@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
+  const handleInputImage = async (event) => {
+    const file = event.target.files[0];
+    const base64 = await this.convertBase64(file);
+    console.log(base64);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const username = e.target.username.value;
@@ -13,6 +18,7 @@ const Register = () => {
     const last_name = e.target.last_name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const role = e.target.role.value;
 
     const data = {
       username,
@@ -20,6 +26,7 @@ const Register = () => {
       last_name,
       email,
       password,
+      role,
     };
 
     console.log(data);
@@ -106,8 +113,28 @@ const Register = () => {
               name="last_name"
             />
           </div>
+          <div className="mb-[42px]">
+            <label className="outfit text-[20px] font-[300] mb-[10px] block">
+              Role
+            </label>
+            <select name="role">
+              <option value="analyst">Analyst</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div className="hidden mb-[42px]">
+            <label className="outfit text-[20px] font-[300] mb-[10px] block">
+              Image
+            </label>
+            <input
+              type="file"
+              name="image"
+              className="opacity-0 cursor-pointer absolute top-0 "
+              onChange={handleInputImage}
+              accept={"image/*"}
+            />
+          </div>
           <div className="flex justify-center gap-[30px] mb-[30px]">
-            {/* <BlueButton>Register</BlueButton> */}
             <button
               type="submit"
               className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"

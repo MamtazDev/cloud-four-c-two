@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import loginLogo from "../../assets/login_logo.png";
 import BlueButton from "../../utils/BlueButton";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [userList, setUserList] = useState([]);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,9 +26,21 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.message === "logged in.") {
-          e.target.reset();
-          window.location.reload(true);
-          navigate("/dashboard/project");
+          fetch("https://app.cloud4c2.com/api/user/list", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              setUserList(data);
+              e.target.reset();
+              window.location.reload(true);
+              navigate("/dashboard/project");
+            
+            });
         } else {
           alert("Log in is not successful");
         }

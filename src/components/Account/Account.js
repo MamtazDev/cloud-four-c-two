@@ -3,14 +3,26 @@ import "./account.css";
 
 const Account = () => {
   const [file, setFile] = useState(null);
-  const [base, setBase] = useState("");
+  const [base64Image, setBase64Image] = useState('');
 
   const inputRef = useRef();
-  const onFileChangeCapture = async (e) => {
+  const onFileChangeCapture = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
-    const base64 = await this.convertBase64(file);
-    console.log(base64);
   };
+
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setBase64Image(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  // console.log(base64Image)
 
   const inputHandler = () => {
     inputRef.current.click();
@@ -27,6 +39,7 @@ const Account = () => {
       last_name,
       email,
       password,
+      image: base64Image
     };
     console.log(data);
 
@@ -64,6 +77,7 @@ const Account = () => {
               accept="image/*"
               onChangeCapture={onFileChangeCapture}
               className="file-input w-full hidden  border-0 bg-white"
+              onChange={handleImageChange}
             />
             {file === null ? (
               <div

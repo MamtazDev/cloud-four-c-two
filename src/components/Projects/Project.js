@@ -61,7 +61,7 @@ const Project = () => {
           </div>
         </div>
 
-        <div className="code_box px-[7px]">
+        {/* <div className="code_box px-[7px]">
           <div>
             <img className="mx-auto" src={code} alt="" />
           </div>
@@ -77,17 +77,17 @@ const Project = () => {
           <p className="commissioner text-center text-[10px]">
             Got a code to join a team? <br /> Enter it above
           </p>
-        </div>
+        </div> */}
 
         <div className="card_box p-[7px]">
           <div className="img_box">
-            <div className="flex justify-between px-[12px] pt-[9px] pb-[22px]">
-              <img
+            <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]">
+              {/* <img
                 className="pointer"
                 onClick={handleDelete}
                 src={close}
                 alt=""
-              />
+              /> */}
 
               <div className="dropdown dropdown-right">
                 <label tabIndex={0}>

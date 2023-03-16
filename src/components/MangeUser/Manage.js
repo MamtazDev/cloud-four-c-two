@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import BlueButton from "../../utils/BlueButton";
 import "./manage.css";
 import Person1 from "../../assets/person1.png";
 import TableBtn from "../../utils/TableBtn";
 
 const Manage = () => {
+
+const [user,setUser] = useState([]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className="Mange__User bg-[#FFFBFB] lg:rounded-l-[50px] h-full lg:px-[57px] lg:py-[61px] p-4 overflow-x-auto">
       <div className="top__btn flex items-center mb-[82px]">

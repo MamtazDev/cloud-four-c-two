@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Register.css";
 import loginLogo from "../../assets/login_logo.png";
 import BlueButton from "../../utils/BlueButton";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/AuthProvider";
 
 const Login = () => {
-  const [userList, setUserList] = useState([]);
+  const {  userList,setUserList,hhh} = useContext(UserContext);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,6 +47,8 @@ const Login = () => {
         }
       });
   };
+
+
 
   return (
     <div className=" py-[60px]">

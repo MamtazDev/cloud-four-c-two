@@ -2,6 +2,10 @@ import React, { useRef, useState } from "react";
 import "./account.css";
 
 const Account = () => {
+  const [firstShow, setFirstShow] = useState(false);
+  const [lastShow, setLastShow] = useState(false);
+  const [emailShow, setEmailShow] = useState(false);
+  const [passwordshow, setPasswordShow] = useState(false);
   const [file, setFile] = useState(null);
   const [base64Image, setBase64Image] = useState("");
 
@@ -115,44 +119,104 @@ const Account = () => {
                   First Name
                 </label>
                 <input
-                  className="pl-4 border h-[40px] w-[288px] rounded-[7px]"
+                  className={
+                    firstShow === true
+                      ? "block pl-4 border h-[40px] w-[288px] rounded-[7px]"
+                      : "hidden "
+                  }
                   type="text"
                   name="first_name"
                 />
-                <a className="commissioner" href="#!">
+                <p
+                  className={
+                    firstShow === true ? "hidden" : "block text-start py-2"
+                  }
+                >
+                  Nipa
+                </p>
+                <a
+                  onClick={() => setFirstShow(true)}
+                  className="commissioner"
+                  href="#!"
+                >
                   Change
                 </a>
               </div>
               <div className="flex justify-between items-center w-full mb-[25px] text-[20px] leading-[24px]">
                 <label className="label commissioner p-0">Last Name</label>
                 <input
-                  className="pl-4 border h-[40px] w-[288px] rounded-[7px]"
+                  className={
+                    lastShow === true
+                      ? "block pl-4 border h-[40px] w-[288px] rounded-[7px]"
+                      : "hidden "
+                  }
                   type="text"
                   name="last_name"
                 />
-                <a className="commissioner" href="#!">
+                <p
+                  className={
+                    lastShow === true ? "hidden" : "block text-start py-2"
+                  }
+                >
+                  Akter
+                </p>
+                <a
+                  onClick={() => setLastShow(true)}
+                  className="commissioner"
+                  href="#!"
+                >
                   Change
                 </a>
               </div>
               <div className="flex justify-between items-center w-full mb-[25px] text-[20px] leading-[24px]">
                 <label className="label commissioner p-0">Email</label>
                 <input
-                  className="pl-4 border h-[40px] w-[288px] rounded-[7px]"
+                  className={
+                    emailShow === true
+                      ? "block pl-4 border h-[40px] w-[288px] rounded-[7px]"
+                      : "hidden "
+                  }
                   type="email"
                   name="email"
                 />
-                <a className="commissioner" href="#!">
+                <p
+                  className={
+                    emailShow === true ? "hidden" : "block text-start py-2"
+                  }
+                >
+                  nipa@gmail.com
+                </p>
+                <a
+                  onClick={() => setEmailShow(true)}
+                  className="commissioner"
+                  href="#!"
+                >
                   Update
                 </a>
               </div>
               <div className="flex justify-between items-center w-full mb-[25px] text-[20px] leading-[24px]">
                 <label className="label commissioner p-0">Password</label>
                 <input
-                  className="pl-4 border h-[40px] w-[288px] rounded-[7px]"
+                  className={
+                    passwordshow === true
+                      ? "block pl-4 border h-[40px] w-[288px] rounded-[7px]"
+                      : "hidden "
+                  }
                   type="password"
                   name="password"
                 />
-                <a className="commissioner" href="#!">
+                <p
+                  className={
+                    passwordshow === true ? "hidden" : "block text-start py-2"
+                  }
+                >
+                  *******
+                </p>
+                <a
+                  onClick={() => setPasswordShow(true)}
+                  className="commissioner"
+                  href="#!"
+                >
                   Update
                 </a>
               </div>

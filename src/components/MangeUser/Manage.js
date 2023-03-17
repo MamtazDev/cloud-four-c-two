@@ -4,10 +4,13 @@ import "./manage.css";
 import Person1 from "../../assets/person1.png";
 import TableBtn from "../../utils/TableBtn";
 import { UserContext } from "../../context/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Manage = () => {
   const { userList, setUserList } = useContext(UserContext);
-  console.log(userList);
+  // console.log(userList);
+  const [active, setActive] = useState(true);
+  console.log(active);
 
   return (
     <div className="Mange__User bg-[#FFFBFB] lg:rounded-l-[50px] h-full lg:px-[57px] lg:py-[61px] p-4 overflow-x-auto">
@@ -39,17 +42,19 @@ const Manage = () => {
               <td>Sajib</td>
               <td>Ahmed</td>
               <td>Admin</td>
-              <td>Active</td>
+              <td>{active === true ? "Active" : "Deactive"}</td>
               <td>
                 <div className="flex justify-between">
-                  <TableBtn>
+                  <TableBtn setActive={setActive} active={active}>
                     Active /
                     <br />
                     Deactivate
                   </TableBtn>
                   <TableBtn>Report</TableBtn>
                   <TableBtn>Delete</TableBtn>
-                  <TableBtn>Edit</TableBtn>
+                  <Link to="/dashboard">
+                    <TableBtn>Edit</TableBtn>
+                  </Link>
                 </div>
               </td>
             </tr>

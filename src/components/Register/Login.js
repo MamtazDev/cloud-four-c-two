@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/AuthProvider";
 
 const Login = () => {
-  const {  userList,setUserList,hhh} = useContext(UserContext);
+  const { userList, setUserList } = useContext(UserContext);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,19 +36,20 @@ const Login = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              setUserList(data);
-              e.target.reset();
-              window.location.reload(true);
-              navigate("/dashboard/project");
-            
+              if (data.success) {
+                setUserList(data);
+                e.target.reset();
+                window.location.reload(true);
+                navigate("/dashboard/project");
+                localStorage.setItem("accessToken", username);
+                localStorage.setItem("password", password);
+              }
             });
         } else {
           alert("Log in is not successful");
         }
       });
   };
-
-
 
   return (
     <div className=" py-[60px]">

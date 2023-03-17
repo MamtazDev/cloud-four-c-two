@@ -10,8 +10,16 @@ const Manage = () => {
   const { userList, setUserList } = useContext(UserContext);
   // console.log(userList);
   const [active, setActive] = useState(true);
-  const [activeId, setActiveId] = useState("");
+  const [activeId, setActiveId] = useState([]);
+
   console.log(active);
+  const table = [1, 2, 3, 4, 5, 6, 7];
+  const [rows, setRows] = useState(table);
+  function handleDelete(id) {
+    const updatedRows = rows.filter((row) => row.id !== id);
+    setRows(updatedRows);
+    console.log("clicked", id);
+  }
 
   return (
     <div className="Mange__User bg-[#FFFBFB] lg:rounded-l-[50px] h-full lg:px-[57px] lg:py-[61px] p-4 overflow-x-auto">
@@ -43,7 +51,9 @@ const Manage = () => {
               <td>Sajib</td>
               <td>Ahmed</td>
               <td>Admin</td>
-              <td>{activeId === index && active === true ? "Active" : "Deactive"}</td>
+              <td>
+                {activeId.includes(index) && active ? "Active" : "Deactivate"}
+              </td>
               <td>
                 <div className="flex justify-between">
                   <TableBtn
@@ -57,7 +67,10 @@ const Manage = () => {
                     Deactivate
                   </TableBtn>
                   <TableBtn>Report</TableBtn>
-                  <TableBtn>Delete</TableBtn>
+                  {/* <TableBtn>Delete</TableBtn> */}
+                  <button onClick={() => handleDelete(index)} type="">
+                    del{index}
+                  </button>
                   <Link to="/dashboard">
                     <TableBtn>Edit</TableBtn>
                   </Link>

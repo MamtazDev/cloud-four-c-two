@@ -26,6 +26,7 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        localStorage.setItem("accessToken");
         if (data.message === "logged in.") {
           fetch("https://app.cloud4c2.com/api/user/list", {
             method: "POST",
@@ -35,14 +36,14 @@ const Login = () => {
             body: JSON.stringify(data),
           })
             .then((res) => res.json())
-            .then((data) => {
-              if (data.success) {
-                setUserList(data);
+            .then((newdata) => {
+              if (newdata.success) {
+                setUserList(newdata);
                 e.target.reset();
                 window.location.reload(true);
                 navigate("/dashboard/project");
-                localStorage.setItem("accessToken", username);
-                localStorage.setItem("password", password);
+                // localStorage.setItem("username", username);
+                // localStorage.setItem("password", password);
               }
             });
         } else {

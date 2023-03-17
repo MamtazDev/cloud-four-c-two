@@ -103,7 +103,8 @@ const Project = () => {
 
         {/* project (staff) parts */}
         {/* The button to open modal */}
-        <label htmlFor="my-modal-4">
+        <label htmlFor="my-modal-5">
+          {" "}
           <div className="card_box p-[7px]">
             <div className="img_box">
               <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]"></div>
@@ -121,16 +122,9 @@ const Project = () => {
         </label>
 
         {/* Put this part before </body> tag */}
-        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box relative">
-            <label
-              htmlFor="my-modal-4"
-              className="btn btn-sm btn-circle absolute right-2 top-2"
-            >
-              ✕
-            </label>
-
+        <input type="checkbox" id="my-modal-5" className="modal-toggle" />
+        <label htmlFor="my-modal-5" className="modal cursor-pointer">
+          <label className="modal-box relative bg-transparent" htmlFor="">
             <div className="card_box p-[7px]">
               <div className="img_box">
                 <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]">
@@ -212,8 +206,8 @@ const Project = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </label>
+        </label>
 
         <div className="card_box p-[7px]">
           <div className="img_box">

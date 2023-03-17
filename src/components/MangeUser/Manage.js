@@ -10,6 +10,7 @@ const Manage = () => {
   const { userList, setUserList } = useContext(UserContext);
   // console.log(userList);
   const [active, setActive] = useState(true);
+  const [activeId, setActiveId] = useState("");
   console.log(active);
 
   return (
@@ -42,10 +43,15 @@ const Manage = () => {
               <td>Sajib</td>
               <td>Ahmed</td>
               <td>Admin</td>
-              <td>{active === true ? "Active" : "Deactive"}</td>
+              <td>{activeId === index && active === true ? "Active" : "Deactive"}</td>
               <td>
                 <div className="flex justify-between">
-                  <TableBtn setActive={setActive} active={active}>
+                  <TableBtn
+                    index={index}
+                    setActiveId={setActiveId}
+                    setActive={setActive}
+                    active={active}
+                  >
                     Active /
                     <br />
                     Deactivate

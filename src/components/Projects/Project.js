@@ -14,7 +14,7 @@ import axios from "axios";
 import { UserContext } from "../../context/AuthProvider";
 
 const Project = () => {
-  const { projects, setProjects } = useContext(UserContext);
+  const [projects, setProjects] = useState([]);
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -25,9 +25,9 @@ const Project = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => console.log(response.data.users));
+      .then((response) => setProjects(response.data.projects));
   }, []);
-  // console.log(userList);
+  console.log(projects);
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -226,81 +226,94 @@ const Project = () => {
           </label>
         </label>
 
-        <div className="card_box p-[7px]">
-          <div className="img_box">
-            <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]">
-              {/* <img
+        {projects.map((project) => (
+          <div key={project.project_id} className="card_box p-[7px]">
+            <div className="img_box">
+              <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]">
+                {/* <img
                 className="pointer"
                 onClick={handleDelete}
                 src={close}
                 alt=""
               /> */}
 
-              <div className="dropdown dropdown-right">
-                <label tabIndex={0}>
-                  <img className="pointer" src={more} alt="" />
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
-                >
-                  <li>
-                    <Link
-                      className="commissioner"
-                      to="/dashboard/projectDetails"
-                    >
-                      Project details
-                    </Link>
-                  </li>
-                  <li>
-                    <a className="commissioner">Share</a>
-                  </li>
-                  <li>
-                    <Link
-                      className="commissioner"
-                      to="/dashboard/projectDetails"
-                    >
-                      Leave project
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="commissioner" to="/dashboard/startSession">
-                      start session
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="commissioner" to="/dashboard/projectCopy">
-                      copy project
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="commissioner"
-                      to="/dashboard/projectUpload"
-                    >
-                      edit project
-                    </Link>
-                  </li>
-                  <li>
-                    <a className="commissioner">disable project</a>
-                  </li>
-                  <li>
-                    <a className="commissioner">delete project</a>
-                  </li>
-                </ul>
+                <div className="dropdown dropdown-right">
+                  <label tabIndex={0}>
+                    <img className="pointer" src={more} alt="" />
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
+                  >
+                    <li>
+                      <Link
+                        className="commissioner"
+                        to="/dashboard/projectDetails"
+                      >
+                        Project details
+                      </Link>
+                    </li>
+                    <li>
+                      <a className="commissioner">Share</a>
+                    </li>
+                    <li>
+                      <Link
+                        className="commissioner"
+                        to="/dashboard/projectDetails"
+                      >
+                        Leave project
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="commissioner"
+                        to="/dashboard/startSession"
+                      >
+                        start session
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="commissioner"
+                        to="/dashboard/projectCopy"
+                      >
+                        copy project
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="commissioner"
+                        to="/dashboard/projectUpload"
+                      >
+                        edit project
+                      </Link>
+                    </li>
+                    <li>
+                      <a className="commissioner">disable project</a>
+                    </li>
+                    <li>
+                      <a className="commissioner">delete project</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div>
+                <img
+                  width={100}
+                  className=" mx-auto mb-[-30px]"
+                  src={project.image}
+                  alt=""
+                />
+                <p className="commissioner text-[16px] font-[500] mt-[35px] mb-[8px] text-center">
+                  {project.name}
+                </p>
+                <p className="commissioner text-[14px] font-[400] text-center">
+                  {project?.description}
+                </p>
               </div>
             </div>
-            <div>
-              <img className="mx-auto mb-[-30px]" src={staff} alt="" />
-              <p className="commissioner text-[16px] font-[500] mt-[35px] mb-[8px] text-center">
-                Staff
-              </p>
-              <p className="commissioner text-[14px] font-[400] text-center">
-                School administration and <br /> development
-              </p>
-            </div>
           </div>
-        </div>
+        ))}
       </div>
       {/* <button>Click Me</button> */}
     </div>

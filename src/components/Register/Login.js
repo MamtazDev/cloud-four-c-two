@@ -7,7 +7,6 @@ import { UserContext } from "../../context/AuthProvider";
 import axios from "axios";
 
 const Login = () => {
-  const { userList, setUserList } = useContext(UserContext);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,73 +17,16 @@ const Login = () => {
       password,
     };
     console.log(data);
-    // fetch("https://app.cloud4c2.com/api/user/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //     'Access-Control-Allow-Credentials': true
-    //   },
-    //   withCredentials: true,
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     // localStorage.setItem("accessToken");
-    //     if (data.message === "logged in.") {
-    //       alert('message',data.message)
-    //       navigate("/dashboard/project");
-    //       // fetch("https://app.cloud4c2.com/api/user/list", {
-    //       //   method: "POST",
-    //       //   headers: {
-    //       //     "content-type": "application/json",
-    //       //     withCredentials: true 
-    //       //   },
-            
-    //       //   body: JSON.stringify(data),
-    //       // })
-    //       //   .then((res) => res.json())
-    //       //   .then((newdata) => {
-    //       //     if (newdata.success) {
-    //       //       setUserList(newdata);
-    //       //       e.target.reset();
-    //       //       window.location.reload(true);
-    //       //       navigate("/dashboard/project");
-    //       //       // localStorage.setItem("username", username);
-    //       //       // localStorage.setItem("password", password);
-    //       //     }
-    //       //   });
-    //     } else {
-    //       alert("Log in is not successful");
-    //     }
-    //   });
-    axios.defaults.withCredentials = true;
-    axios.post('https://app.cloud4c2.com/api/user/login', data,
-       {
-        headers:{
-          'Content-Type': 'application/json',
-          "Access-Control-Allow-Credentials": true
-          },
-       }
-)
-    .then(response =>  console.log(response));
 
-    // axios.post({
-    //   url: "https://app.cloud4c2.com/api/user/login",
-    //   headers:{
-    //           'Content-Type': 'application/json'
-    //       },
-    //   json:true,
-    //   data,
-    //   withCredentials: true 
-    // })
-    // .then((response) =>
-    // {
-    //       console.log(response);
-    // }) 
-    // .catch((err)=>
-    // {
-    //       alert(err);
-    //   }) 
+    axios.defaults.withCredentials = true;
+    axios
+      .post("https://app.cloud4c2.com/api/user/login", data, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => console.log(response));
   };
 
   return (

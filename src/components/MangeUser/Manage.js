@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BlueButton from "../../utils/BlueButton";
 import "./manage.css";
 import Person1 from "../../assets/person1.png";
@@ -14,23 +14,25 @@ const Manage = () => {
   const [activeId, setActiveId] = useState([]);
 
   console.log(active);
-  const table = [1, 2, 3, 4, 5, 6, 7];
-  const [rows, setRows] = useState(table);
-  function handleDelete(id) {
-    const updatedRows = rows.filter((row) => row.id !== id);
-    setRows(updatedRows);
-    console.log("clicked", id);
-  }
+
   axios.defaults.withCredentials = true;
-  axios
-    .post("https://app.cloud4c2.com/api/user/list", {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
-      },
-    })
-    .then((response) => setUserList(response.data.users))
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/user/list", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setUserList(response.data.users));
+  }, []);
   console.log(userList);
+
+  const handleDelete = (id) => {
+    axios.delete(`https://app.cloud4c2.com/api/user/delete/${id}`).then(() => {
+      setUserList(userList.filter((item) => item.id !== id));
+    });
+  };
 
   return (
     <div className="Mange__User bg-[#FFFBFB] lg:rounded-l-[50px] h-full lg:px-[57px] lg:py-[61px] p-4 overflow-x-auto">
@@ -63,8 +65,7 @@ const Manage = () => {
               <td>{i.last_name}</td>
               <td>{i.role}</td>
               <td>{i.status}</td>
-        
-              
+
               {/* <td>
                 {activeId.includes(index) && active ? "Active" : "Deactivate"}
               </td> */}
@@ -82,7 +83,7 @@ const Manage = () => {
                   </TableBtn>
                   <TableBtn>Report</TableBtn>
                   {/* <TableBtn>Delete</TableBtn> */}
-                  <button onClick={() => handleDelete(index)} type="">
+                  <button onClick={() => handleDelete(i.user_id)} type="">
                     del{index}
                   </button>
                   <Link to="/dashboard">

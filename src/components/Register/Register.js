@@ -27,11 +27,11 @@ const Register = () => {
       password,
       role,
     };
-
+    console.log(info);
 
     fetch("https://app.cloud4c2.com/api/user/signup", {
       method: "POST",
-      credentials: 'same-origin',
+      credentials: "same-origin",
       headers: {
         "content-type": "application/json",
       },
@@ -39,10 +39,12 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert("registration is  successful")
+        if (data.message === "user was successfully signed up") {
+          e.target.reset();
+          navigate("/dashboard/project");
+        }
+        console.log(data.message);
       });
-
-
 
     // console.log(info);
     // fetch("https://app.cloud4c2.com/api/user/signup", {

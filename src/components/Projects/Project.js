@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BlueButton from "../../utils/BlueButton";
 import "./Project.css";
 import picture from "../../assets/upload-img.png";
@@ -11,40 +11,23 @@ import { Link } from "react-router-dom";
 import CreateProject from "./CreateProject";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import { UserContext } from "../../context/AuthProvider";
 
 const Project = () => {
+  const { projects, setProjects } = useContext(UserContext);
 
-
-  const [cookies, setCookie] = useCookies();
-
-  const handleClick =()=>{
-
-
-    axios.defaults.withCredentials = true;
-    axios.post('https://app.cloud4c2.com/api/user/list',
-       {
-        headers:{
-          'Content-Type': 'application/json',
-          "Access-Control-Allow-Credentials": true
-          },
-       }
-  )
-    .then(response =>  console.log(response))
-    
-    // fetch("https://app.cloud4c2.com/api/user/list", {
-    //         method: "POST",
-    //         headers: {
-    //           "content-type": "application/json",
-    //         },
-    //         withCredentials: true,
-    //         // body: JSON.stringify({
-    //         //   "username": "admin",
-    //         //   "password": "dfspo32h0f9"
-    //         // }),
-    //       })
-    //         .then((res) => res.json())
-            .then((data) => console.log(data))
-}
+  axios.defaults.withCredentials = true;
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/project/my_projects", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => console.log(response.data.users));
+  }, []);
+  // console.log(userList);
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -319,7 +302,7 @@ const Project = () => {
           </div>
         </div>
       </div>
-      <button onClick={handleClick}>Click Me</button>
+      {/* <button>Click Me</button> */}
     </div>
   );
 };

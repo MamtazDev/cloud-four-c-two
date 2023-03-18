@@ -19,12 +19,14 @@ const CreateProject = () => {
     e.preventDefault();
     const project_name = e.target.project_name.value;
     const project_description = e.target.project_description.value;
+    const file_data = e.target.file_data.value;
     const project_path_to_execute = e.target.project_path_to_execute.value;
 
     const data = {
       project_name,
-      project_description,
+      file_data,
       project_path_to_execute,
+      project_description,
       project_image: base64Image,
     };
     console.log(data);
@@ -38,12 +40,10 @@ const CreateProject = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === "Invalid token: JsonWebTokenError") {
-          alert(data.message);
-        } else {
+        if (data.message === "New project successfully created") {
           e.target.reset();
-          window.location.reload(true);
-        }
+          alert(data.message);
+        } 
       });
   };
 
@@ -69,7 +69,7 @@ const CreateProject = () => {
             name="project_description"
           ></textarea>
         </div>
-        <div className="mb-[33px]">
+        {/* <div className="mb-[33px]">
           <label className="outfit text-[20px] font-[300] mb-[10px] block">
             Project Image <sup className="text-[#C9312E]">*</sup>
           </label>
@@ -79,13 +79,14 @@ const CreateProject = () => {
             className="file-input w-full bg-white"
             onChange={handleImageChange}
           />
-        </div>
+        </div> */}
         <div className="mb-[33px]">
           <label className="outfit text-[20px] font-[300] mb-[10px] block">
             File Data <sup className="text-[#C9312E]">*</sup>
           </label>
           <input
             type="file"
+            name="file_data"
             accept=".zip,.rar,.7zip"
             className="file-input w-full bg-white"
             onChange={handleImageChange}

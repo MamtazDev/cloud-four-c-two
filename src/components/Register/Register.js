@@ -19,7 +19,7 @@ const Register = () => {
     const password = e.target.password.value;
     const role = e.target.role.value;
 
-    const data = {
+    const info = {
       username,
       first_name,
       last_name,
@@ -28,24 +28,40 @@ const Register = () => {
       role,
     };
 
-    console.log(data);
+
     fetch("https://app.cloud4c2.com/api/user/signup", {
       method: "POST",
+      credentials: 'same-origin',
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(info),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === "Invalid token: JsonWebTokenError") {
-          alert(data.message);
-        } else {
-          e.target.reset();
-          window.location.reload(true);
-          navigate("/dashboard/project");
-        }
+        alert("registration is  successful")
       });
+
+
+
+    // console.log(info);
+    // fetch("https://app.cloud4c2.com/api/user/signup", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(info),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.message === "user was successfully signed up") {
+    //       e.target.reset();
+    //       window.location.reload(true);
+    //       navigate("/dashboard/project");
+    //     } else {
+    //       alert("registration is not successful");
+    //     }
+    //   });
   };
 
   return (

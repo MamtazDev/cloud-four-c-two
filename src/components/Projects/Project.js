@@ -9,8 +9,42 @@ import staff from "../../assets/staff.png";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import CreateProject from "./CreateProject";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const Project = () => {
+
+
+  const [cookies, setCookie] = useCookies();
+
+  const handleClick =()=>{
+
+
+    axios.defaults.withCredentials = true;
+    axios.post('https://app.cloud4c2.com/api/user/list',
+       {
+        headers:{
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Credentials": true
+          },
+       }
+  )
+    .then(response =>  console.log(response))
+    
+    // fetch("https://app.cloud4c2.com/api/user/list", {
+    //         method: "POST",
+    //         headers: {
+    //           "content-type": "application/json",
+    //         },
+    //         withCredentials: true,
+    //         // body: JSON.stringify({
+    //         //   "username": "admin",
+    //         //   "password": "dfspo32h0f9"
+    //         // }),
+    //       })
+    //         .then((res) => res.json())
+            .then((data) => console.log(data))
+}
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -285,6 +319,7 @@ const Project = () => {
           </div>
         </div>
       </div>
+      <button onClick={handleClick}>Click Me</button>
     </div>
   );
 };

@@ -26,7 +26,12 @@ const Login = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => console.log(response));
+     
+      .then((response) => {
+        if (response.data.message === "logged in.") {
+          navigate("/dashboard/project");
+        }
+      });
   };
 
   return (

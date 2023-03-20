@@ -13,7 +13,7 @@ const CreateProject = () => {
 
     reader.readAsDataURL(file);
   };
-  console.log(base64Image);
+  // console.log(base64Image);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,10 +24,10 @@ const CreateProject = () => {
 
     const data = {
       project_name,
-      file_data,
+      file_data: base64Image,
       project_path_to_execute,
       project_description,
-      project_image: base64Image,
+      // project_image: base64Image,
     };
     console.log(data);
 
@@ -43,7 +43,7 @@ const CreateProject = () => {
         if (data.message === "New project successfully created") {
           e.target.reset();
           alert(data.message);
-        } 
+        }
       });
   };
 

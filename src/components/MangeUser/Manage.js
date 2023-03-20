@@ -9,12 +9,6 @@ import axios from "axios";
 
 const Manage = () => {
   const { userList, setUserList } = useContext(UserContext);
-  // console.log(userList);
-  const [active, setActive] = useState(true);
-  const [activeId, setActiveId] = useState([]);
-
-  console.log(active);
-
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
@@ -26,12 +20,32 @@ const Manage = () => {
       })
       .then((response) => setUserList(response.data.users));
   }, []);
-  console.log(userList);
+  // console.log(userList);
 
   const handleDelete = (id) => {
-    axios.delete(`https://app.cloud4c2.com/api/user/delete/${id}`).then(() => {
-      setUserList(userList.filter((item) => item.id !== id));
-    });
+    axios
+      .post(`https://app.cloud4c2.com/api/user/delete/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+
+      .then((res) => {
+        setUserList(userList.filter((item) => item.user_id !== res.data.user));
+      });
+  };
+
+  const handleActive = (id) => {
+    axios
+      .post(`https://app.cloud4c2.com/api/user/change_status/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+
+      .then((res) => console.log(res));
   };
 
   return (
@@ -66,26 +80,22 @@ const Manage = () => {
               <td>{i.role}</td>
               <td>{i.status}</td>
 
-              {/* <td>
-                {activeId.includes(index) && active ? "Active" : "Deactivate"}
-              </td> */}
               <td>
                 <div className="flex justify-between">
-                  <TableBtn
-                    index={index}
-                    setActiveId={setActiveId}
-                    setActive={setActive}
-                    active={active}
-                  >
-                    Active /
-                    <br />
-                    Deactivate
+                  <TableBtn>
+                    <button onClick={() => handleActive(i.user_id)}>
+                      Active /
+                      <br />
+                      Deactivate
+                    </button>
                   </TableBtn>
                   <TableBtn>Report</TableBtn>
-                  {/* <TableBtn>Delete</TableBtn> */}
-                  <button onClick={() => handleDelete(i.user_id)} type="">
-                    del{index}
-                  </button>
+                  <TableBtn>
+                    {/* <button onClick={() => handleDelete(i.user_id)} type=""> */}
+                    Delete
+                    {/* </button> */}
+                  </TableBtn>
+
                   <Link to="/dashboard">
                     <TableBtn>Edit</TableBtn>
                   </Link>

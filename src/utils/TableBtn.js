@@ -1,9 +1,10 @@
 import React from "react"
 
-const TableBtn = ({ children }) =>{
+const TableBtn = ({ children ,setActive,active,index,setActiveId}) =>{
     return(
         <>
-            <button className="bg-[#F0F4FF] h-[54px] w-[124px] text-[14px] font-[500] border-1 border-[#243c5a] rounded-[6px]">
+            <button onClick={()=>{setActive(!active)
+            setActiveId((current)=>[...current, index])}} className="bg-[#F0F4FF] h-[54px] w-[124px] text-[14px] font-[500] border-1 border-[#243c5a] rounded-[6px]">
                 {children}
             </button>
         </>

@@ -1,19 +1,56 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BlueButton from "../../utils/BlueButton";
 import "./manage.css";
-
-import Person1 from "../../assets/person1.png";
-import Person2 from "../../assets/person2.png";
-import Person3 from "../../assets/person3.png";
-import Person4 from "../../assets/person4.png";
-import Person5 from "../../assets/person5.png";
-import Person6 from "../../assets/person6.png";
-import Person7 from "../../assets/person7.png";
-import Person8 from "../../assets/person8.png";
-
 import TableBtn from "../../utils/TableBtn";
+import { UserContext } from "../../context/AuthProvider";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Manage = () => {
+  const { userList, setUserList } = useContext(UserContext);
+  const { uiRender, setUiRender } = useState(0);
+  axios.defaults.withCredentials = true;
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/user/list", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setUserList(response.data.users));
+  }, [uiRender]);
+  // console.log(userList);
+
+  const handleDelete = (id) => {
+    axios
+      .post(`https://app.cloud4c2.com/api/user/delete/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+
+      .then((res) => {
+        setUserList(userList.filter((item) => item.user_id !== res.data.user));
+      });
+  };
+
+  const handleActive = (id) => {
+    axios
+      .post(`https://app.cloud4c2.com/api/user/change_status/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+
+      .then((res) => {
+        setUiRender(uiRender +1)
+        console.log(res)});
+  };
+
+
   return (
     <div className="Mange__User bg-[#FFFBFB] lg:rounded-l-[50px] h-full lg:px-[57px] lg:py-[61px] p-4 overflow-x-auto">
       <div className="top__btn flex items-center mb-[82px]">
@@ -22,63 +59,6 @@ const Manage = () => {
           Show Deleted
         </button>
       </div>
-      {/* <div className='manage__info'>
-                <table className='w-full'>
-                    <tr className='bg-[red]'>
-                        <td className='w-[6%]'>Image</td>
-                        <td className='w-[10%]'>Username</td>
-                        <td className='w-[10%]'>First Name</td>
-                        <td className='w-[10%]'>Last Name</td>
-                        <td className='w-[10%]'>Account Type</td>
-                        <td className='w-[10%]'>Status</td>
-                        <td className='text-center'>Accounts/edit</td>
-                    </tr>
-                </table>
-                <table><tr><td className='h-[30px] w-full'></td></tr></table>
-                <table>
-                    <tr>
-                        <td className='w-[6%]'><img src={Person1} alt='img'/></td>
-                        <td className='w-[10%]'>Sajib Ahmed</td>
-                        <td className='w-[10%]'>Sajib</td>
-                        <td className='w-[10%]'>Ahmed</td>
-                        <td className='w-[10%]'>Admin</td>
-                        <td className='w-[10%]'>Active</td>
-                        <td className='w-[32%]'>
-                            <table className='w-full'>
-                                <tr>
-                                    <td><TableBtn>Activate/ <br/> Deactive</TableBtn></td>
-                                    <td><TableBtn>Report</TableBtn></td>
-                                    <td><TableBtn>Delete</TableBtn></td>
-                                    <td><TableBtn>Edit</TableBtn></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <table><tr><td className='h-[20px] w-full'></td></tr></table>
-                <table>
-                    <tr>
-                        <td className='w-[6%]'><img src={Person2} alt='img'/></td>
-                        <td className='w-[10%]'>Sajib Ahmed</td>
-                        <td className='w-[10%]'>Sajib</td>
-                        <td className='w-[10%]'>Ahmed</td>
-                        <td>Admin</td>
-                        <td>Active</td>
-                        <td className='w-[32%]'>
-                            <table className='w-full'>
-                                <tr>
-                                    <td><TableBtn>Activate/ <br/> Deactive</TableBtn></td>
-                                    <td><TableBtn>Report</TableBtn></td>
-                                    <td><TableBtn>Delete</TableBtn></td>
-                                    <td><TableBtn>Edit</TableBtn></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <table><tr><td className='h-[20px] w-full'></td></tr></table>
-            </div> */}
-
       <table style={{ width: "100%" }}>
         <thead>
           <tr className="commissioner">
@@ -87,31 +67,41 @@ const Manage = () => {
             <th className="text-left">First Name</th>
             <th className="text-left">Last Name</th>
             <th className="text-left">Account Type</th>
-            <th className="text-left">Status</th>
+            <th className="text-left" >Status</th>
             <th className="text-center">Accounts/Edit</th>
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-            <tr>
+          {userList.map((i, index) => (
+            <tr key={index}>
               <td>
-                <img src={Person1} alt="User Image" />
+                <img width={60} src={i.image} alt="User Image" />
               </td>
-              <td>Sajib Ahmed</td>
-              <td>Sajib</td>
-              <td>Ahmed</td>
-              <td>Admin</td>
-              <td>Active</td>
+              <td>{i.username}</td>
+              <td>{i.first_name}</td>
+              <td>{i.last_name}</td>
+              <td>{i.role}</td>
+              <td>{i.status}</td>
+
               <td>
                 <div className="flex justify-between">
                   <TableBtn>
-                    Active/
-                    <br />
-                    Deactivate
+                    <button onClick={() => handleActive(i.user_id)}>
+                      Active /
+                      <br />
+                      Deactivate
+                    </button>
                   </TableBtn>
                   <TableBtn>Report</TableBtn>
-                  <TableBtn>Delete</TableBtn>
-                  <TableBtn>Edit</TableBtn>
+                  <TableBtn>
+                    {/* <button onClick={() => handleDelete(i.user_id)} type=""> */}
+                    Delete
+                    {/* </button> */}
+                  </TableBtn>
+
+                  <Link to="/dashboard">
+                    <TableBtn>Edit</TableBtn>
+                  </Link>
                 </div>
               </td>
             </tr>

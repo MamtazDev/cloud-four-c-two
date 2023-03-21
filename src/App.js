@@ -10,9 +10,7 @@ import ProjectCopy from "./components/Projects/ProjectCopy";
 import ProjectDetails from "./components/Projects/ProjectDetails";
 import ProjectUpload from "./components/Projects/ProjectUpload";
 import StartSession from "./components/Projects/StartSession";
-
 import ProjectReport from "./components/Projects/ProjectReport";
-
 import Login from "./components/Register/Login";
 import Register from "./components/Register/Register";
 import Sidebar from "./components/shared/Sidebar";
@@ -22,7 +20,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Login />} />
-        
+
         <Route path="dashboard" element={<Sidebar />}>
           <Route index element={<Account />}></Route>
           <Route path="project" element={<Project />}></Route>

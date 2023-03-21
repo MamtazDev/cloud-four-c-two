@@ -30,7 +30,7 @@ const Manage = () => {
         },
       })
       .then((response) => setUserList(response.data.users));
-  }, [uiRender]);
+  }, []);
   // console.log(userList);
 
   const handleDelete = (id) => {
@@ -56,10 +56,7 @@ const Manage = () => {
         },
       })
 
-      .then((res) => {
-        setUiRender(uiRender + 1);
-        console.log(res);
-      });
+      .then((res) => console.log(res));
   };
 
   return (
@@ -105,7 +102,7 @@ const Manage = () => {
                   </TableBtn>
                   <TableBtn>Report</TableBtn>
                   <TableBtn>
-                    {user.role === "administrator" ? (
+                    {user?.role === "administrator" ? (
                       <button onClick={() => handleDelete(i.user_id)} type="">
                         Delete
                       </button>

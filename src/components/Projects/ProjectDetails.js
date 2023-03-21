@@ -5,6 +5,11 @@ import bob from "../../assets/bob.png";
 import sarah from "../../assets/sarah.png";
 
 const ProjectDetails = () => {
+
+
+
+
+  
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
       <div className="max-w-[1091px]">

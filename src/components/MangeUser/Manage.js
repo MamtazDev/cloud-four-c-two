@@ -7,9 +7,20 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Manage = () => {
+  const [user, setUser] = useState();
   const { userList, setUserList } = useContext(UserContext);
   const { uiRender, setUiRender } = useState(0);
   axios.defaults.withCredentials = true;
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/user/", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setUser(response.data.user));
+  }, []);
   useEffect(() => {
     axios
       .post("https://app.cloud4c2.com/api/user/list", {
@@ -46,10 +57,10 @@ const Manage = () => {
       })
 
       .then((res) => {
-        setUiRender(uiRender +1)
-        console.log(res)});
+        setUiRender(uiRender + 1);
+        console.log(res);
+      });
   };
-
 
   return (
     <div className="Mange__User bg-[#FFFBFB] lg:rounded-l-[50px] h-full lg:px-[57px] lg:py-[61px] p-4 overflow-x-auto">
@@ -67,7 +78,7 @@ const Manage = () => {
             <th className="text-left">First Name</th>
             <th className="text-left">Last Name</th>
             <th className="text-left">Account Type</th>
-            <th className="text-left" >Status</th>
+            <th className="text-left">Status</th>
             <th className="text-center">Accounts/Edit</th>
           </tr>
         </thead>
@@ -94,12 +105,16 @@ const Manage = () => {
                   </TableBtn>
                   <TableBtn>Report</TableBtn>
                   <TableBtn>
-                    {/* <button onClick={() => handleDelete(i.user_id)} type=""> */}
-                    Delete
-                    {/* </button> */}
+                    {user.role === "administrator" ? (
+                      <button onClick={() => handleDelete(i.user_id)} type="">
+                        Delete
+                      </button>
+                    ) : (
+                      ""
+                    )}
                   </TableBtn>
 
-                  <Link to="/dashboard">
+                  <Link to="/dashboard/edit-user">
                     <TableBtn>Edit</TableBtn>
                   </Link>
                 </div>

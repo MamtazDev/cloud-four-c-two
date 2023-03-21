@@ -1,7 +1,9 @@
-import React, { useRef, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import "./account.css";
 
 const Account = () => {
+  const [user, setUser] = useState();
   const [firstShow, setFirstShow] = useState(false);
   const [lastShow, setLastShow] = useState(false);
   const [emailShow, setEmailShow] = useState(false);
@@ -28,36 +30,47 @@ const Account = () => {
   const inputHandler = () => {
     inputRef.current.click();
   };
+  axios.defaults.withCredentials = true;
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/user/", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setUser(response.data.user));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const first_name = e.target.first_name.value;
     const last_name = e.target.last_name.value;
     const email = e.target.email.value;
-    const password = e.target.password.value;
+    // const password = e.target.password.value;
     const data = {
       first_name,
       last_name,
       email,
-      password,
+      // password,
       image: base64Image,
     };
     console.log(data);
 
-    fetch("https://app.cloud4c2.com/api/user/edit", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === "Invalid token: JsonWebTokenError") {
+    axios.defaults.withCredentials = true;
+
+    axios
+      .post("https://app.cloud4c2.com/api/user/edit", data, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+
+      .then((res) => {
+        if (res.data.message === "User successfully updated!") {
+          alert(res.data.message);
           e.target.reset();
-          window.location.reload(true);
-        } else {
-          alert(data.message);
         }
       });
   };
@@ -68,7 +81,7 @@ const Account = () => {
         <div className="user__info text-center">
           <h3 className="commissioner text-[30px] font-[600] leading-[37px]">
             {" "}
-            <a href="#!">My Account</a> / <a href="#!">Edit user</a>{" "}
+            <a href="#!">My Account</a>
           </h3>
 
           <form onSubmit={handleSubmit}>
@@ -112,7 +125,7 @@ const Account = () => {
             <div className="user__log flex flex-col justify-between">
               <div className="flex w-full max-w-[400px] md:max-w-[445px] mb-[30px] justify-between text-[20px] font-[500] leading-[24px]">
                 <div className="label commissioner">Username</div>
-                <div className="label commissioner">My_cernamnet_username</div>
+                <div className="label commissioner">{user?.username}</div>
               </div>
               <div className="flex justify-between items-center mb-[25px] text-[20px] leading-[24px]">
                 <label className="label commissioner p-0 text-[20px]">
@@ -132,7 +145,7 @@ const Account = () => {
                     firstShow === true ? "hidden" : "block text-start py-2"
                   }
                 >
-                  Nipa
+                  {user?.first_name}
                 </p>
                 <a
                   onClick={() => setFirstShow(true)}
@@ -158,7 +171,7 @@ const Account = () => {
                     lastShow === true ? "hidden" : "block text-start py-2"
                   }
                 >
-                  Akter
+                  {user?.last_name}
                 </p>
                 <a
                   onClick={() => setLastShow(true)}
@@ -184,7 +197,7 @@ const Account = () => {
                     emailShow === true ? "hidden" : "block text-start py-2"
                   }
                 >
-                  nipa@gmail.com
+                  {user?.email}
                 </p>
                 <a
                   onClick={() => setEmailShow(true)}
@@ -194,7 +207,7 @@ const Account = () => {
                   Update
                 </a>
               </div>
-              <div className="flex justify-between items-center w-full mb-[25px] text-[20px] leading-[24px]">
+              {/* <div className="flex justify-between items-center w-full mb-[25px] text-[20px] leading-[24px]">
                 <label className="label commissioner p-0">Password</label>
                 <input
                   className={
@@ -219,7 +232,7 @@ const Account = () => {
                 >
                   Update
                 </a>
-              </div>
+              </div> */}
             </div>
             <div className="flex justify-center md:justify-between  items-center mb-[25px] text-[20px] leading-[24px]">
               <label className="label hidden md:block invisible commissioner">

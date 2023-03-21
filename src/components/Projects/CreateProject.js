@@ -39,7 +39,12 @@ const CreateProject = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((res) => console.log(res));
+      .then((res) => {
+        if (res.data.message === "New project successfully created") {
+          e.target.reset();
+          window.location.reload(true);
+        }
+      });
   };
 
   return (

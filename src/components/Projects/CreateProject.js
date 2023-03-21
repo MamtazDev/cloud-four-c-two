@@ -19,24 +19,24 @@ const CreateProject = () => {
     e.preventDefault();
     const project_name = e.target.project_name.value;
     const project_description = e.target.project_description.value;
-    const file_data = e.target.file_data.value;
     const project_path_to_execute = e.target.project_path_to_execute.value;
 
-    const data = {
+    const info = {
       project_name,
       file_data: base64Image,
       project_path_to_execute,
       project_description,
       // project_image: base64Image,
     };
-    console.log(data);
+    console.log(info);
 
     fetch("https://app.cloud4c2.com/api/project/create", {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(info),
     })
       .then((res) => res.json())
       .then((data) => {

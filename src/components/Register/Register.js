@@ -29,26 +29,9 @@ const Register = () => {
     };
     console.log(info);
 
-    fetch("https://app.cloud4c2.com/api/user/signup", {
-      method: "POST",
-      credentials: "same-origin",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(info),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === "user was successfully signed up") {
-          e.target.reset();
-          navigate("/dashboard/project");
-        }
-        console.log(data.message);
-      });
-
-    // console.log(info);
     // fetch("https://app.cloud4c2.com/api/user/signup", {
     //   method: "POST",
+    //   credentials: "same-origin",
     //   headers: {
     //     "content-type": "application/json",
     //   },
@@ -58,12 +41,28 @@ const Register = () => {
     //   .then((data) => {
     //     if (data.message === "user was successfully signed up") {
     //       e.target.reset();
-    //       window.location.reload(true);
     //       navigate("/dashboard/project");
-    //     } else {
-    //       alert("registration is not successful");
     //     }
+    //     console.log(data.message);
     //   });
+
+    fetch("https://app.cloud4c2.com/api/user/signup", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "user was successfully signed up") {
+          e.target.reset();
+          window.location.reload(true);
+          navigate("/dashboard/project");
+        } else {
+          alert("registration is not successful");
+        }
+      });
   };
 
   return (

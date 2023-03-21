@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import BlueButton from "../../utils/BlueButton";
 import "./manage.css";
-import Person1 from "../../assets/person1.png";
 import TableBtn from "../../utils/TableBtn";
 import { UserContext } from "../../context/AuthProvider";
 import { Link } from "react-router-dom";
@@ -9,6 +8,7 @@ import axios from "axios";
 
 const Manage = () => {
   const { userList, setUserList } = useContext(UserContext);
+  const { uiRender, setUiRender } = useState(0);
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
@@ -19,7 +19,7 @@ const Manage = () => {
         },
       })
       .then((response) => setUserList(response.data.users));
-  }, []);
+  }, [uiRender]);
   // console.log(userList);
 
   const handleDelete = (id) => {
@@ -45,8 +45,11 @@ const Manage = () => {
         },
       })
 
-      .then((res) => console.log(res));
+      .then((res) => {
+        setUiRender(uiRender +1)
+        console.log(res)});
   };
+
 
   return (
     <div className="Mange__User bg-[#FFFBFB] lg:rounded-l-[50px] h-full lg:px-[57px] lg:py-[61px] p-4 overflow-x-auto">
@@ -64,7 +67,7 @@ const Manage = () => {
             <th className="text-left">First Name</th>
             <th className="text-left">Last Name</th>
             <th className="text-left">Account Type</th>
-            <th className="text-left">Status</th>
+            <th className="text-left" >Status</th>
             <th className="text-center">Accounts/Edit</th>
           </tr>
         </thead>

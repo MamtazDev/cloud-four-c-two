@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import CreateProject from "./CreateProject";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { UserContext } from "../../context/AuthProvider";
 
 const Project = () => {
   const [projects, setProjects] = useState([]);

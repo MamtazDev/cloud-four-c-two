@@ -9,7 +9,6 @@ import axios from "axios";
 const Manage = () => {
   const [user, setUser] = useState();
   const { userList, setUserList } = useContext(UserContext);
-  const { uiRender, setUiRender } = useState(0);
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
@@ -47,14 +46,22 @@ const Manage = () => {
       });
   };
 
-  const handleActive = (id) => {
+  const handleActive = (user) => {
+    console.log("user...", user);
+    // const status = {
+    //   ...user,status: "suspended"
+    // }
     axios
-      .post(`https://app.cloud4c2.com/api/user/change_status/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
+      .post(
+        `https://app.cloud4c2.com/api/user/change_status/${user.user_id}`,
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        }
+      )
 
       .then((res) => console.log(res));
   };
@@ -94,7 +101,7 @@ const Manage = () => {
               <td>
                 <div className="flex justify-between">
                   <TableBtn>
-                    <button onClick={() => handleActive(i.user_id)}>
+                    <button onClick={() => handleActive(i)}>
                       Active /
                       <br />
                       Deactivate

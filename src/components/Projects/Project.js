@@ -7,7 +7,7 @@ import close from "../../assets/close.png";
 import more from "../../assets/more.png";
 import staff from "../../assets/staff.png";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreateProject from "./CreateProject";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -15,6 +15,10 @@ import axios from "axios";
 const Project = () => {
   const [projects, setProjects] = useState([]);
   const [base64Image, setBase64Image] = useState("");
+  const navigate = useNavigate()
+  const navigateToItemDetails = id => {
+      navigate(`/dashboard/projectDetails/${id}`);
+  }
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -40,20 +44,19 @@ const Project = () => {
       .then((response) => setProjects(response.data.projects));
   }, []);
 
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-    });
+  const handleDelete = (id) => {
+    axios
+      .post(`https://app.cloud4c2.com/api/project/delete/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+
+      .then((res) => {
+        console.log(res);
+        // setProjects(projects.filter((item) => item.project_id !== res.data.user));
+      });
   };
   return (
     <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px]">
@@ -296,13 +299,13 @@ const Project = () => {
                           tabIndex={0}
                           className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
                         >
-                          <li>
-                            <Link
+                          <li onClick={()=>navigateToItemDetails(project.project_id)}>
+                            {/* <Link
                               className="commissioner"
                               to="/dashboard/projectDetails"
-                            >
+                            > */}
                               Project details
-                            </Link>
+                            {/* </Link> */}
                           </li>
                           <li>
                             <a className="commissioner">Share</a>
@@ -343,7 +346,12 @@ const Project = () => {
                             <a className="commissioner">disable project</a>
                           </li>
                           <li>
-                            <a className="commissioner">delete project</a>
+                            <a
+                              onClick={() => handleDelete(project.project_id)}
+                              className="commissioner"
+                            >
+                              delete project
+                            </a>
                           </li>
                         </ul>
                       </div>

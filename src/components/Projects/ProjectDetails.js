@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BlueButton from "../../utils/BlueButton";
 import girl from "../../assets/girl.png";
 import bob from "../../assets/bob.png";
 import sarah from "../../assets/sarah.png";
+import axios from "axios";
 
 const ProjectDetails = () => {
 
+  axios.defaults.withCredentials = true;
+  useEffect(() => {
+    axios
+      .post(`https://app.cloud4c2.com/api/project/details/&{id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => console.log(response));
+  }, []);
 
 
 
-  
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
       <div className="max-w-[1091px]">

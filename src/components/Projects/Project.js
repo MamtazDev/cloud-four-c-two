@@ -14,6 +14,19 @@ import axios from "axios";
 
 const Project = () => {
   const [projects, setProjects] = useState([]);
+  const [base64Image, setBase64Image] = useState("");
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setBase64Image(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+  // console.log(base64Image);
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -26,7 +39,7 @@ const Project = () => {
       })
       .then((response) => setProjects(response.data.projects));
   }, []);
-  console.log(projects);
+
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -43,7 +56,7 @@ const Project = () => {
     });
   };
   return (
-    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px] h-full">
+    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px]">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[61px] mb-[34px] ">
         <div className="col-span-2">
           <input
@@ -226,14 +239,16 @@ const Project = () => {
         </label>
 
         {projects.map((project) => (
-          <div  key={project.project_id}>
+          <div key={project.project_id}>
             {/* project (staff) parts */}
             {/* The button to open modal */}
-            <label className="cursor-pointer" htmlFor={"my-modal" + project.project_id}>
+            <label
+              className="cursor-pointer"
+              htmlFor={"my-modal" + project.project_id}
+            >
               {" "}
               <div className="card_box p-[7px]">
                 <div className="img_box">
-              
                   <div>
                     <img
                       width={100}

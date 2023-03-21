@@ -2,6 +2,7 @@ import React from "react";
 import "./Register.css";
 import loginLogo from "../../assets/login_logo.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -29,39 +30,23 @@ const Register = () => {
     };
     console.log(info);
 
-    // fetch("https://app.cloud4c2.com/api/user/signup", {
-    //   method: "POST",
-    //   credentials: "same-origin",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(info),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.message === "user was successfully signed up") {
-    //       e.target.reset();
-    //       navigate("/dashboard/project");
-    //     }
-    //     console.log(data.message);
-    //   });
+    axios.defaults.withCredentials = true;
 
-    fetch("https://app.cloud4c2.com/api/user/signup", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(info),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === "user was successfully signed up") {
+    axios
+      .post("https://app.cloud4c2.com/api/user/signup", info, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+
+      .then((res) => {
+        console.log(res);
+        if (res.data.message === "user was successfully signed up") {
           e.target.reset();
-          window.location.reload(true);
+          // window.location.reload(true);
           navigate("/dashboard/project");
-        } else {
-          alert("registration is not successful");
-        }
+        } 
       });
   };
 

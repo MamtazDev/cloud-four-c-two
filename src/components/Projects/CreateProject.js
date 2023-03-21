@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const CreateProject = () => {
@@ -29,20 +30,19 @@ const CreateProject = () => {
       // project_image: base64Image,
     };
     console.log(info);
+    axios.defaults.withCredentials = true;
 
-    fetch("https://app.cloud4c2.com/api/project/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
-      },
-      body: JSON.stringify(info),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === "New project successfully created") {
+    axios
+      .post("https://app.cloud4c2.com/api/project/create", info, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((res) => {
+        if (res.data.message === "New project successfully created") {
           e.target.reset();
-          alert(data.message);
+          window.location.reload(true);
         }
       });
   };

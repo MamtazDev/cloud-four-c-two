@@ -299,12 +299,15 @@ const Project = () => {
                           tabIndex={0}
                           className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
                         >
-                          <li onClick={()=>navigateToItemDetails(project.project_id)}>
+                          <li  onClick={()=>navigateToItemDetails(project.project_id)}>
                             {/* <Link
                               className="commissioner"
                               to="/dashboard/projectDetails"
                             > */}
+                            <p     className="commissioner">
+
                               Project details
+                            </p>
                             {/* </Link> */}
                           </li>
                           <li>

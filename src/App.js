@@ -14,6 +14,7 @@ import ProjectReport from "./components/Projects/ProjectReport";
 import Login from "./components/Register/Login";
 import Register from "./components/Register/Register";
 import Sidebar from "./components/shared/Sidebar";
+import EditUser from "./components/Account/EditUser";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="dashboard" element={<Sidebar />}>
           <Route index element={<Account />}></Route>
           <Route path="project" element={<Project />}></Route>
+          <Route path="edit-user" element={<EditUser />}></Route>
           <Route path="projectDetails" element={<ProjectDetails />}></Route>
           <Route path="projectReport" element={<ProjectReport />}></Route>
           <Route path="help" element={<Help />}></Route>

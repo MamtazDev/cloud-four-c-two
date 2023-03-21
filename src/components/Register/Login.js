@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import "./Register.css";
 import loginLogo from "../../assets/login_logo.png";
 import BlueButton from "../../utils/BlueButton";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/AuthProvider";
 import axios from "axios";
 
 const Login = () => {

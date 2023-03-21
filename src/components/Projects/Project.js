@@ -119,7 +119,7 @@ const Project = () => {
 
         {/* project (staff) parts */}
         {/* The button to open modal */}
-        <label htmlFor="my-modal-5">
+        <label className="cursor-pointer" htmlFor="my-modal-5">
           {" "}
           <div className="card_box p-[7px]">
             <div className="img_box">
@@ -151,7 +151,7 @@ const Project = () => {
                 alt=""
               /> */}
 
-                  <div className="dropdown dropdown-right">
+                  <div className="dropdown dropdown-left lg:dropdown-right">
                     <label tabIndex={0}>
                       <img className="pointer" src={more} alt="" />
                     </label>
@@ -226,95 +226,134 @@ const Project = () => {
         </label>
 
         {projects.map((project) => (
-          <div key={project.project_id} className="card_box p-[7px]">
-            <div className="img_box">
-              <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]">
-                {/* <img
+          <div  key={project.project_id}>
+            {/* project (staff) parts */}
+            {/* The button to open modal */}
+            <label className="cursor-pointer" htmlFor={"my-modal" + project.project_id}>
+              {" "}
+              <div className="card_box p-[7px]">
+                <div className="img_box">
+              
+                  <div>
+                    <img
+                      width={100}
+                      className="h-[150px] mx-auto mb-[-30px]"
+                      src={project.image}
+                      alt=""
+                    />
+                    <p className="commissioner text-[16px] font-[500] mt-[35px] mb-[8px] text-center">
+                      {project.name}
+                    </p>
+                    <p className="commissioner text-[14px] font-[400] text-center">
+                      {project.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </label>
+
+            {/* Put this part before </body> tag */}
+            <input
+              type="checkbox"
+              id={"my-modal" + project.project_id}
+              className="modal-toggle"
+            />
+            <label
+              htmlFor={"my-modal" + project.project_id}
+              className="modal cursor-pointer"
+            >
+              <label className="modal-box relative bg-transparent" htmlFor="">
+                <div className="card_box p-[7px]">
+                  <div className="img_box">
+                    <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]">
+                      {/* <img
                 className="pointer"
                 onClick={handleDelete}
                 src={close}
                 alt=""
               /> */}
 
-                <div className="dropdown dropdown-right">
-                  <label tabIndex={0}>
-                    <img className="pointer" src={more} alt="" />
-                  </label>
-                  <ul
-                    tabIndex={0}
-                    className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
-                  >
-                    <li>
-                      <Link
-                        className="commissioner"
-                        to="/dashboard/projectDetails"
-                      >
-                        Project details
-                      </Link>
-                    </li>
-                    <li>
-                      <a className="commissioner">Share</a>
-                    </li>
-                    <li>
-                      <Link
-                        className="commissioner"
-                        to="/dashboard/projectDetails"
-                      >
-                        Leave project
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="commissioner"
-                        to="/dashboard/startSession"
-                      >
-                        start session
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="commissioner"
-                        to="/dashboard/projectCopy"
-                      >
-                        copy project
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="commissioner"
-                        to="/dashboard/projectUpload"
-                      >
-                        edit project
-                      </Link>
-                    </li>
-                    <li>
-                      <a className="commissioner">disable project</a>
-                    </li>
-                    <li>
-                      <a className="commissioner">delete project</a>
-                    </li>
-                  </ul>
+                      <div className="dropdown dropdown-left lg:dropdown-right">
+                        <label tabIndex={0}>
+                          <img className="pointer" src={more} alt="" />
+                        </label>
+                        <ul
+                          tabIndex={0}
+                          className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
+                        >
+                          <li>
+                            <Link
+                              className="commissioner"
+                              to="/dashboard/projectDetails"
+                            >
+                              Project details
+                            </Link>
+                          </li>
+                          <li>
+                            <a className="commissioner">Share</a>
+                          </li>
+                          <li>
+                            <Link
+                              className="commissioner"
+                              to="/dashboard/projectDetails"
+                            >
+                              Leave project
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="commissioner"
+                              to="/dashboard/startSession"
+                            >
+                              start session
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="commissioner"
+                              to="/dashboard/projectCopy"
+                            >
+                              copy project
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="commissioner"
+                              to="/dashboard/projectUpload"
+                            >
+                              edit project
+                            </Link>
+                          </li>
+                          <li>
+                            <a className="commissioner">disable project</a>
+                          </li>
+                          <li>
+                            <a className="commissioner">delete project</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div>
+                      <img
+                        width={100}
+                        className="mx-auto mb-[-30px]"
+                        src={project.image}
+                        alt=""
+                      />
+                      <p className="commissioner text-[16px] font-[500] mt-[35px] mb-[8px] text-center">
+                        {project.name}
+                      </p>
+                      <p className="commissioner text-[14px] font-[400] text-center">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <img
-                  width={100}
-                  className=" mx-auto mb-[-30px]"
-                  src={project.image}
-                  alt=""
-                />
-                <p className="commissioner text-[16px] font-[500] mt-[35px] mb-[8px] text-center">
-                  {project.name}
-                </p>
-                <p className="commissioner text-[14px] font-[400] text-center">
-                  {project?.description}
-                </p>
-              </div>
-            </div>
+              </label>
+            </label>
           </div>
         ))}
       </div>
-      {/* <button>Click Me</button> */}
     </div>
   );
 };

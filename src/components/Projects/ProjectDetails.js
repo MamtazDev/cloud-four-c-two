@@ -113,19 +113,22 @@ const ProjectDetails = () => {
             <BlueButton>Add user</BlueButton>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
-            <div className="flex ">
-              <p className="flex items-center gap-[11px] font-[500] w-[210px] pl-[17px] py-[20px]">
-                <img width={36} src={bob} alt="" /> Bob
-              </p>
+            {project?.users?.map((user) => (
+              <div key={user.user_id} className="flex ">
+                <p className="flex items-center gap-[11px] font-[500] w-[210px] pl-[17px] py-[20px]">
+                  <img width={36} src={user.image} alt="" /> {user.username}
+                </p>
 
-              <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
-                Remove (ANALYST)
-              </p>
-              <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
-                Change role (ANALYST)
-              </p>
-            </div>
-            <div className="flex text-[16px]">
+                <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
+                  Remove (ANALYST)
+                </p>
+                <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
+                  Change role (ANALYST)
+                </p>
+              </div>
+            ))}
+
+            {/* <div className="flex text-[16px]">
               <p className="flex items-center gap-[11px] font-[500] w-[210px] pl-[17px] py-[20px]">
                 <img width={36} src={sarah} alt="" /> Sarah
               </p>
@@ -136,7 +139,7 @@ const ProjectDetails = () => {
               <p className=" session_bg  w-[257px] py-[20px] text-center font-[400]">
                 Change role (ANALYST)
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* recent activity part */}

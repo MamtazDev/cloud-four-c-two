@@ -28,7 +28,7 @@ const Register = () => {
       password,
       role,
     };
-    console.log(info);
+    // console.log(info);
 
     axios.defaults.withCredentials = true;
 
@@ -46,7 +46,7 @@ const Register = () => {
           e.target.reset();
           // window.location.reload(true);
           navigate("/dashboard/project");
-        } 
+        }
       });
   };
 

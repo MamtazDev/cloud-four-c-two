@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./account.css";
 
 const Account = () => {
@@ -10,6 +11,7 @@ const Account = () => {
   const [passwordshow, setPasswordShow] = useState(false);
   const [file, setFile] = useState(null);
   const [base64Image, setBase64Image] = useState("");
+  const navigate = useNavigate();
 
   const inputRef = useRef();
   const onFileChangeCapture = (e) => {
@@ -30,6 +32,7 @@ const Account = () => {
   const inputHandler = () => {
     inputRef.current.click();
   };
+  console.log(user);
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
@@ -53,9 +56,11 @@ const Account = () => {
       last_name,
       email,
       // password,
-      image: base64Image,
+      // image: base64Image ? base64Image : user.image,
+      user_image: base64Image ? base64Image : user.image,
+      // user_id: user?.user_id,
     };
-    console.log(data);
+    console.log(data, "data");
 
     axios.defaults.withCredentials = true;
 
@@ -71,8 +76,20 @@ const Account = () => {
         if (res.data.message === "User successfully updated!") {
           alert(res.data.message);
           e.target.reset();
+          setUser(res.data.user);
+          setFirstShow(false);
+          setLastShow(false);
+          setEmailShow(false);
         }
       });
+  };
+
+  const handleLogOut = () => {
+    axios.post("https://app.cloud4c2.com/api/user/logout").then((res) => {
+      if (res.data.message === "Logged out") {
+        navigate("/");
+      }
+    });
   };
 
   return (
@@ -100,7 +117,7 @@ const Account = () => {
               >
                 <img
                   className="profile_img mx-auto w-[262px] h-[262px] rounded-full"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGrR1QgdaFVmP3uVbCdkh13ZEa6o8Zt4UY9A&usqp=CAU"
+                  src={user?.image}
                   alt=""
                 />
                 <p className="commissioner absolute text-white change font-[500]">
@@ -139,6 +156,7 @@ const Account = () => {
                   }
                   type="text"
                   name="first_name"
+                  Value={user?.first_name}
                 />
                 <p
                   className={
@@ -165,6 +183,7 @@ const Account = () => {
                   }
                   type="text"
                   name="last_name"
+                  Value={user?.last_name}
                 />
                 <p
                   className={
@@ -191,6 +210,7 @@ const Account = () => {
                   }
                   type="email"
                   name="email"
+                  Value={user?.email}
                 />
                 <p
                   className={
@@ -244,11 +264,18 @@ const Account = () => {
               >
                 Save
               </button>
+
               <a className="hidden md:block invisible" href="#!">
                 Change
               </a>
             </div>
           </form>
+          <button
+            onClick={handleLogOut}
+            className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </div>

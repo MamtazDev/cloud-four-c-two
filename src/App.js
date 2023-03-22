@@ -25,8 +25,8 @@ function App() {
         <Route path="dashboard" element={<Sidebar />}>
           <Route index element={<Account />}></Route>
           <Route path="project" element={<Project />}></Route>
-          <Route path="edit-user" element={<EditUser />}></Route>
-          <Route path="projectDetails" element={<ProjectDetails />}></Route>
+          <Route path="edit-user/:id" element={<EditUser />}></Route>
+          <Route path="projectDetails/:id" element={<ProjectDetails />}></Route>
           <Route path="projectReport" element={<ProjectReport />}></Route>
           <Route path="help" element={<Help />}></Route>
           <Route path="manageUser" element={<Manage />}></Route>

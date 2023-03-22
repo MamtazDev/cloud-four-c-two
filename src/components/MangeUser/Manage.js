@@ -32,9 +32,9 @@ const Manage = () => {
   }, []);
   // console.log(userList);
 
-  const handleDelete = (id) => {
+  const handleDelete = (user) => {
     axios
-      .post(`https://app.cloud4c2.com/api/user/delete/${id}`, {
+      .post(`https://app.cloud4c2.com/api/user/delete/${user.user_id}`, user, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Credentials": true,
@@ -42,6 +42,7 @@ const Manage = () => {
       })
 
       .then((res) => {
+        console.log(res);
         setUserList(userList.filter((item) => item.user_id !== res.data.user));
       });
   };
@@ -110,7 +111,7 @@ const Manage = () => {
                   <TableBtn>Report</TableBtn>
                   <TableBtn>
                     {user?.role === "administrator" ? (
-                      <button onClick={() => handleDelete(i.user_id)} type="">
+                      <button onClick={() => handleDelete(i)} type="">
                         Delete
                       </button>
                     ) : (
@@ -118,7 +119,7 @@ const Manage = () => {
                     )}
                   </TableBtn>
 
-                  <Link to="/dashboard/edit-user">
+                  <Link to={`/dashboard/edit-user/${i.user_id}`}>
                     <TableBtn>Edit</TableBtn>
                   </Link>
                 </div>

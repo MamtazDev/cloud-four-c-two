@@ -1,25 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BlueButton from "../../utils/BlueButton";
 import girl from "../../assets/girl.png";
 import bob from "../../assets/bob.png";
 import sarah from "../../assets/sarah.png";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const ProjectDetails = () => {
+  const [project, setProject] = useState();
+  const { id } = useParams();
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
-      .post(`https://app.cloud4c2.com/api/project/details/&{id}`, {
+      .post(`https://app.cloud4c2.com/api/project/details/${id}`, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => console.log(response));
+      .then((response) => setProject(response.data.project));
   }, []);
-
-
+  console.log(project);
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
@@ -64,7 +66,8 @@ const ProjectDetails = () => {
           <div>
             <img
               className="rounded-[12px] h-[305px] w-full"
-              src={girl}
+              src={project?.image}
+              // src={girl}
               alt=""
             />
           </div>
@@ -110,19 +113,22 @@ const ProjectDetails = () => {
             <BlueButton>Add user</BlueButton>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
-            <div className="flex ">
-              <p className="flex items-center gap-[11px] font-[500] w-[210px] pl-[17px] py-[20px]">
-                <img width={36} src={bob} alt="" /> Bob
-              </p>
+            {project?.users?.map((user) => (
+              <div key={user.user_id} className="flex ">
+                <p className="flex items-center gap-[11px] font-[500] w-[210px] pl-[17px] py-[20px]">
+                  <img width={36} src={user.image} alt="" /> {user.username}
+                </p>
 
-              <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
-                Remove (ANALYST)
-              </p>
-              <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
-                Change role (ANALYST)
-              </p>
-            </div>
-            <div className="flex text-[16px]">
+                <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
+                  Remove (ANALYST)
+                </p>
+                <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
+                  Change role (ANALYST)
+                </p>
+              </div>
+            ))}
+
+            {/* <div className="flex text-[16px]">
               <p className="flex items-center gap-[11px] font-[500] w-[210px] pl-[17px] py-[20px]">
                 <img width={36} src={sarah} alt="" /> Sarah
               </p>
@@ -133,7 +139,7 @@ const ProjectDetails = () => {
               <p className=" session_bg  w-[257px] py-[20px] text-center font-[400]">
                 Change role (ANALYST)
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* recent activity part */}

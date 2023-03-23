@@ -29,7 +29,8 @@ const CreateProject = () => {
       project_description,
       // project_image: base64Image,
     };
-    console.log(info);
+    console.log(info, "click");
+
     axios.defaults.withCredentials = true;
 
     axios
@@ -40,6 +41,7 @@ const CreateProject = () => {
         },
       })
       .then((res) => {
+        console.log(res, "hello");
         if (res.data.message === "New project successfully created") {
           e.target.reset();
           window.location.reload(true);

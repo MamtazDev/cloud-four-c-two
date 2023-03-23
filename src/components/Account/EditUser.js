@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./account.css";
 
 const EditUser = () => {
@@ -10,6 +11,10 @@ const EditUser = () => {
   const [passwordshow, setPasswordShow] = useState(false);
   const [file, setFile] = useState(null);
   const [base64Image, setBase64Image] = useState("");
+
+  const navigate = useNavigate();
+
+  const { id } = useParams();
 
   const inputRef = useRef();
   const onFileChangeCapture = (e) => {
@@ -53,9 +58,11 @@ const EditUser = () => {
       last_name,
       email,
       password,
-      image: base64Image,
+      user_image: base64Image,
+      user_id: id,
     };
-    console.log(data);
+
+    console.log(data, "data");
 
     axios.defaults.withCredentials = true;
 
@@ -71,9 +78,12 @@ const EditUser = () => {
         if (res.data.message === "User successfully updated!") {
           alert(res.data.message);
           e.target.reset();
+          navigate("/dashboard/manageUser");
         }
       });
   };
+
+  console.log(user, "user");
 
   return (
     <div className="user__set bg-white lg:rounded-l-[50px]  p-[40px] md:px-[100px] md:py-[40px]">

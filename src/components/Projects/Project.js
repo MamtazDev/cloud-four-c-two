@@ -15,10 +15,10 @@ import axios from "axios";
 const Project = () => {
   const [projects, setProjects] = useState([]);
   const [base64Image, setBase64Image] = useState("");
-  const navigate = useNavigate()
-  const navigateToItemDetails = id => {
-      navigate(`/dashboard/projectDetails/${id}`);
-  }
+  const navigate = useNavigate();
+  const navigateToItemDetails = (id) => {
+    navigate(`/dashboard/projectDetails/${id}`);
+  };
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -56,6 +56,9 @@ const Project = () => {
       .then((res) => {
         console.log(res);
         // setProjects(projects.filter((item) => item.project_id !== res.data.user));
+        if (res.data.message === "project successfully deleted.") {
+          window.location.reload(true);
+        }
       });
   };
   return (
@@ -299,15 +302,19 @@ const Project = () => {
                           tabIndex={0}
                           className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
                         >
-                          <li  onClick={()=>navigateToItemDetails(project.project_id)}>
+
+                          <li
+                            onClick={() =>
+                              navigateToItemDetails(project.project_id)
+                            }
+                          >
+
                             {/* <Link
                               className="commissioner"
                               to="/dashboard/projectDetails"
                             > */}
-                            <p     className="commissioner">
+                            Project details
 
-                              Project details
-                            </p>
                             {/* </Link> */}
                           </li>
                           <li>

@@ -4,13 +4,37 @@ import girl from "../../assets/girl.png";
 import bob from "../../assets/bob.png";
 import sarah from "../../assets/sarah.png";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ProjectDetails = () => {
   const [project, setProject] = useState();
   const { id } = useParams();
-
+  const [deletesession, setDelete] = useState(false);
   axios.defaults.withCredentials = true;
+
+  const handleDeleteSession = (id) => {
+    axios
+      .post(`https://app.cloud4c2.com/api/session/delete/${id}`)
+      .then((res) => {
+        if (res.data.message === "session deleted") {
+          setDelete(!deletesession);
+        }
+      });
+  };
+
+  const handleUserRemove = (UserId) => {
+    axios
+      .post(`https://app.cloud4c2.com/api/project/remove_user/${id}`, {
+        user_id: UserId,
+      })
+      .then((res) => {
+        if (res.data.message === "you removed someone from the project") {
+          alert(res.data.message);
+          window.location.reload(true);
+        }
+      });
+  };
+
   useEffect(() => {
     axios
       .post(`https://app.cloud4c2.com/api/project/details/${id}`, {
@@ -20,7 +44,7 @@ const ProjectDetails = () => {
         },
       })
       .then((response) => setProject(response.data.project));
-  }, []);
+  }, [deletesession]);
   console.log(project);
 
   return (
@@ -53,7 +77,7 @@ const ProjectDetails = () => {
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
               <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
-                Copy project
+                <Link to={`/dashboard/projectCopy/${id}`}>Copy project</Link>
               </button>
               <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 Edit project
@@ -77,22 +101,34 @@ const ProjectDetails = () => {
         <div className="mb-[22px]">
           <div className="flex items-center justify-between mb-[12px]">
             <p className="commissioner text-[16px] font-[500]">Sessions</p>
-            <BlueButton>New session</BlueButton>
+            {/* <BlueButton>New session</BlueButton> */}
+            <Link
+              to={`/dashboard/startSession/${project?.project_id}`}
+              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              type="submit"
+            >
+              New session
+            </Link>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
-            <div className="flex ">
-              <p className="commissioner font-[500] w-[210px] pl-[17px] py-[20px]">
-                Sessions 01{" "}
-              </p>
+            {project?.sessions?.map((session, index) => (
+              <div className="flex ">
+                <p className="commissioner font-[500] w-[210px] pl-[17px] py-[20px]">
+                  Sessions {index + 1}{" "}
+                </p>
 
-              <p className="commissioner session_bg w-[111px] py-[20px] text-center font-[400]">
-                Join
-              </p>
-              <p className="commissioner session_bg w-[226px] py-[20px] text-center font-[400]">
-                Delete (ANALYST)
-              </p>
-            </div>
-            <div className="flex text-[16px]">
+                <button className="commissioner session_bg w-[111px] py-[20px] text-center font-[400]">
+                  Join
+                </button>
+                <button
+                  onClick={() => handleDeleteSession(session.session_id)}
+                  className="commissioner session_bg w-[226px] py-[20px] text-center font-[400]"
+                >
+                  Delete (ANALYST)
+                </button>
+              </div>
+            ))}
+            {/* <div className="flex text-[16px]">
               <p className="commissioner w-[210px] font-[500] pl-[17px] py-[20px]">
                 Sessions 02{" "}
               </p>
@@ -103,14 +139,21 @@ const ProjectDetails = () => {
               <p className="commissioner session_bg  w-[226px] py-[20px] text-center font-[400]">
                 Delete (ANALYST)
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* user part */}
         <div className="mb-[22px]">
           <div className="flex items-center justify-between mb-[12px]">
             <p className="text-[16px] font-[500]">Users</p>
-            <BlueButton>Add user</BlueButton>
+            {/* <BlueButton>Add user</BlueButton> */}
+            <Link
+              to={`/dashboard/addUser/${project?.project_id}`}
+              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              type="submit"
+            >
+              Add user
+            </Link>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
             {project?.users?.map((user) => (
@@ -119,7 +162,10 @@ const ProjectDetails = () => {
                   <img width={36} src={user.image} alt="" /> {user.username}
                 </p>
 
-                <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
+                <p
+                  className=" session_bg w-[257px] py-[20px] text-center font-[400] cursor-pointer"
+                  onClick={() => handleUserRemove(user.user_id)}
+                >
                   Remove (ANALYST)
                 </p>
                 <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">

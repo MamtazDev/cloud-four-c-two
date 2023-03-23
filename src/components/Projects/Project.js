@@ -44,6 +44,21 @@ const Project = () => {
       .then((response) => setProjects(response.data.projects));
   }, []);
 
+  const handleLeave = (id) => {
+    axios
+      .post(`https://app.cloud4c2.com/api/project/leave/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((res) => {
+        if (res.data.message === "you left the project") {
+          alert(res.data.message);
+          window.location.reload(true);
+        }
+      });
+  };
   const handleDelete = (id) => {
     axios
       .post(`https://app.cloud4c2.com/api/project/delete/${id}`, {
@@ -61,6 +76,30 @@ const Project = () => {
         }
       });
   };
+
+  const handleDisabled = (id) => {
+    axios
+      .post(
+        `https://app.cloud4c2.com/api/project/activate/${id}`,
+        {
+          activate: true,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.message === "Project activation changed") {
+          alert(res.data.message);
+          window.location.reload(true);
+        }
+      });
+  };
+
+  console.log(projects, "pororo");
   return (
     <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px]">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[61px] mb-[34px] ">
@@ -302,36 +341,33 @@ const Project = () => {
                           tabIndex={0}
                           className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
                         >
-
                           <li
                             onClick={() =>
                               navigateToItemDetails(project.project_id)
                             }
                           >
-
                             {/* <Link
                               className="commissioner"
                               to="/dashboard/projectDetails"
                             > */}
                             Project details
-
                             {/* </Link> */}
                           </li>
                           <li>
                             <a className="commissioner">Share</a>
                           </li>
                           <li>
-                            <Link
+                            <button
                               className="commissioner"
-                              to="/dashboard/projectDetails"
+                              onClick={() => handleLeave(project.project_id)}
                             >
                               Leave project
-                            </Link>
+                            </button>
                           </li>
                           <li>
                             <Link
                               className="commissioner"
-                              to="/dashboard/startSession"
+                              to={`/dashboard/startSession/${project.project_id}`}
                             >
                               start session
                             </Link>
@@ -339,7 +375,7 @@ const Project = () => {
                           <li>
                             <Link
                               className="commissioner"
-                              to="/dashboard/projectCopy"
+                              to={`/dashboard/projectCopy/${project.project_id}`}
                             >
                               copy project
                             </Link>
@@ -352,7 +388,9 @@ const Project = () => {
                               edit project
                             </Link>
                           </li>
-                          <li>
+                          <li
+                            onClick={() => handleDisabled(project.project_id)}
+                          >
                             <a className="commissioner">disable project</a>
                           </li>
                           <li>

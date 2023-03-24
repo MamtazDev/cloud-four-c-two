@@ -350,7 +350,10 @@ const Project = () => {
                               className="commissioner"
                               to="/dashboard/projectDetails"
                             > */}
+                            <span className="commissioner">
+
                             Project details
+                            </span>
                             {/* </Link> */}
                           </li>
                           <li>

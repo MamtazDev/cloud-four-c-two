@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 
 const ProjectDetails = () => {
   const [project, setProject] = useState();
+  const [session, setSession] = useState();
   const { id } = useParams();
   const [deletesession, setDelete] = useState(false);
   axios.defaults.withCredentials = true;
@@ -33,6 +34,18 @@ const ProjectDetails = () => {
           window.location.reload(true);
         }
       });
+  };
+
+  const handleSessionDetails = (id) => {
+    console.log(id);
+    axios
+      .post(`https://app.cloud4c2.com/api/session/details/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => console.log(response.data.session));
   };
 
   useEffect(() => {
@@ -126,6 +139,37 @@ const ProjectDetails = () => {
                 >
                   Delete (ANALYST)
                 </button>
+                <button></button>
+
+                {/* The button to open modal */}
+                <label
+                  onClick={() => handleSessionDetails(session.session_id)}
+                  className="commissioner session_bg px-5 py-[20px] text-center font-[400]"
+                  htmlFor={"my-modal" + session.session_id}
+                >
+                  {" "}
+                  Details
+                </label>
+
+                {/* Put this part before </body> tag */}
+                <input
+                  type="checkbox"
+                  id={"my-modal" + session.session_id}
+                  className="modal-toggle"
+                />
+                <label
+                  htmlFor={"my-modal" + session.session_id}
+                  className="modal cursor-pointer"
+                >
+                  <label className="modal-box relative" htmlFor="">
+                    <h3 className="text-lg font-bold">
+                      Creation Time: {session.creation_time}
+                    </h3>
+                    <p className="py-4">Creator: {session.creator}</p>
+                    <p className="py-4">Project Id: {session.project_id}</p>
+                    <p className="py-4">Session Id: {session.session_id}</p>
+                  </label>
+                </label>
               </div>
             ))}
             {/* <div className="flex text-[16px]">

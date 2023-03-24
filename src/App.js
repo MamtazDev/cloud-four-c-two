@@ -15,6 +15,7 @@ import Login from "./components/Register/Login";
 import Register from "./components/Register/Register";
 import Sidebar from "./components/shared/Sidebar";
 import EditUser from "./components/Account/EditUser";
+import UserLog from "./components/MangeUser/UserLog";
 
 function App() {
   return (
@@ -25,15 +26,14 @@ function App() {
         <Route path="dashboard" element={<Sidebar />}>
           <Route index element={<Account />}></Route>
           <Route path="project" element={<Project />}></Route>
-
           <Route path="edit-user/:id" element={<EditUser />}></Route>
-
           <Route path="projectDetails/:id" element={<ProjectDetails />}></Route>
           <Route path="projectReport" element={<ProjectReport />}></Route>
           <Route path="help" element={<Help />}></Route>
           <Route path="manageUser" element={<Manage />}></Route>
           <Route path="nodeInfo" element={<NodeInfo />}></Route>
           <Route path="addUser/:id" element={<AddUser />}></Route>
+          <Route path="user-log/:id" element={<UserLog />}></Route>
           <Route path="startSession/:id" element={<StartSession />}></Route>
           <Route path="projectCopy/:id" element={<ProjectCopy />}></Route>
           <Route path="projectUpload" element={<ProjectUpload />}></Route>

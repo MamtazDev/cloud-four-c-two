@@ -3,12 +3,13 @@ import BlueButton from "../../utils/BlueButton";
 import "./manage.css";
 import TableBtn from "../../utils/TableBtn";
 import { UserContext } from "../../context/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Manage = () => {
   const [user, setUser] = useState();
   const { userList, setUserList } = useContext(UserContext);
+  
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
@@ -122,6 +123,10 @@ const Manage = () => {
                   <Link to={`/dashboard/edit-user/${i.user_id}`}>
                     <TableBtn>Edit</TableBtn>
                   </Link>
+                  <Link to={`/dashboard/user-log/${i.user_id}`}>
+                    <TableBtn>Log</TableBtn>
+                  </Link>
+                
                 </div>
               </td>
             </tr>

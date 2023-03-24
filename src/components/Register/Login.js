@@ -25,7 +25,7 @@ const Login = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-     
+
       .then((response) => {
         if (response.data.message === "logged in.") {
           navigate("/dashboard/project");

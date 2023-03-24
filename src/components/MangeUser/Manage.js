@@ -9,7 +9,7 @@ import axios from "axios";
 const Manage = () => {
   const [user, setUser] = useState();
   const { userList, setUserList } = useContext(UserContext);
-  
+
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
@@ -126,7 +126,6 @@ const Manage = () => {
                   <Link to={`/dashboard/user-log/${i.user_id}`}>
                     <TableBtn>Log</TableBtn>
                   </Link>
-                
                 </div>
               </td>
             </tr>

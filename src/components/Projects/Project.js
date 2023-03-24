@@ -295,6 +295,90 @@ const Project = () => {
                 {" "}
                 <div className="card_box p-[7px]">
                   <div className="img_box">
+
+                    <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]">
+                      {/* <img
+                className="pointer"
+                onClick={handleDelete}
+                src={close}
+                alt=""
+              /> */}
+
+                      <div className="dropdown dropdown-left lg:dropdown-right">
+                        <label tabIndex={0}>
+                          <img className="pointer" src={more} alt="" />
+                        </label>
+                        <ul
+                          tabIndex={0}
+                          className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
+                        >
+                          <li
+                            onClick={() =>
+                              navigateToItemDetails(project.project_id)
+                            }
+                          >
+                            {/* <Link
+                              className="commissioner"
+                              to="/dashboard/projectDetails"
+                            > */}
+                            <span className="commissioner">
+
+                            Project details
+                            </span>
+                            {/* </Link> */}
+                          </li>
+                          <li>
+                            <a className="commissioner">Share</a>
+                          </li>
+                          <li>
+                            <button
+                              className="commissioner"
+                              onClick={() => handleLeave(project.project_id)}
+                            >
+                              Leave project
+                            </button>
+                          </li>
+                          <li>
+                            <Link
+                              className="commissioner"
+                              to={`/dashboard/startSession/${project.project_id}`}
+                            >
+                              start session
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="commissioner"
+                              to={`/dashboard/projectCopy/${project.project_id}`}
+                            >
+                              copy project
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="commissioner"
+                              to="/dashboard/projectUpload"
+                            >
+                              edit project
+                            </Link>
+                          </li>
+                          <li
+                            onClick={() => handleDisabled(project.project_id)}
+                          >
+                            <a className="commissioner">disable project</a>
+                          </li>
+                          <li>
+                            <a
+                              onClick={() => handleDelete(project.project_id)}
+                              className="commissioner"
+                            >
+                              delete project
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
                     <div>
                       <img
                         width={100}

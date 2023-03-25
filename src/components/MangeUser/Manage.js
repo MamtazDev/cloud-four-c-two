@@ -50,13 +50,13 @@ const Manage = () => {
 
   const handleActive = (user) => {
     console.log("user...", user);
-    // const status = {
-    //   ...user,status: "suspended"
-    // }
+    const status = {
+      ...user,status: "suspended"
+    }
     axios
       .post(
         `https://app.cloud4c2.com/api/user/change_status/${user.user_id}`,
-        user,
+      status,
         {
           headers: {
             "Content-Type": "application/json",

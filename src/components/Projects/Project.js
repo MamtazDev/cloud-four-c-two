@@ -388,6 +388,14 @@ const Project = () => {
                                 edit project
                               </Link>
                             </li>
+                            <li>
+                              <Link
+                                className="commissioner"
+                                to={`/dashboard/project-log/${project.project_id}`}
+                              >
+                              Log
+                              </Link>
+                            </li>
                             <li
                               onClick={() => handleDisabled(project.project_id)}
                             >

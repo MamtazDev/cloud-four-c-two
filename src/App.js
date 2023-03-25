@@ -16,6 +16,8 @@ import Register from "./components/Register/Register";
 import Sidebar from "./components/shared/Sidebar";
 import EditUser from "./components/Account/EditUser";
 import UserLog from "./components/MangeUser/UserLog";
+import SessionLog from "./components/Projects/SessionLog";
+import ProjectLog from "./components/Projects/ProjectLog";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
           <Route path="nodeInfo" element={<NodeInfo />}></Route>
           <Route path="addUser/:id" element={<AddUser />}></Route>
           <Route path="user-log/:id" element={<UserLog />}></Route>
+          <Route path="session-log/:id" element={<SessionLog />}></Route>
+          <Route path="project-log/:id" element={<ProjectLog />}></Route>
           <Route path="startSession/:id" element={<StartSession />}></Route>
           <Route path="projectCopy/:id" element={<ProjectCopy />}></Route>
           <Route path="projectUpload" element={<ProjectUpload />}></Route>

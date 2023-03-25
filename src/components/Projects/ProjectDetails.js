@@ -170,6 +170,11 @@ const ProjectDetails = () => {
                     <p className="py-4">Session Id: {session.session_id}</p>
                   </label>
                 </label>
+                <Link to={`/dashboard/session-log/${session.session_id}`}>
+                  <button className="commissioner session_bg w-[111px] py-[20px] text-center font-[400]">
+                    Log
+                  </button>
+                </Link>
               </div>
             ))}
             {/* <div className="flex text-[16px]">

@@ -18,6 +18,7 @@ import EditUser from "./components/Account/EditUser";
 import UserLog from "./components/MangeUser/UserLog";
 import SessionLog from "./components/Projects/SessionLog";
 import ProjectLog from "./components/Projects/ProjectLog";
+import Notfound from "./components/Notfound";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         </Route>
 
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<Notfound />} />
       </Routes>
     </div>
   );

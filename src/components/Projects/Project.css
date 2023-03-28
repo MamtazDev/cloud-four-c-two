@@ -31,7 +31,7 @@
 }
 .img_box {
   background: rgba(56, 83, 164, 0.13);
-  backdrop-filter: blur(178.5px);
+  /* backdrop-filter: blur(178.5px); */
   border-radius: 12px;
   height: 145px;
 }

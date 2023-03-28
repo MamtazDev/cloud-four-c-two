@@ -14,6 +14,9 @@ import axios from "axios";
 
 const Project = () => {
   const [projects, setProjects] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [return_deactivated, setReturn_deactivated] = useState(false);
+  const [return_deleted, setReturn_deleted] = useState(false);
   const [base64Image, setBase64Image] = useState("");
   const navigate = useNavigate();
   const navigateToItemDetails = (id) => {
@@ -34,15 +37,20 @@ const Project = () => {
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
+    const info = {
+      filter: filter,
+      return_deactivated: return_deactivated,
+      return_deleted: return_deleted,
+    };
     axios
-      .post("https://app.cloud4c2.com/api/project/my_projects", {
+      .post("https://app.cloud4c2.com/api/project/my_projects", info, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Credentials": true,
         },
       })
       .then((response) => setProjects(response.data.projects));
-  }, []);
+  }, [filter, return_deactivated, return_deleted]);
 
   const handleLeave = (id) => {
     axios
@@ -108,6 +116,7 @@ const Project = () => {
           <input
             type="search"
             className="search_bg pl-16 input input-bordered w-full rounded-[60px] h-[58px] "
+            onChange={(e) => setFilter(e.target.value)}
           />
         </div>
         <div className="flex gap-1 lg:gap-[18px]">
@@ -140,10 +149,22 @@ const Project = () => {
         </div>
       </div>
       <div className="flex gap-[20px] mb-[20px]">
-        <button className="outfit outline_btn py-[8px] px-[33px]" type="">
+        <button
+          className={`outfit outline_btn py-[8px] px-[33px] ${
+            return_deactivated && "bg-primary text-white"
+          }`}
+          type=""
+          onClick={() => setReturn_deactivated(!return_deactivated)}
+        >
           Disabled
         </button>
-        <button className="outfit outline_btn py-[8px] px-[33px]" type="">
+        <button
+          className={`outfit outline_btn py-[8px] px-[33px] ${
+            return_deleted && "bg-primary text-white"
+          }`}
+          type=""
+          onClick={() => setReturn_deleted(!return_deleted)}
+        >
           Deleted
         </button>
       </div>

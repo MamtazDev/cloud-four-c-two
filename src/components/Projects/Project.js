@@ -429,8 +429,10 @@ const Project = () => {
               </label>
             </div>
           ))
+        ) : projects.length === 0 ? (
+          <div>No Project Found</div>
         ) : (
-          <div>Loading....</div>
+          <div>Loading...</div>
         )}
       </div>
     </div>

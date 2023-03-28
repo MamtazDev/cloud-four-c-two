@@ -28,10 +28,10 @@ const Login = () => {
       })
 
       .then((response) => {
-        // if (response.data.message === "logged in.") {
-        //   navigate("/dashboard/project");
-        // }
-        console.log(response);
+        if (response.data.message === "logged in.") {
+          setError("");
+          navigate("/dashboard/project");
+        }
       })
       .catch((err) => {
         if (err.response.data.message) {

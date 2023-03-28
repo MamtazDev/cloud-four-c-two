@@ -18,6 +18,8 @@ const NodeInfo = () => {
   console.log(node);
   return (
     <div className="node__info bg-[#FFFBFB] lg:rounded-l-[50px] h-full overflow-x-auto lg:py-[54px] lg:pt-[196px] lg:px-[57px] p-4">
+      <h1 className="text-3xl font-[600] mb-8">Node Information</h1>
+
       <table className="w-[1032px]">
         {node?.map((i) => (
           <tr>

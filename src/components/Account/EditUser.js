@@ -38,14 +38,21 @@ const EditUser = () => {
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
-      .post("https://app.cloud4c2.com/api/user/", {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
+      .post(
+        "https://app.cloud4c2.com/api/user/",
+        {
+          user_id: id,
         },
-      })
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        }
+      )
       .then((response) => setUser(response.data.user));
-  }, []);
+  }, [id]);
+  console.log(user,"newwwwww");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,7 +117,7 @@ const EditUser = () => {
               >
                 <img
                   className="profile_img mx-auto w-[262px] h-[262px] rounded-full"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGrR1QgdaFVmP3uVbCdkh13ZEa6o8Zt4UY9A&usqp=CAU"
+                  src={user?.image}
                   alt=""
                 />
                 <p className="commissioner absolute text-white change font-[500]">
@@ -140,6 +147,7 @@ const EditUser = () => {
                 type="text"
                 className="input input-bordered w-full h-[56px]"
                 name="username"
+                Value={user?.username}
               />
             </div>
             <div className="mb-[33px]">
@@ -150,6 +158,7 @@ const EditUser = () => {
                 type="password"
                 className="input input-bordered w-full h-[56px]"
                 name="password"
+           
               />
               <p className="outfit text-[12px] font-[400] text-[#767676]">
                 Minimum 8 characters
@@ -163,6 +172,7 @@ const EditUser = () => {
                 type="email"
                 className="input input-bordered w-full h-[56px]"
                 name="email"
+                Value={user?.email}
               />
             </div>
             <div className="mb-[42px]">
@@ -173,6 +183,7 @@ const EditUser = () => {
                 type="text"
                 className="input input-bordered w-full h-[56px]"
                 name="first_name"
+                Value={user?.first_name}
               />
             </div>
             <div className="mb-[42px]">
@@ -183,15 +194,16 @@ const EditUser = () => {
                 type="text"
                 className="input input-bordered w-full h-[56px]"
                 name="last_name"
+                Value={user?.last_name}
               />
             </div>
-            <div className="mb-[42px]">
-              <label className="outfit text-[20px] font-[300] mb-[10px] block">
+            <div className="mb-[42px] flex items-center gap-3">
+              <label className="outfit text-[20px] font-[300] block">
                 Role
               </label>
               <select name="role">
                 <option value="analyst">Analyst</option>
-                <option value="admin">Admin</option>
+                {/* <option value="admin">Admin</option> */}
               </select>
             </div>
 

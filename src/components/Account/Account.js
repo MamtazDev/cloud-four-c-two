@@ -270,12 +270,21 @@ const Account = () => {
               </a>
             </div>
           </form>
-          <button
-            onClick={handleLogOut}
-            className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
-          >
-            Logout
-          </button>
+          <div className="flex justify-center md:justify-between  items-center mb-[25px] text-[20px] leading-[24px]">
+            <label className="label hidden md:block invisible commissioner">
+              Last Name
+            </label>
+            <button
+              onClick={handleLogOut}
+              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+            >
+              Logout
+            </button>
+
+            <a className="hidden md:block invisible" href="#!">
+              Change
+            </a>
+          </div>
         </div>
       </div>
     </div>

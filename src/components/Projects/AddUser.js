@@ -71,11 +71,11 @@ const AddUser = () => {
           <div className="bg-[#F8FAFF] p-6 rounded-[40px] overflow-hidden">
             <input
               type="search"
-              className="search_bg border h-[40px] rounded-[36px] pl-10 w-full"
+              className="search_bg border h-[40px] rounded-[36px] pl-10 w-full mb-3"
               placeholder="Search"
               onChange={(e) => SetSearchText(e.target.value)}
             />
-            <div className="flex gap-[6px] overflow-x-scroll overflow-auto mb-[25px]">
+            {/* <div className="flex gap-[6px] overflow-x-scroll overflow-auto mb-[25px]">
               {userList &&
                 userList.length > 0 &&
                 userList?.map((user) => (
@@ -85,7 +85,7 @@ const AddUser = () => {
                     </div>
                   </div>
                 ))}
-            </div>
+            </div> */}
 
             <div className="h-[368px] overflow-y-scroll">
               {userList &&
@@ -123,9 +123,9 @@ const AddUser = () => {
 
           <div className="">
             <div className="flex flex-col w-[121px] ">
-              <button className="commissioner w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px  font-[500] rounded-[8px] p-[8px] mb-[10px]">
+              {/* <button className="commissioner w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px  font-[500] rounded-[8px] p-[8px] mb-[10px]">
                 Filter
-              </button>
+              </button> */}
               <div className="dropdown dropdown-right">
                 <label tabIndex={0}>
                   {" "}

@@ -19,25 +19,14 @@ const SessionLog = () => {
   }, []);
   return (
     <div className="node__info bg-[#FFFBFB] lg:rounded-l-[50px] h-full overflow-x-auto lg:py-[54px] lg:pt-[196px] lg:px-[57px] p-4">
-      <h1 className="text-3xl font-bold mb-5">User Logs</h1>
-      <table className="w-[1032px]">
-        <tr className="bg-blue-200 h-16">
-          <th>Log</th>
-          <th>Time</th>
-        </tr>
+      <h1 className="text-3xl font-bold mb-5">Session Logs</h1>
 
-        {/* {userLog.map((i, index) => (
-          
-        ))} */}
-        <tr>
-          <td
-            dangerouslySetInnerHTML={{
-              __html: sessionLog,
-            }}
-          ></td>
-          <td></td>
-        </tr>
-      </table>
+      <p
+        className="text-lg font-[600]"
+        dangerouslySetInnerHTML={{
+          __html: sessionLog,
+        }}
+      ></p>
     </div>
   );
 };

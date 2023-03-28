@@ -9,6 +9,8 @@ import axios from "axios";
 const Manage = () => {
   const [user, setUser] = useState();
   const { userList, setUserList } = useContext(UserContext);
+  const [filter, setFilter] = useState("");
+  const [return_deleted, setReturn_deleted] = useState(false);
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -22,15 +24,19 @@ const Manage = () => {
       .then((response) => setUser(response.data.user));
   }, []);
   useEffect(() => {
+    const info = {
+      filter: filter,
+      return_deleted: return_deleted,
+    };
     axios
-      .post("https://app.cloud4c2.com/api/user/list", {
+      .post("https://app.cloud4c2.com/api/user/list", info, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Credentials": true,
         },
       })
       .then((response) => setUserList(response.data.users));
-  }, []);
+  }, [filter, return_deleted]);
   // console.log(userList);
 
   const handleDelete = (user) => {
@@ -50,9 +56,9 @@ const Manage = () => {
 
   const handleActive = (user) => {
     const status = {
-      // status: user?.status === "active" ? "suspended" : "active",
+      status: user?.status === "active" ? "suspended" : "active",
       // status: "active",
-      status: "suspended",
+      // status: "suspended",
     };
     axios
       .post(
@@ -77,8 +83,17 @@ const Manage = () => {
   return (
     <div className="Mange__User bg-[#FFFBFB] lg:rounded-l-[50px] h-full lg:px-[57px] lg:py-[61px] p-4 overflow-x-auto">
       <div className="top__btn flex items-center mb-[82px]">
-        <BlueButton>Test Filter</BlueButton>
-        <button className="gray__btn text-[20px] font-[500] leading-[30px] ml-[20px] px-[38px] py-[18px] rounded-[5px] bg-[#f0f4ff] bordered-[1px]">
+        <input
+          type="search"
+          className="search_bg pl-16 input input-bordered w-1/2 rounded-[60px] h-[58px] "
+          onChange={(e) => setFilter(e.target.value)}
+        />
+        <button
+          className={`gray__btn text-[20px] font-[500] leading-[30px] ml-[20px] px-[38px] py-[18px] rounded-[5px] bg-[#f0f4ff] bordered-[1px] ${
+            return_deleted && "bg-primary text-white"
+          }`}
+          onClick={() => setReturn_deleted(!return_deleted)}
+        >
           Show Deleted
         </button>
       </div>
@@ -115,7 +130,7 @@ const Manage = () => {
                       Deactivate
                     </button>
                   </TableBtn>
-                  <TableBtn>Report</TableBtn>
+
                   <TableBtn>
                     {user?.role === "administrator" ? (
                       <button onClick={() => handleDelete(i)} type="">

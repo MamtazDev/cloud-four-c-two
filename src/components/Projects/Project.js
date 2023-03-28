@@ -335,7 +335,7 @@ const Project = () => {
                 </div>
               </label>
 
-              {/* Put this part before </body> tag */}
+              {/* Put this part before </body> tag the dropdo*/}
               <input
                 type="checkbox"
                 id={"my-modal" + project.project_id}

@@ -130,9 +130,14 @@ const ProjectDetails = () => {
                   Sessions {index + 1}{" "}
                 </p>
 
-                <button className="commissioner session_bg w-[111px] py-[20px] text-center font-[400]">
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`https://cloud4c2.com/map/?sessionID=${session.session_id}`}
+                  className="commissioner session_bg w-[111px] py-[20px] text-center font-[400]"
+                >
                   Join
-                </button>
+                </a>
                 <button
                   onClick={() => handleDeleteSession(session.session_id)}
                   className="commissioner session_bg w-[226px] py-[20px] text-center font-[400]"

@@ -53,7 +53,7 @@ const Register = () => {
   return (
     <div className="py-[60px]">
       <div className="login_container ">
-        <img className="mx-auto mb-[61px]" src={loginLogo} alt="" />
+        <img width={150} className="mx-auto mb-[61px]" src={loginLogo} alt="" />
         <p className="outfit text-center text-[20px] font-[500] mb-[12px]">
           Register a new account
         </p>

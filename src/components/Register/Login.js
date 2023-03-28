@@ -41,47 +41,41 @@ const Login = () => {
   };
 
   return (
-    <div className=" py-[60px] max-h-[50px]">
-      <div className="login_container ">
-        <img className="mx-auto mb-[71px]" src={loginLogo} alt="" />
-        <p className="outfit text-center text-[#C9312E] text-[36px] font-[500] mb-[50px] font_family">
+
+
+    <div className=" py-[60px]">
+      <div className="login_container shadow">
+        <img width={150} className=" mx-auto mb-[31px]" src={loginLogo} alt="" />
+        <p className="outfit text-center text-[#C9312E] text-[36px] font-[500] mb-[30px] font_family">
+
           Login to your account
         </p>
         <p className="text-red-600">{error}</p>
         <form onSubmit={handleSubmit}>
-          <div className="mb-[33px]">
+          <div className="mb-[25px]">
             <label className=" outfit text-[20px] font-[300] mb-[10px] block">
               Username <sup className="text-[#C9312E]">*</sup>
             </label>
             <input
               type="text"
-              className="input input-bordered w-full h-[56px]"
+              className="input input-bordered w-full h-[50px]"
               required
               name="username"
             />
           </div>
-          <div className="mb-[33px]">
+          <div className="mb-[25px]">
             <label className="outfit text-[20px] font-[300] mb-[10px] block">
               Password <sup className="text-[#C9312E]">*</sup>
             </label>
             <input
               type="password"
-              className="input input-bordered w-full h-[56px]"
+              className="input input-bordered w-full h-[50px]"
               required
               name="password"
             />
           </div>
-          <div className="mb-[42px]">
-            <label className="outfit text-[20px] font-[300] mb-[10px] block">
-              Key <sup className="text-[#C9312E]">*</sup>
-            </label>
-            <input
-              type="text"
-              maxlength="6"
-              className="input input-bordered w-full h-[56px]"
-            />
-          </div>
-          <div className="flex justify-center gap-[30px] mb-[30px]">
+       
+          <div className="flex justify-center gap-[30px] mb-[25px]">
             <Link to="/register">
               <BlueButton>Register</BlueButton>
             </Link>

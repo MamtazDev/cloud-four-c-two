@@ -49,14 +49,15 @@ const Manage = () => {
   };
 
   const handleActive = (user) => {
-    console.log("user...", user);
     const status = {
-      ...user,status: "suspended"
-    }
+      // status: user?.status === "active" ? "suspended" : "active",
+      // status: "active",
+      status: "suspended",
+    };
     axios
       .post(
         `https://app.cloud4c2.com/api/user/change_status/${user.user_id}`,
-      status,
+        status,
         {
           headers: {
             "Content-Type": "application/json",
@@ -65,7 +66,12 @@ const Manage = () => {
         }
       )
 
-      .then((res) => console.log(res));
+      .then((res) => {
+        if (res.data.success === true) {
+          alert("User Updated successfully");
+          // window.location.reload(true);
+        }
+      });
   };
 
   return (

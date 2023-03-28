@@ -15,7 +15,7 @@ const SessionLog = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => console.log(response));
+      .then((response) => setsessionLog(response.data.logs));
   }, []);
   return (
     <div className="node__info bg-[#FFFBFB] lg:rounded-l-[50px] h-full overflow-x-auto lg:py-[54px] lg:pt-[196px] lg:px-[57px] p-4">
@@ -27,15 +27,16 @@ const SessionLog = () => {
         </tr>
 
         {/* {userLog.map((i, index) => (
-            <tr key={index}>
-              <td
-                dangerouslySetInnerHTML={{
-                  __html: i.log,
-                }}
-              ></td>
-              <td>{i.time}</td>
-            </tr>
-          ))} */}
+          
+        ))} */}
+        <tr>
+          <td
+            dangerouslySetInnerHTML={{
+              __html: sessionLog,
+            }}
+          ></td>
+          <td></td>
+        </tr>
       </table>
     </div>
   );

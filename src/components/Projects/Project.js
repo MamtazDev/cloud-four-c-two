@@ -77,13 +77,14 @@ const Project = () => {
       });
   };
 
-  const handleDisabled = (id) => {
+  const handleDisabled = (project) => {
+    const activation = {
+      activate: project.active === true ? "false" : "true",
+    };
     axios
       .post(
-        `https://app.cloud4c2.com/api/project/activate/${id}`,
-        {
-          activate: true,
-        },
+        `https://app.cloud4c2.com/api/project/activate/${project.project_id}`,
+        activation,
         {
           headers: {
             "Content-Type": "application/json",
@@ -94,7 +95,7 @@ const Project = () => {
       .then((res) => {
         if (res.data.message === "Project activation changed") {
           alert(res.data.message);
-          window.location.reload(true);
+          // window.location.reload(true);
         }
       });
   };
@@ -347,11 +348,9 @@ const Project = () => {
                                 navigateToItemDetails(project.project_id)
                               }
                             >
-                             <span className="commissioner">
-
-                              Project details
-                             </span>
-                          
+                              <span className="commissioner">
+                                Project details
+                              </span>
                             </li>
                             <li>
                               <a className="commissioner">Share</a>
@@ -393,12 +392,10 @@ const Project = () => {
                                 className="commissioner"
                                 to={`/dashboard/project-log/${project.project_id}`}
                               >
-                              Log
+                                Log
                               </Link>
                             </li>
-                            <li
-                              onClick={() => handleDisabled(project.project_id)}
-                            >
+                            <li onClick={() => handleDisabled(project)}>
                               <a className="commissioner">disable project</a>
                             </li>
                             <li>
@@ -432,8 +429,10 @@ const Project = () => {
               </label>
             </div>
           ))
+        ) : projects.length === 0 ? (
+          <div>No Project Found</div>
         ) : (
-          <div>Loading....</div>
+          <div>Loading...</div>
         )}
       </div>
     </div>

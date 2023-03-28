@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import loginLogo from "../../assets/login_logo.png";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   const handleInputImage = async (event) => {
     const file = event.target.files[0];
     const base64 = await this.convertBase64(file);
@@ -47,6 +48,14 @@ const Register = () => {
           // window.location.reload(true);
           navigate("/dashboard/project");
         }
+      })
+      .catch((err) => {
+        if (err.response.data.message) {
+          const errorSentence = err.response.data.message;
+          const wordToRemove = "req.body.";
+          const newErrorSentence = errorSentence.replace(wordToRemove, "");
+          setError(newErrorSentence);
+        }
       });
   };
 
@@ -58,7 +67,7 @@ const Register = () => {
           Register a new account
         </p>
         <p className="outfit text-center text-[#C9312E] text-[25px] font-[500] mb-[40px]">
-          If there is an error registering, display it here
+          {error}
         </p>
         <form onSubmit={handleSubmit}>
           <div className="mb-[33px]">
@@ -120,7 +129,7 @@ const Register = () => {
             </label>
             <select name="role">
               <option value="analyst">Analyst</option>
-              <option value="admin">Admin</option>
+              {/* <option value="admin">Admin</option> */}
             </select>
           </div>
           <div className="hidden mb-[42px]">

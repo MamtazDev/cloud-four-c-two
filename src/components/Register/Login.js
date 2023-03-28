@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import loginLogo from "../../assets/login_logo.png";
 import BlueButton from "../../utils/BlueButton";
@@ -7,6 +7,7 @@ import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     const username = e.target.username.value;
@@ -28,18 +29,28 @@ const Login = () => {
 
       .then((response) => {
         if (response.data.message === "logged in.") {
+          setError("");
           navigate("/dashboard/project");
+        }
+      })
+      .catch((err) => {
+        if (err.response.data.message) {
+          setError("Please put a valid username and password");
         }
       });
   };
 
   return (
+
+
     <div className=" py-[60px]">
       <div className="login_container shadow">
         <img width={150} className=" mx-auto mb-[31px]" src={loginLogo} alt="" />
         <p className="outfit text-center text-[#C9312E] text-[36px] font-[500] mb-[30px] font_family">
+
           Login to your account
         </p>
+        <p className="text-red-600">{error}</p>
         <form onSubmit={handleSubmit}>
           <div className="mb-[25px]">
             <label className=" outfit text-[20px] font-[300] mb-[10px] block">

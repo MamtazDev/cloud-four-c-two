@@ -12,6 +12,7 @@ import { BiEdit } from "react-icons/bi";
 
 const ProjectDetails = () => {
   const [name, setName] = useState(false);
+  const [description, setDescription] = useState(false);
   const [project, setProject] = useState();
   const [projectLog, setProjectLog] = useState([]);
   const { id } = useParams();
@@ -117,13 +118,29 @@ const ProjectDetails = () => {
                 {project?.name} <BiEdit onClick={() => setName(true)} />
               </button>
             )}
+            {description ? (
+              <input
+                type="text"
+                className="border w-full py-4 mb-4 px-3 rounded-md"
+              />
+            ) : (
+              <button
+                className="flex items-center justify-between px-4 commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
+                type=""
+              >
+                {project?.description
+                  ? project?.description
+                  : "Project Description"}{" "}
+                <BiEdit onClick={() => setDescription(true)} />
+              </button>
+            )}
 
-            <button
+            {/* <button
               className="commissioner outline_btn w-full py-[18px] font-[500] mb-[20px]"
               type=""
             >
               Edit description
-            </button>
+            </button> */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px] mb-[20px]">
               <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 Disable project

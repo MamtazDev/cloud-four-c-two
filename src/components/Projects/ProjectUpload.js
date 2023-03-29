@@ -5,8 +5,10 @@ import ProjectButton3 from "../../utils/ProjectButton3";
 import uploadImg from "../../assets/uploadproject.png";
 import Dataimg from "../../assets/Data.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ProjectUpload = ({ myModal }) => {
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const inputRef = useRef();
   const [base64Image, setBase64Image] = useState("");
@@ -69,6 +71,11 @@ const ProjectUpload = ({ myModal }) => {
         if (res.data.message === "New project successfully created") {
           e.target.reset();
           window.location.reload(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
         }
       });
   };

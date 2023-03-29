@@ -7,7 +7,7 @@ import copyImg from "../../assets/copyproject.png";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
-const ProjectCopy = () => {
+const ProjectCopy = ({myModal}) => {
   const [files, setFile] = useState(null);
   const inputRef = useRef();
 
@@ -150,9 +150,9 @@ const ProjectCopy = () => {
           {/* <ProjectButton3>
             <span>Cancel</span>
           </ProjectButton3> */}
-          <Link  to={`/dashboard/projectDetails/${project.project_id}`} className="text-center commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]">
+          <label htmlFor={myModal} className="text-center commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]">
             Cancel
-          </Link>
+          </label>
           {/* <ProjectButton3>Accept</ProjectButton3> */}
           <button
             onClick={handleAccept}

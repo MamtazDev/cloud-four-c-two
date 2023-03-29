@@ -170,7 +170,7 @@ const Project = () => {
               >
                 ✕
               </label>
-              <ProjectUpload />
+              <ProjectUpload myModal={"my-modal-upload"} />
             </div>
           </div>
         </div>

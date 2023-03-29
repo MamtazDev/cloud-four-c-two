@@ -53,10 +53,10 @@ const Project = () => {
       .then((response) => setProjects(response.data.projects))
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
-  }, [filter, return_deactivated, return_deleted,navigate]);
+  }, [filter, return_deactivated, return_deleted, navigate]);
 
   const handleLeave = (id) => {
     axios
@@ -70,6 +70,11 @@ const Project = () => {
         if (res.data.message === "you left the project") {
           alert(res.data.message);
           window.location.reload(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
         }
       });
   };
@@ -87,6 +92,11 @@ const Project = () => {
         // setProjects(projects.filter((item) => item.project_id !== res.data.user));
         if (res.data.message === "project successfully deleted.") {
           window.location.reload(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
         }
       });
   };
@@ -112,8 +122,11 @@ const Project = () => {
           // window.location.reload(true);
         }
       })
-     
-      
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
   };
 
   return (

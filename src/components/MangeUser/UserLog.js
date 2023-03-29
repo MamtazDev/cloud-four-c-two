@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 const UserLog = () => {
   const [userLog, setUserLog] = useState([]);
+  const navigate = useNavigate();
   const { id } = useParams();
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -14,8 +15,13 @@ const UserLog = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => setUserLog(response.data.log_strings));
-  }, []);
+      .then((response) => setUserLog(response.data.log_strings))
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
+      });
+  }, [id]);
 
   return (
     <div className="node__info bg-[#FFFBFB] lg:rounded-l-[50px] h-full overflow-x-auto lg:py-[54px] lg:pt-[196px] lg:px-[57px] p-4">

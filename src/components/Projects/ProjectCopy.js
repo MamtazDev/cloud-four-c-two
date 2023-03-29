@@ -4,10 +4,11 @@ import ProjectButton2 from "../../utils/ProjectButton2";
 import ProjectButton3 from "../../utils/ProjectButton3";
 
 import copyImg from "../../assets/copyproject.png";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const ProjectCopy = ({myModal}) => {
+  const navigate = useNavigate();
   const [files, setFile] = useState(null);
   const inputRef = useRef();
 
@@ -26,10 +27,6 @@ const ProjectCopy = ({myModal}) => {
   const { id } = useParams();
 
   const [project, setProject] = useState("");
-
-  const [nameShow, setNameShow] = useState(false);
-  const [descriptionShow, setDescriptionShow] = useState(false);
-
   const [projectName, setProjectName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -42,7 +39,6 @@ const ProjectCopy = ({myModal}) => {
       project_picture: base64Image,
     };
 
-    console.log(data, "datass");
 
     axios
       .post(`https://app.cloud4c2.com/api/project/copy/${id}`, data, {
@@ -55,6 +51,11 @@ const ProjectCopy = ({myModal}) => {
         if (res.data.message === "New project successfully created") {
           alert(res.data.message);
           window.location.reload(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
         }
       });
   };

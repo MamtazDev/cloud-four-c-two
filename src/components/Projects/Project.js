@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CreateProject from "./CreateProject";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import ProjectUpload from "./ProjectUpload";
 
 const Project = () => {
   const [projects, setProjects] = useState([]);
@@ -143,9 +144,35 @@ const Project = () => {
             </div>
           </div>
 
-          <Link to="/dashboard/projectUpload">
+          {/* <Link to="/dashboard/projectUpload">
             <BlueButton>Upload Project</BlueButton>
-          </Link>
+          </Link> */}
+
+          {/* The button to open modal */}
+          <label
+            htmlFor="my-modal-upload"
+            className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+          >
+            Upload Project
+          </label>
+
+          {/* Put this part before </body> tag */}
+          <input
+            type="checkbox"
+            id="my-modal-upload"
+            className="modal-toggle"
+          />
+          <div className="modal">
+            <div className="modal-box relative">
+              <label
+                htmlFor="my-modal-upload"
+                className="btn btn-sm btn-circle absolute right-2 top-2"
+              >
+                ✕
+              </label>
+              <ProjectUpload />
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex gap-[20px] mb-[20px]">
@@ -200,10 +227,7 @@ const Project = () => {
         {projects.length > 0 ? (
           projects?.map((project) => (
             <div key={project.project_id}>
-              <div
-         
-                className="card_box p-[7px]"
-              >
+              <div className="card_box p-[7px]">
                 <div className="img_box">
                   <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]">
                     {/* <img
@@ -288,7 +312,7 @@ const Project = () => {
                   </div>
                   <div>
                     <img
-                           onClick={() => navigateToItemDetails(project.project_id)}
+                      onClick={() => navigateToItemDetails(project.project_id)}
                       width={100}
                       className="cursor-pointer mx-auto mb-[-30px]"
                       src={project.image}

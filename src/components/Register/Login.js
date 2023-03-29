@@ -41,13 +41,15 @@ const Login = () => {
   };
 
   return (
-
-
     <div className=" py-[60px]">
       <div className="login_container shadow">
-        <img width={150} className=" mx-auto mb-[31px]" src={loginLogo} alt="" />
+        <img
+          width={150}
+          className=" mx-auto mb-[31px]"
+          src={loginLogo}
+          alt=""
+        />
         <p className="outfit text-center text-[#C9312E] text-[36px] font-[500] mb-[30px] font_family">
-
           Login to your account
         </p>
         <p className="text-red-600">{error}</p>
@@ -74,7 +76,7 @@ const Login = () => {
               name="password"
             />
           </div>
-       
+
           <div className="flex justify-center gap-[30px] mb-[25px]">
             <Link to="/register">
               <BlueButton>Register</BlueButton>

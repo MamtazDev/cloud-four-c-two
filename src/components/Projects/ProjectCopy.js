@@ -7,7 +7,7 @@ import copyImg from "../../assets/copyproject.png";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
-const ProjectCopy = () => {
+const ProjectCopy = ({myModal}) => {
   const [files, setFile] = useState(null);
   const inputRef = useRef();
 
@@ -37,9 +37,9 @@ const ProjectCopy = () => {
 
   const handleAccept = () => {
     const data = {
-      name: projectName,
-      description: description,
-      picture: base64Image,
+      project_name: projectName,
+      project_description: description,
+      project_picture: base64Image,
     };
 
     console.log(data, "datass");
@@ -51,7 +51,12 @@ const ProjectCopy = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((res) => console.log(res, "resss"));
+      .then((res) =>{
+        if (res.data.message === "New project successfully created") {
+          alert(res.data.message);
+          window.location.reload(true);
+        }
+      });
   };
 
   useEffect(() => {
@@ -85,21 +90,15 @@ const ProjectCopy = () => {
      
 
         {/* <ProjectButton2>New project description</ProjectButton2> */}
-        {descriptionShow ? (
+     
           <input
             className="block pl-4 border h-[40px] w-[288px] rounded-[7px] mb-[12px] "
             type="text"
             Value={project.description}
             onChange={(e) => setDescription(e.target.value)}
+          
           />
-        ) : (
-          <button
-            onClick={() => setDescriptionShow(true)}
-            className="commissioner w-[302px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[12px]"
-          >
-            New project description
-          </button>
-        )}
+     
 
         <div className="copy__img border-[1px] overflow-hidden w-[302px] bordered rounded-[8px]">
           <input
@@ -150,9 +149,9 @@ const ProjectCopy = () => {
           {/* <ProjectButton3>
             <span>Cancel</span>
           </ProjectButton3> */}
-          <Link  to={`/dashboard/projectDetails/${project.project_id}`} className="text-center commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]">
+          <label htmlFor={myModal} className="text-center commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]">
             Cancel
-          </Link>
+          </label>
           {/* <ProjectButton3>Accept</ProjectButton3> */}
           <button
             onClick={handleAccept}

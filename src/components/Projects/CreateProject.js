@@ -14,7 +14,7 @@ const CreateProject = () => {
 
     reader.readAsDataURL(file);
   };
-  // console.log(base64Image);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

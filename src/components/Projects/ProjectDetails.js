@@ -155,7 +155,7 @@ const ProjectDetails = () => {
                   >
                     ✕
                   </label>
-                  <ProjectCopy />
+                  <ProjectCopy myModal={"my-modal-3"} />
                 </div>
               </div>
 
@@ -213,7 +213,7 @@ const ProjectDetails = () => {
                 >
                   ✕
                 </label>
-                <StartSession />
+                <StartSession myModal={"my-modal-session"} />
               </div>
             </div>
           </div>

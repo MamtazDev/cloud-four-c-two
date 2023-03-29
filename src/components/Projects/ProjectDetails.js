@@ -213,7 +213,7 @@ const ProjectDetails = () => {
                 >
                   ✕
                 </label>
-                <StartSession />
+                <StartSession myModal={"my-modal-session"} />
               </div>
             </div>
           </div>

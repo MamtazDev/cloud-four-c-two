@@ -90,21 +90,15 @@ const ProjectCopy = ({myModal}) => {
      
 
         {/* <ProjectButton2>New project description</ProjectButton2> */}
-        {descriptionShow ? (
+     
           <input
             className="block pl-4 border h-[40px] w-[288px] rounded-[7px] mb-[12px] "
             type="text"
             Value={project.description}
             onChange={(e) => setDescription(e.target.value)}
+          
           />
-        ) : (
-          <button
-            onClick={() => setDescriptionShow(true)}
-            className="commissioner w-[302px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[12px]"
-          >
-            New project description
-          </button>
-        )}
+     
 
         <div className="copy__img border-[1px] overflow-hidden w-[302px] bordered rounded-[8px]">
           <input

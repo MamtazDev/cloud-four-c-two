@@ -5,10 +5,15 @@ import bob from "../../assets/bob.png";
 import sarah from "../../assets/sarah.png";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import ProjectCopy from "./ProjectCopy";
+import StartSession from "./StartSession";
+import AddUser from "./AddUser";
+import { BiEdit } from "react-icons/bi";
 
 const ProjectDetails = () => {
+  const [name, setName] = useState(false);
   const [project, setProject] = useState();
-  const [session, setSession] = useState();
+  const [projectLog, setProjectLog] = useState([]);
   const { id } = useParams();
   const [deletesession, setDelete] = useState(false);
   axios.defaults.withCredentials = true;
@@ -59,21 +64,60 @@ const ProjectDetails = () => {
       .then((response) => setProject(response.data.project));
   }, [deletesession]);
   console.log(project);
+  const handleLeave = (id) => {
+    axios
+      .post(`https://app.cloud4c2.com/api/project/leave/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((res) => {
+        if (res.data.message === "you left the project") {
+          alert(res.data.message);
+          window.location.reload(true);
+        }
+      });
+  };
+  useEffect(() => {
+    axios
+      .post(`https://app.cloud4c2.com/api/project/logs/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setProjectLog(response.data.log_strings));
+  }, []);
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
       <div className="max-w-[1091px]">
         <div className="mb-[57px]">
-          <BlueButton>Leave Project (Not Admin)</BlueButton>
+          <BlueButton>
+            {" "}
+            <span onClick={() => handleLeave(project.project_id)}>
+              {" "}
+              Leave Project (Not Admin)
+            </span>{" "}
+          </BlueButton>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px] mb-[40px]">
           <div>
-            <button
-              className="commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
-              type=""
-            >
-              Edit Name
-            </button>
+            {name ? (
+              <input
+                type="text"
+                className="border w-full py-4 mb-4 px-3 rounded-md"
+              />
+            ) : (
+              <button
+                className="flex items-center justify-between px-4 commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
+                type=""
+              >
+                {project?.name} <BiEdit onClick={() => setName(true)} />
+              </button>
+            )}
+
             <button
               className="commissioner outline_btn w-full py-[18px] font-[500] mb-[20px]"
               type=""
@@ -89,9 +133,32 @@ const ProjectDetails = () => {
               </button>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
-              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+              {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 <Link to={`/dashboard/projectCopy/${id}`}>Copy project</Link>
-              </button>
+              </button> */}
+              {/* The button to open modal */}
+              <label
+                htmlFor="my-modal-3"
+                className="text-center bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
+              >
+                {" "}
+                Copy project
+              </label>
+
+              {/* Put this part before </body> tag */}
+              <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+              <div className="modal">
+                <div className="modal-box relative">
+                  <label
+                    htmlFor="my-modal-3"
+                    className="btn btn-sm btn-circle absolute right-2 top-2"
+                  >
+                    ✕
+                  </label>
+                  <ProjectCopy />
+                </div>
+              </div>
+
               <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 Edit project
               </button>
@@ -115,13 +182,40 @@ const ProjectDetails = () => {
           <div className="flex items-center justify-between mb-[12px]">
             <p className="commissioner text-[16px] font-[500]">Sessions</p>
             {/* <BlueButton>New session</BlueButton> */}
-            <Link
+            {/* <Link
               to={`/dashboard/startSession/${project?.project_id}`}
               className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
               type="submit"
             >
               New session
-            </Link>
+            </Link> */}
+
+            {/* The button to open modal */}
+            <label
+              htmlFor="my-modal-session"
+              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+            >
+              {" "}
+              New session
+            </label>
+
+            {/* Put this part before </body> tag */}
+            <input
+              type="checkbox"
+              id="my-modal-session"
+              className="modal-toggle"
+            />
+            <div className="modal">
+              <div className="modal-box relative">
+                <label
+                  htmlFor="my-modal-session"
+                  className="btn btn-sm btn-circle absolute right-2 top-2"
+                >
+                  ✕
+                </label>
+                <StartSession />
+              </div>
+            </div>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
             {project?.sessions?.map((session, index) => (
@@ -201,13 +295,40 @@ const ProjectDetails = () => {
           <div className="flex items-center justify-between mb-[12px]">
             <p className="text-[16px] font-[500]">Users</p>
             {/* <BlueButton>Add user</BlueButton> */}
-            <Link
+            {/* <Link
               to={`/dashboard/addUser/${project?.project_id}`}
               className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
               type="submit"
             >
               Add user
-            </Link>
+            </Link> */}
+
+            {/* The button to open modal */}
+            <label
+              htmlFor="my-modal-user"
+              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+            >
+              {" "}
+              Add user
+            </label>
+
+            {/* Put this part before </body> tag */}
+            <input
+              type="checkbox"
+              id="my-modal-user"
+              className="modal-toggle"
+            />
+            <div className="modal">
+              <div className="modal-box relative max-w-4xl rounded-[16px]">
+                <label
+                  htmlFor="my-modal-user"
+                  className="btn btn-sm btn-circle absolute right-2 top-2"
+                >
+                  ✕
+                </label>
+                <AddUser />
+              </div>
+            </div>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
             {project?.users?.map((user) => (
@@ -246,32 +367,17 @@ const ProjectDetails = () => {
         <div className="mb-[22px]">
           <div className="flex items-center justify-between mb-[12px]">
             <p className="text-[16px] font-[500]">Recent Activity</p>
-            <BlueButton>Full report</BlueButton>
+            <BlueButton><Link    to={`/dashboard/project-log/${id}`}>  Full report</Link></BlueButton>
           </div>
-          <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
-            <div className="flex ">
-              <p className="font-[500] w-[210px] pl-[17px] py-[20px]">
-                Session 01
-              </p>
-
-              <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
-                Remove (ANALYST)
-              </p>
-              <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
-                Change role (ANALYST)
-              </p>
-            </div>
-            <div className="flex text-[16px]">
-              <p className="w-[210px] font-[500] pl-[17px] py-[20px]">Bob</p>
-              <p className="font-[500] py-[20px]">
-                this is some text log, no buttons should be here
-              </p>
-            </div>
-            <div className="flex text-[16px]">
-              <p className="w-[210px] font-[500] pl-[17px] py-[20px]"></p>
-              <p className="font-[500] py-[20px] mr-[97px]">Remove (ANALYST)</p>
-              <p className="font-[500] py-[20px]">Change role (ANALYST)</p>
-            </div>
+          <div className="border border-[#3853A4] rounded-[5px] pb-[56px] px-4">
+            {projectLog.map((i, index) => (
+              <p
+                key={index}
+                dangerouslySetInnerHTML={{
+                  __html: i.log,
+                }}
+              ></p>
+            ))}
           </div>
         </div>
       </div>

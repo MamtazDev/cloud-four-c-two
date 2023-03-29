@@ -75,21 +75,14 @@ const ProjectCopy = () => {
       <div className="copy__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-[593px]">
         <ProjectButton>Copy this porject</ProjectButton>
         {/* <ProjectButton2>New project Name</ProjectButton2> */}
-        {nameShow ? (
+       
           <input
             className="block pl-4 border h-[40px] w-[288px] rounded-[7px] mb-[12px]"
             type="text"
             onChange={(e) => setProjectName(e.target.value)}
             Value={project.name}
           />
-        ) : (
-          <button
-            onClick={() => setNameShow(true)}
-            className="commissioner w-[302px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[12px]"
-          >
-            New project Name
-          </button>
-        )}
+     
 
         {/* <ProjectButton2>New project description</ProjectButton2> */}
         {descriptionShow ? (

@@ -200,8 +200,10 @@ const Project = () => {
         {projects.length > 0 ? (
           projects?.map((project) => (
             <div key={project.project_id}>
-
-              <div className="card_box p-[7px]">
+              <div
+         
+                className="card_box p-[7px]"
+              >
                 <div className="img_box">
                   <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]">
                     {/* <img
@@ -220,13 +222,13 @@ const Project = () => {
                         tabIndex={0}
                         className="commissioner dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ml-1"
                       >
-                        <li
+                        {/* <li
                           onClick={() =>
                             navigateToItemDetails(project.project_id)
                           }
                         >
                           <span className="commissioner">Project details</span>
-                        </li>
+                        </li> */}
                         <li>
                           <a className="commissioner">Share</a>
                         </li>
@@ -286,8 +288,9 @@ const Project = () => {
                   </div>
                   <div>
                     <img
+                           onClick={() => navigateToItemDetails(project.project_id)}
                       width={100}
-                      className="mx-auto mb-[-30px]"
+                      className="cursor-pointer mx-auto mb-[-30px]"
                       src={project.image}
                       alt=""
                     />

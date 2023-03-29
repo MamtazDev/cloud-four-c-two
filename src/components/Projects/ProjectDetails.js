@@ -92,6 +92,14 @@ const ProjectDetails = () => {
               <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 <Link to={`/dashboard/projectCopy/${id}`}>Copy project</Link>
               </button>
+
+
+
+
+
+
+
+              
               <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 Edit project
               </button>

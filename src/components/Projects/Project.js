@@ -248,14 +248,14 @@ const Project = () => {
                             start session
                           </Link>
                         </li>
-                        <li>
+                        {/* <li>
                           <Link
                             className="commissioner"
                             to={`/dashboard/projectCopy/${project.project_id}`}
                           >
                             copy project
                           </Link>
-                        </li>
+                        </li> */}
                         <li>
                           <Link
                             className="commissioner"

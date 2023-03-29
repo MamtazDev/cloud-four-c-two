@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Account/account.css";
 import SideLogo from "../../assets/Sidelogo.png";
 import Person from "../../assets/Person.png";
@@ -6,8 +6,21 @@ import Home from "../../assets/Home.png";
 import Info from "../../assets/Info-Square.png";
 import User from "../../assets/User.png";
 import { Link, Outlet } from "react-router-dom";
+import axios from "axios";
 
 const Sidebar = () => {
+  const [user, setUser] = useState();
+  axios.defaults.withCredentials = true;
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/user/", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setUser(response.data.user));
+  }, []);
   return (
     <div>
       <div className="">
@@ -51,8 +64,8 @@ const Sidebar = () => {
               </Link>
               <Link to="/dashboard">
                 <img
-                  className="px-[45px] cursor-pointer"
-                  src={Person}
+                  className="rounded-full px-[45px] cursor-pointer"
+                  src={user?.image}
                   alt="image"
                 />
               </Link>

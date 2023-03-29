@@ -131,7 +131,7 @@ const ProjectCopy = ({myModal}) => {
               <img
                 className="relative z-[99] w-full h-[192px] "
                 src={files}
-                alt="image"
+                alt=""
               />
               <button className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
                 Pick new image

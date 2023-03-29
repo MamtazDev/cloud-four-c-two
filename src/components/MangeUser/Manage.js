@@ -113,7 +113,7 @@ const Manage = () => {
           {userList.map((i, index) => (
             <tr key={index}>
               <td>
-                <img width={60} src={i.image} alt="User Image" />
+                <img width={60} src={i.image} alt="User Image"/>
               </td>
               <td>{i.username}</td>
               <td>{i.first_name}</td>

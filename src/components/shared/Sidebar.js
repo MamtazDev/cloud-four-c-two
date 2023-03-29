@@ -72,7 +72,7 @@ const Sidebar = () => {
                 <img
                   className="rounded-full px-[45px] cursor-pointer"
                   src={user?.image}
-                  alt="image"
+                  alt=""
                 />
               </Link>
             </div>
@@ -81,21 +81,21 @@ const Sidebar = () => {
                 <img
                   className="px-[45px] py-[25px] cursor-pointer"
                   src={Home}
-                  alt="image"
+                  alt=""
                 />
               </Link>
               <Link to="/dashboard/nodeInfo" className="img-wrapper mb-[12px]">
                 <img
                   className="px-[45px] py-[25px] cursor-pointer"
                   src={Info}
-                  alt="image"
+                  alt=""
                 />
               </Link>
               <Link to="/dashboard/manageUser" className="img-wrapper mb-[62px]">
                 <img
                   className="px-[45px] py-[25px] cursor-pointer"
                   src={User}
-                  alt="image"
+                  alt=""
                 />
               </Link>
             </div>

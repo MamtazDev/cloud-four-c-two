@@ -134,7 +134,7 @@ const ProjectUpload = ({ myModal }) => {
                     onClick={filenameHandler}
                     className="flex items-center justify-between"
                   >
-                    <img className="mr-[5px]" src={Dataimg} alt="image" /> File
+                    <img className="mr-[5px]" src={Dataimg} alt="" /> File
                     Picker
                   </div>
                 ) : (
@@ -181,7 +181,7 @@ const ProjectUpload = ({ myModal }) => {
                 <img
                   className="relative z-[99] h-[192px] w-full"
                   src={uploadImg}
-                  alt="image"
+                  alt=""
                 />
                 <button className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
                   Pick new image
@@ -195,7 +195,7 @@ const ProjectUpload = ({ myModal }) => {
                 <img
                   className="relative z-[99] w-full h-[192px] "
                   src={file}
-                  alt="image"
+                  alt=""
                 />
                 <button className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
                   Pick new image

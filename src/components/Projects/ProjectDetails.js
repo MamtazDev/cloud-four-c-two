@@ -121,6 +121,12 @@ const ProjectDetails = () => {
         }
       });
   }, [id,navigate]);
+const dateFormat=(date)=>{
+const formatDate = new Date(date);
+const neww = formatDate.toDateString()
+return neww;
+}
+ 
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
@@ -309,8 +315,8 @@ const ProjectDetails = () => {
                   className="modal cursor-pointer"
                 >
                   <label className="modal-box relative" htmlFor="">
-                    <h3 className="text-lg font-bold">
-                      Creation Time: {session.creation_time}
+                    <h3  className="text-lg font-bold">
+                      Creation Time: {dateFormat(session.creation_time)} 
                     </h3>
                     <p className="py-4">Creator: {session.creator}</p>
                     <p className="py-4">Project Id: {session.project_id}</p>

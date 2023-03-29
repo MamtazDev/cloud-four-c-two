@@ -35,20 +35,14 @@ const StartSession = () => {
       <div className="session__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-[593px]">
         <ProjectButton>Start Session</ProjectButton>
         {/* <ProjectButton2>Session Name</ProjectButton2> */}
-        {sessionNameShow ? (
+    
           <input
             className="block pl-4 border h-[40px] w-[288px] rounded-[7px] mb-[12px]"
             type="text"
+            placeholder="Session name"
             onChange={(e) => setSessionName(e.target.value)}
           />
-        ) : (
-          <button
-            onClick={() => setSessionNameShow(true)}
-            className="commissioner w-[302px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[12px]"
-          >
-            Session Name
-          </button>
-        )}
+       
 
         {/* <ProjectButton2>Session Description</ProjectButton2> */}
         {sessionDescriptionShow ? (

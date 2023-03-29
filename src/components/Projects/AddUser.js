@@ -65,10 +65,10 @@ const AddUser = () => {
   console.log(userList, "useress");
   return (
     <div className="addUser bg-white lg:rounded-l-[50px]  w-full  xl:h-full flex justify-center items-center">
-      <div className="addUser__inner p-12 max-w-[900px] border-[1px] rounded-[16px] border-[#d5d5d5]">
+      <div className="addUser__inner p-3 lg:p-12 max-w-[900px] border-[1px] rounded-[16px] border-[#d5d5d5]">
         <ProjectButton>Add User</ProjectButton>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-[#F8FAFF] p-6 rounded-[40px] overflow-hidden">
+          <div className="bg-[#F8FAFF] p-3 lg:p-6 rounded-lg lg:rounded-[40px] overflow-hidden">
             <input
               type="search"
               className="search_bg border h-[40px] rounded-[36px] pl-10 w-full mb-3"
@@ -98,13 +98,13 @@ const AddUser = () => {
                     onClick={() => setUser(i)}
                   >
                     <div className="avatar online">
-                      <div className="w-16 rounded-full">
+                      <div className="w-8 lg:w-16 rounded-full">
                         <img src={i.image} />
                       </div>
                     </div>
 
                     <div>
-                      <p className="poppins text-[20px] font-[600]">
+                      <p className="poppins text-[15px] lg:text-[20px] font-[600]">
                         {i.username}
                       </p>
                       {/* <p className="poppins text-[12px] font-[400]">

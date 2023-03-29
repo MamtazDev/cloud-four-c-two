@@ -5,6 +5,9 @@ import bob from "../../assets/bob.png";
 import sarah from "../../assets/sarah.png";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import ProjectCopy from "./ProjectCopy";
+import StartSession from "./StartSession";
+import AddUser from "./AddUser";
 
 const ProjectDetails = () => {
   const [project, setProject] = useState();
@@ -89,17 +92,32 @@ const ProjectDetails = () => {
               </button>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
-              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+              {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 <Link to={`/dashboard/projectCopy/${id}`}>Copy project</Link>
-              </button>
+              </button> */}
+              {/* The button to open modal */}
+              <label
+                htmlFor="my-modal-3"
+                className="text-center bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
+              >
+                {" "}
+                Copy project
+              </label>
 
+              {/* Put this part before </body> tag */}
+              <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+              <div className="modal">
+                <div className="modal-box relative">
+                  <label
+                    htmlFor="my-modal-3"
+                    className="btn btn-sm btn-circle absolute right-2 top-2"
+                  >
+                    ✕
+                  </label>
+                  <ProjectCopy />
+                </div>
+              </div>
 
-
-
-
-
-
-              
               <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 Edit project
               </button>
@@ -123,13 +141,40 @@ const ProjectDetails = () => {
           <div className="flex items-center justify-between mb-[12px]">
             <p className="commissioner text-[16px] font-[500]">Sessions</p>
             {/* <BlueButton>New session</BlueButton> */}
-            <Link
+            {/* <Link
               to={`/dashboard/startSession/${project?.project_id}`}
               className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
               type="submit"
             >
               New session
-            </Link>
+            </Link> */}
+
+            {/* The button to open modal */}
+            <label
+              htmlFor="my-modal-session"
+              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+            >
+              {" "}
+              New session
+            </label>
+
+            {/* Put this part before </body> tag */}
+            <input
+              type="checkbox"
+              id="my-modal-session"
+              className="modal-toggle"
+            />
+            <div className="modal">
+              <div className="modal-box relative">
+                <label
+                  htmlFor="my-modal-session"
+                  className="btn btn-sm btn-circle absolute right-2 top-2"
+                >
+                  ✕
+                </label>
+                <StartSession />
+              </div>
+            </div>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
             {project?.sessions?.map((session, index) => (
@@ -209,13 +254,35 @@ const ProjectDetails = () => {
           <div className="flex items-center justify-between mb-[12px]">
             <p className="text-[16px] font-[500]">Users</p>
             {/* <BlueButton>Add user</BlueButton> */}
-            <Link
+            {/* <Link
               to={`/dashboard/addUser/${project?.project_id}`}
               className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
               type="submit"
             >
               Add user
-            </Link>
+            </Link> */}
+
+
+{/* The button to open modal */}
+<label htmlFor="my-modal-user"  className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]">   Add user</label>
+
+{/* Put this part before </body> tag */}
+<input type="checkbox" id="my-modal-user" className="modal-toggle" />
+<div className="modal">
+  <div className="modal-box relative max-w-4xl rounded-[16px]">
+    <label htmlFor="my-modal-user" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+  <AddUser/>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
             {project?.users?.map((user) => (

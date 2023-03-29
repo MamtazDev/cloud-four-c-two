@@ -6,11 +6,13 @@ import uploadImg from "../../assets/uploadproject.png";
 import Dataimg from "../../assets/Data.png";
 import axios from "axios";
 
-const ProjectUpload = () => {
+const ProjectUpload = ({ myModal }) => {
   const [file, setFile] = useState(null);
   const inputRef = useRef();
   const [base64Image, setBase64Image] = useState("");
+  const [base64File, setBase64File] = useState("");
 
+  //  base64 conver start
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -21,6 +23,23 @@ const ProjectUpload = () => {
 
     reader.readAsDataURL(file);
   };
+  //  base64 conver end
+
+  // file convert to base64 start
+  const handleFileConvertToBase64 = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setBase64File(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  // file convert to base64 end
+
+  // submit form start
   const handleSubmit = (e) => {
     e.preventDefault();
     const project_name = e.target.project_name.value;
@@ -29,7 +48,8 @@ const ProjectUpload = () => {
 
     const info = {
       project_name,
-      file_data: base64Image,
+      file_data: base64File,
+      project_image: base64Image,
       project_path_to_execute,
       project_description,
       // project_image: base64Image,
@@ -46,13 +66,15 @@ const ProjectUpload = () => {
         },
       })
       .then((res) => {
-        console.log(res, "hello");
         if (res.data.message === "New project successfully created") {
           e.target.reset();
           window.location.reload(true);
         }
       });
   };
+  // submit form end
+
+  // image upload start
   const onFileChangeCapture = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
@@ -60,7 +82,9 @@ const ProjectUpload = () => {
   const inputHandler = () => {
     inputRef.current.click();
   };
+  // image upload end
 
+  //  file upload start
   const [filename, setFilename] = useState("");
   const filenameRef = useRef();
   const onFileChange = (e) => {
@@ -72,6 +96,10 @@ const ProjectUpload = () => {
   const filenameHandler = () => {
     filenameRef.current.click();
   };
+  //  file upload end
+
+  // console.log(base64File,"file")
+  // console.log(base64Image,"image")
   return (
     <div className="bg-white lg:rounded-l-[50px] project__copy w-full h-full flex justify-center items-center">
       <div className="copy__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-full">
@@ -92,6 +120,7 @@ const ProjectUpload = () => {
                   ref={filenameRef}
                   onChangeCapture={onFileChange}
                   className="file-input w-full hidden  border-0 bg-white"
+                  onChange={handleFileConvertToBase64}
                 />
                 {filename === "" ? (
                   <div
@@ -118,7 +147,6 @@ const ProjectUpload = () => {
               type="text"
               placeholder="Project description"
               name="project_description"
-              
             />
 
             <input
@@ -135,6 +163,7 @@ const ProjectUpload = () => {
               ref={inputRef}
               accept="image/*"
               onChangeCapture={onFileChangeCapture}
+              onChange={handleImageChange}
               className="file-input w-full hidden  border-0 bg-white"
             />
             {file === null ? (
@@ -169,7 +198,9 @@ const ProjectUpload = () => {
           </div>
 
           <div className="mx-auto cencelation flex justify-between w-[253px] mt-[20px]">
-            <ProjectButton3>Cancel</ProjectButton3>
+            <ProjectButton3>
+              <label htmlFor={myModal}>Cancel</label>{" "}
+            </ProjectButton3>
 
             <button
               type="submit"

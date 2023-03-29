@@ -30,7 +30,7 @@ const ProjectDetails = () => {
       })
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };
@@ -48,7 +48,7 @@ const ProjectDetails = () => {
       })
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };
@@ -65,7 +65,7 @@ const ProjectDetails = () => {
       .then((response) => console.log(response.data.session))
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };
@@ -81,10 +81,10 @@ const ProjectDetails = () => {
       .then((response) => setProject(response.data.project))
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
-  }, [deletesession,id,navigate]);
+  }, [deletesession, id, navigate]);
   console.log(project);
   const handleLeave = (id) => {
     axios
@@ -102,7 +102,7 @@ const ProjectDetails = () => {
       })
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };
@@ -117,16 +117,30 @@ const ProjectDetails = () => {
       .then((response) => setProjectLog(response.data.log_strings))
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
-  }, [id,navigate]);
-const dateFormat=(date)=>{
-const formatDate = new Date(date);
-const neww = formatDate.toDateString()
-return neww;
-}
- 
+  }, [id, navigate]);
+  const dateFormat = (date) => {
+    const formatDate = new Date(date);
+    const neww = formatDate.toDateString();
+    return neww;
+  };
+
+  const handleProjectName = (projectId)=>{
+    if (projectId === id) {
+      return project.name;
+    }
+    
+    // axios
+    // .post(`https://app.cloud4c2.com/api/project/details/${projectId}`, {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Access-Control-Allow-Credentials": true,
+    //   },
+    // })
+    // .then((response) => setProject(response.data.project))
+  }
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
@@ -315,11 +329,11 @@ return neww;
                   className="modal cursor-pointer"
                 >
                   <label className="modal-box relative" htmlFor="">
-                    <h3  className="text-lg font-bold">
-                      Creation Time: {dateFormat(session.creation_time)} 
+                    <h3 className="text-lg font-bold">
+                      Creation Time: {dateFormat(session.creation_time)}
                     </h3>
                     <p className="py-4">Creator: {session.creator}</p>
-                    <p className="py-4">Project Id: {session.project_id}</p>
+                    <p className="py-4">Project Name: {handleProjectName (session.project_id)}</p>
                     <p className="py-4">Session Id: {session.session_id}</p>
                   </label>
                 </label>

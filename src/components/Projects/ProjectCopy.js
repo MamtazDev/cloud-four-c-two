@@ -37,9 +37,9 @@ const ProjectCopy = ({myModal}) => {
 
   const handleAccept = () => {
     const data = {
-      name: projectName,
-      description: description,
-      picture: base64Image,
+      project_name: projectName,
+      project_description: description,
+      project_picture: base64Image,
     };
 
     console.log(data, "datass");
@@ -51,7 +51,12 @@ const ProjectCopy = ({myModal}) => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((res) => console.log(res, "resss"));
+      .then((res) =>{
+        if (res.data.message === "New project successfully created") {
+          alert(res.data.message);
+          window.location.reload(true);
+        }
+      });
   };
 
   useEffect(() => {

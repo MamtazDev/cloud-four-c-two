@@ -4,7 +4,7 @@ import ProjectButton2 from "../../utils/ProjectButton2";
 import ProjectButton3 from "../../utils/ProjectButton3";
 
 import copyImg from "../../assets/copyproject.png";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 const ProjectCopy = () => {
@@ -35,7 +35,7 @@ const ProjectCopy = () => {
 
   axios.defaults.withCredentials = true;
 
-  const handleAccepte = () => {
+  const handleAccept = () => {
     const data = {
       name: projectName,
       description: description,
@@ -87,7 +87,7 @@ const ProjectCopy = () => {
         {/* <ProjectButton2>New project description</ProjectButton2> */}
         {descriptionShow ? (
           <input
-            className="block pl-4 border h-[40px] w-[288px] rounded-[7px] mb-[12px]"
+            className="block pl-4 border h-[40px] w-[288px] rounded-[7px] mb-[12px] "
             type="text"
             Value={project.description}
             onChange={(e) => setDescription(e.target.value)}
@@ -150,12 +150,12 @@ const ProjectCopy = () => {
           {/* <ProjectButton3>
             <span>Cancel</span>
           </ProjectButton3> */}
-          <button className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]">
+          <Link  to={`/dashboard/projectDetails/${project.project_id}`} className="text-center commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]">
             Cancel
-          </button>
+          </Link>
           {/* <ProjectButton3>Accept</ProjectButton3> */}
           <button
-            onClick={handleAccepte}
+            onClick={handleAccept}
             className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
           >
             Accept

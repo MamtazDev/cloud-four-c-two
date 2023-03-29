@@ -343,9 +343,14 @@ const ProjectDetails = () => {
                 >
                   Remove (ANALYST)
                 </p>
-                <p className=" session_bg w-[257px] py-[20px] text-center font-[400]">
-                  Change role (ANALYST)
-                </p>
+                <select className=" session_bg w-[257px] py-[20px] text-center font-[400]">
+                  <option disabled selected>
+                    {" "}
+                    Change role (ANALYST)
+                  </option>
+                  <option>Analyst</option>
+                  <option>Viewer</option>
+                </select>
               </div>
             ))}
 
@@ -367,7 +372,9 @@ const ProjectDetails = () => {
         <div className="mb-[22px]">
           <div className="flex items-center justify-between mb-[12px]">
             <p className="text-[16px] font-[500]">Recent Activity</p>
-            <BlueButton><Link    to={`/dashboard/project-log/${id}`}>  Full report</Link></BlueButton>
+            <BlueButton>
+              <Link to={`/dashboard/project-log/${id}`}> Full report</Link>
+            </BlueButton>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px] px-4">
             {projectLog.map((i, index) => (

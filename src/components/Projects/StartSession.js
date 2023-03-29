@@ -28,6 +28,11 @@ const StartSession = ({ myModal }) => {
           window.location.reload(true);
           // navigate("/dashboard/project");
         }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
       });
   };
 

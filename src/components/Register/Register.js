@@ -56,6 +56,10 @@ const Register = () => {
           const newErrorSentence = errorSentence.replace(wordToRemove, "");
           setError(newErrorSentence);
         }
+
+        if (err.response.status === 403) {
+          navigate("/");
+        }
       });
   };
 
@@ -124,9 +128,7 @@ const Register = () => {
             />
           </div>
           <div className="mb-[42px] flex items-center gap-3">
-            <label className="outfit text-[20px] font-[300]  block">
-              Role
-            </label>
+            <label className="outfit text-[20px] font-[300]  block">Role</label>
             <select name="role">
               <option value="analyst">Analyst</option>
               {/* <option value="admin">Admin</option> */}

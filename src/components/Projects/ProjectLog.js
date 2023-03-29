@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProjectLog = () => {
   const [projectLog, setProjectLog] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
@@ -14,8 +15,13 @@ const ProjectLog = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => setProjectLog(response.data.log_strings));
-  }, []);
+      .then((response) => setProjectLog(response.data.log_strings))
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
+      });
+  }, [id,navigate]);
   return (
     <div className="node__info bg-[#FFFBFB] lg:rounded-l-[50px] h-full overflow-x-auto lg:py-[54px] lg:pt-[196px] lg:px-[57px] p-4">
       <h1 className="text-3xl font-bold mb-5">Project Logs</h1>

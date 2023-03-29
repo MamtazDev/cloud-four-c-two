@@ -5,10 +5,11 @@ import Person from "../../assets/Person.png";
 import Home from "../../assets/Home.png";
 import Info from "../../assets/Info-Square.png";
 import User from "../../assets/User.png";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState();
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -19,7 +20,12 @@ const Sidebar = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => setUser(response.data.user));
+      .then((response) => setUser(response.data.user))
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
+      });
   }, []);
   return (
     <div>

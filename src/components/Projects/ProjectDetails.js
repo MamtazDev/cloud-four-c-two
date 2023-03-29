@@ -4,7 +4,7 @@ import girl from "../../assets/girl.png";
 import bob from "../../assets/bob.png";
 import sarah from "../../assets/sarah.png";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectCopy from "./ProjectCopy";
 import StartSession from "./StartSession";
 import AddUser from "./AddUser";
@@ -17,6 +17,7 @@ const ProjectDetails = () => {
   const [projectLog, setProjectLog] = useState([]);
   const { id } = useParams();
   const [deletesession, setDelete] = useState(false);
+  const navigate = useNavigate();
   axios.defaults.withCredentials = true;
 
   const handleDeleteSession = (id) => {
@@ -25,6 +26,11 @@ const ProjectDetails = () => {
       .then((res) => {
         if (res.data.message === "session deleted") {
           setDelete(!deletesession);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
         }
       });
   };
@@ -39,6 +45,11 @@ const ProjectDetails = () => {
           alert(res.data.message);
           window.location.reload(true);
         }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
       });
   };
 
@@ -51,7 +62,12 @@ const ProjectDetails = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => console.log(response.data.session));
+      .then((response) => console.log(response.data.session))
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
+      });
   };
 
   useEffect(() => {
@@ -62,8 +78,13 @@ const ProjectDetails = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => setProject(response.data.project));
-  }, [deletesession]);
+      .then((response) => setProject(response.data.project))
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
+      });
+  }, [deletesession,id,navigate]);
   console.log(project);
   const handleLeave = (id) => {
     axios
@@ -78,6 +99,11 @@ const ProjectDetails = () => {
           alert(res.data.message);
           window.location.reload(true);
         }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
       });
   };
   useEffect(() => {
@@ -88,8 +114,13 @@ const ProjectDetails = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => setProjectLog(response.data.log_strings));
-  }, []);
+      .then((response) => setProjectLog(response.data.log_strings))
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
+      });
+  }, [id,navigate]);
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">

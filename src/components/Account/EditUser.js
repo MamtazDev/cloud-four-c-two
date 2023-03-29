@@ -50,8 +50,13 @@ const EditUser = () => {
           },
         }
       )
-      .then((response) => setUser(response.data.user));
-  }, [id]);
+      .then((response) => setUser(response.data.user))
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
+      });
+  }, [id,navigate]);
   console.log(user,"newwwwww");
 
   const handleSubmit = (e) => {
@@ -86,6 +91,11 @@ const EditUser = () => {
           alert(res.data.message);
           e.target.reset();
           navigate("/dashboard/manageUser");
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
         }
       });
   };

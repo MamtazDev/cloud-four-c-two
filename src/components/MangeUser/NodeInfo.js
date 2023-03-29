@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./manage.css";
 
 const NodeInfo = () => {
   const [node, setNode] = useState([]);
+  const navigate = useNavigate();
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
@@ -13,7 +15,12 @@ const NodeInfo = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((res) => setNode(res.data.nodes));
+      .then((res) => setNode(res.data.nodes))
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
+      });
   }, []);
   console.log(node);
   return (

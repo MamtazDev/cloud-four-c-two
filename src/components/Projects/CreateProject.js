@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 const CreateProject = () => {
   const [base64Image, setBase64Image] = useState("");
@@ -14,7 +15,6 @@ const CreateProject = () => {
 
     reader.readAsDataURL(file);
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +45,11 @@ const CreateProject = () => {
         if (res.data.message === "New project successfully created") {
           e.target.reset();
           window.location.reload(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          Navigate("/");
         }
       });
   };

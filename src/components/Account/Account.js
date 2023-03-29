@@ -42,8 +42,13 @@ const Account = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => setUser(response.data.user));
-  }, []);
+      .then((response) => setUser(response.data.user))
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
+      });
+  }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -80,6 +85,11 @@ const Account = () => {
           setFirstShow(false);
           setLastShow(false);
           setEmailShow(false);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
         }
       });
   };

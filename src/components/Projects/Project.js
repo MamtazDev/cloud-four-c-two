@@ -50,8 +50,13 @@ const Project = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => setProjects(response.data.projects));
-  }, [filter, return_deactivated, return_deleted]);
+      .then((response) => setProjects(response.data.projects))
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  }, [filter, return_deactivated, return_deleted, navigate]);
 
   const handleLeave = (id) => {
     axios
@@ -65,6 +70,11 @@ const Project = () => {
         if (res.data.message === "you left the project") {
           alert(res.data.message);
           window.location.reload(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
         }
       });
   };
@@ -82,6 +92,11 @@ const Project = () => {
         // setProjects(projects.filter((item) => item.project_id !== res.data.user));
         if (res.data.message === "project successfully deleted.") {
           window.location.reload(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
         }
       });
   };
@@ -106,12 +121,16 @@ const Project = () => {
           alert(res.data.message);
           // window.location.reload(true);
         }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
       });
   };
 
-  console.log(projects, "pororo");
   return (
-    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px] h-[100vh] overflow-y-scroll" >
+    <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px] h-[100vh] overflow-y-scroll">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[61px] mb-[34px] ">
         <div className="col-span-2">
           <input
@@ -269,7 +288,7 @@ const Project = () => {
                             className="commissioner"
                             to={`/dashboard/startSession/${project.project_id}`}
                           >
-                            start session
+                            Start session
                           </Link>
                         </li>
                         {/* <li>
@@ -285,7 +304,7 @@ const Project = () => {
                             className="commissioner"
                             to="/dashboard/projectUpload"
                           >
-                            edit project
+                            Edit project
                           </Link>
                         </li>
                         <li>
@@ -297,14 +316,18 @@ const Project = () => {
                           </Link>
                         </li>
                         <li onClick={() => handleDisabled(project)}>
-                          <a className="commissioner">disable project</a>
+                          <a className="commissioner">
+                            {project.active === true
+                              ? "Disable project"
+                              : "Active project"}{" "}
+                          </a>
                         </li>
                         <li>
                           <a
                             onClick={() => handleDelete(project.project_id)}
                             className="commissioner"
                           >
-                            delete project
+                            Delete project
                           </a>
                         </li>
                       </ul>

@@ -27,8 +27,13 @@ const AddUser = () => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((response) => setUserList(response.data.users));
-  }, []);
+      .then((response) => setUserList(response.data.users))
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
+        }
+      });
+  }, [navigate,setUserList]);
 
   const handleUserSearchFilter = (user) => {
     if (searchText) {
@@ -58,6 +63,11 @@ const AddUser = () => {
         if (res.data.message === "user added to project") {
           alert(res.data.message);
           navigate(`/dashboard/projectDetails/${id}`);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+        navigate("/")
         }
       });
   };

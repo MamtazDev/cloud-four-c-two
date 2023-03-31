@@ -12,6 +12,7 @@ import CreateProject from "./CreateProject";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import ProjectUpload from "./ProjectUpload";
+import AddUser from "./AddUser";
 
 const Project = () => {
   const [projects, setProjects] = useState([]);
@@ -135,7 +136,7 @@ const Project = () => {
         <div>
           <input
             type="search"
-            className="search_bg pl-16 input input-bordered  w-full rounded-[60px]  "
+            className="search_bg pl-16 input input-bordered lg:w-[700px] rounded-[60px]  "
             onChange={(e) => setFilter(e.target.value)}
           />
         </div>
@@ -249,7 +250,7 @@ const Project = () => {
             <div key={project.project_id}>
               <div className="card_box p-[7px]">
                 <div className="img_box">
-                  <div className="flex justify-end px-[12px] pt-[9px]">
+                  <div className="flex justify-end pt-[9px]">
                     {/* <img
 
                 className="pointer"
@@ -274,7 +275,18 @@ const Project = () => {
                           <span className="commissioner">Project details</span>
                         </li> */}
                         <li>
-                          <a className="commissioner">Share</a>
+                          {/* <a className="commissioner">Share</a> */}
+                             {/* The button to open modal */}
+            <label
+              htmlFor="my-modal-user"
+              className="commissioner"
+            >
+              {" "}
+              Share
+            </label>
+
+           
+           
                         </li>
                         <li>
                           <button
@@ -358,6 +370,23 @@ const Project = () => {
         ) : (
           <div>Loading...</div>
         )}
+         {/* Put this part before </body> tag */}
+         <input
+              type="checkbox"
+              id="my-modal-user"
+              className="modal-toggle"
+            />
+         <div className="modal">
+              <div className="modal-box relative max-w-4xl rounded-[16px]">
+                <label
+                  htmlFor="my-modal-user"
+                  className="btn btn-sm btn-circle absolute right-2 top-2"
+                >
+                  ✕
+                </label>
+                <AddUser />
+              </div>
+            </div>
       </div>
     </div>
   );

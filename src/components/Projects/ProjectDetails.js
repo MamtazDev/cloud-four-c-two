@@ -12,6 +12,7 @@ import { BiEdit } from "react-icons/bi";
 
 const ProjectDetails = () => {
   const [name, setName] = useState(false);
+  const [user, setUser] = useState();
   const [description, setDescription] = useState(false);
   const [project, setProject] = useState();
   const [projectLog, setProjectLog] = useState([]);
@@ -127,11 +128,11 @@ const ProjectDetails = () => {
     return neww;
   };
 
-  const handleProjectName = (projectId)=>{
+  const handleProjectName = (projectId) => {
     if (projectId === id) {
       return project.name;
     }
-    
+
     // axios
     // .post(`https://app.cloud4c2.com/api/project/details/${projectId}`, {
     //   headers: {
@@ -140,19 +141,36 @@ const ProjectDetails = () => {
     //   },
     // })
     // .then((response) => setProject(response.data.project))
-  }
+  };
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/user/", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setUser(response.data.user))
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  }, [navigate]);
+  console.log("neww", user);
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
       <div className="max-w-[1091px]">
         <div className="mb-[57px]">
-          <BlueButton>
-            {" "}
-            <span onClick={() => handleLeave(project.project_id)}>
-              {" "}
-              Leave Project (Not Admin)
-            </span>{" "}
-          </BlueButton>
+          <span className={user?.role === "administrator" ? "hidden" : "block"}>
+            <BlueButton>
+              <span onClick={() => handleLeave(project.project_id)}>
+                {" "}
+                Leave Project
+              </span>{" "}
+            </BlueButton>
+          </span>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px] mb-[40px]">
           <div>
@@ -333,7 +351,9 @@ const ProjectDetails = () => {
                       Creation Time: {dateFormat(session.creation_time)}
                     </h3>
                     <p className="py-4">Creator: {session.creator}</p>
-                    <p className="py-4">Project Name: {handleProjectName (session.project_id)}</p>
+                    <p className="py-4">
+                      Project Name: {handleProjectName(session.project_id)}
+                    </p>
                     <p className="py-4">Session Id: {session.session_id}</p>
                   </label>
                 </label>

@@ -110,7 +110,7 @@ const ProjectUpload = ({ myModal }) => {
   return (
     <div className="bg-white lg:rounded-l-[50px] project__copy w-full h-full flex justify-center items-center">
       <div className="copy__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-full">
-        <ProjectButton>Upload Project</ProjectButton>
+        <ProjectButton>New Project</ProjectButton>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-3/4 mx-auto my-[20px]">
             <input
@@ -134,7 +134,7 @@ const ProjectUpload = ({ myModal }) => {
                     onClick={filenameHandler}
                     className="flex items-center justify-between"
                   >
-                    <img className="mr-[5px]" src={Dataimg} alt="image" /> File
+                    <img className="mr-[5px]" src={Dataimg} alt="" /> File
                     Picker
                   </div>
                 ) : (
@@ -180,8 +180,8 @@ const ProjectUpload = ({ myModal }) => {
               >
                 <img
                   className="relative z-[99] h-[192px] w-full"
-                  src={uploadImg}
-                  alt="image"
+                  src="https://lppm.upnjatim.ac.id/assets/img/nophoto.png"
+                  alt=""
                 />
                 <button className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
                   Pick new image
@@ -195,7 +195,7 @@ const ProjectUpload = ({ myModal }) => {
                 <img
                   className="relative z-[99] w-full h-[192px] "
                   src={file}
-                  alt="image"
+                  alt=""
                 />
                 <button className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
                   Pick new image

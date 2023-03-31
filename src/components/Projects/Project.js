@@ -12,6 +12,7 @@ import CreateProject from "./CreateProject";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import ProjectUpload from "./ProjectUpload";
+import AddUser from "./AddUser";
 
 const Project = () => {
   const [projects, setProjects] = useState([]);
@@ -131,18 +132,18 @@ const Project = () => {
 
   return (
     <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px] h-[100vh] overflow-y-scroll">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-[61px] mb-[34px] ">
-        <div className="col-span-2">
+      <div className="flex flex-wrap justify-between gap-[41px] mb-[15px] ">
+        <div>
           <input
             type="search"
-            className="search_bg pl-16 input input-bordered w-full rounded-[60px] h-[58px] "
+            className="search_bg pl-16 input input-bordered lg:w-[700px] rounded-[60px]  "
             onChange={(e) => setFilter(e.target.value)}
           />
         </div>
         <div className="flex gap-1 lg:gap-[18px]">
           {/* The button to open modal */}
           <label
-            className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+            className="outfit bg-[#3853A4] p-3  text-white text-[15px]  font-[500] rounded-[5px]"
             htmlFor="my-modal-3"
           >
             {" "}
@@ -170,7 +171,8 @@ const Project = () => {
           {/* The button to open modal */}
           <label
             htmlFor="my-modal-upload"
-            className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+            className="outfit bg-[#3853A4] p-3 
+           text-white text-[15px]  font-[500] rounded-[5px]"
           >
             Upload Project
           </label>
@@ -248,7 +250,7 @@ const Project = () => {
             <div key={project.project_id}>
               <div className="card_box p-[7px]">
                 <div className="img_box">
-                  <div className="flex justify-end px-[12px] pt-[9px] pb-[22px]">
+                  <div className="flex justify-end pt-[9px]">
                     {/* <img
 
                 className="pointer"
@@ -273,7 +275,18 @@ const Project = () => {
                           <span className="commissioner">Project details</span>
                         </li> */}
                         <li>
-                          <a className="commissioner">Share</a>
+                          {/* <a className="commissioner">Share</a> */}
+                             {/* The button to open modal */}
+            <label
+              htmlFor="my-modal-user"
+              className="commissioner"
+            >
+              {" "}
+              Share
+            </label>
+
+           
+           
                         </li>
                         <li>
                           <button
@@ -336,15 +349,15 @@ const Project = () => {
                   <div>
                     <img
                       onClick={() => navigateToItemDetails(project.project_id)}
-                      width={100}
-                      className="cursor-pointer mx-auto mb-[-30px]"
+                      className="h-[150px] w-full cursor-pointer mx-auto"
+                    
                       src={project.image}
                       alt=""
                     />
-                    <p className="commissioner text-[16px] font-[500] mt-[35px] mb-[8px] text-center">
+                    <p className="commissioner text-[16px] font-[500] mt-2 mb-[8px] text-center">
                       {project.name}
                     </p>
-                    <p className="commissioner text-[14px] font-[400] text-center">
+                    <p className="commissioner text-[14px] font-[400] text-center pb-2">
                       {project.description}
                     </p>
                   </div>
@@ -357,6 +370,23 @@ const Project = () => {
         ) : (
           <div>Loading...</div>
         )}
+         {/* Put this part before </body> tag */}
+         <input
+              type="checkbox"
+              id="my-modal-user"
+              className="modal-toggle"
+            />
+         <div className="modal">
+              <div className="modal-box relative max-w-4xl rounded-[16px]">
+                <label
+                  htmlFor="my-modal-user"
+                  className="btn btn-sm btn-circle absolute right-2 top-2"
+                >
+                  ✕
+                </label>
+                <AddUser />
+              </div>
+            </div>
       </div>
     </div>
   );

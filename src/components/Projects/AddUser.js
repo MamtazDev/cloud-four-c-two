@@ -109,7 +109,7 @@ const AddUser = () => {
                   >
                     <div className="avatar online">
                       <div className="w-8 lg:w-16 rounded-full">
-                        <img src={i.image} />
+                        <img src={i.image}     alt=""/>
                       </div>
                     </div>
 

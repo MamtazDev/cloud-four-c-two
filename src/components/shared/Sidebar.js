@@ -23,7 +23,7 @@ const Sidebar = () => {
       .then((response) => setUser(response.data.user))
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   }, []);
@@ -53,7 +53,7 @@ const Sidebar = () => {
           type="checkbox"
           className="drawer-toggle"
         />
-        <div  className="drawer-content lg:ml-[-50px]">
+        <div className="drawer-content lg:ml-[-50px]">
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
@@ -69,11 +69,15 @@ const Sidebar = () => {
                 />
               </Link>
               <Link to="/dashboard">
-                <img
-                  className="rounded-full px-[45px] cursor-pointer"
-                  src={user?.image}
-                  alt="image"
-                />
+                <div className="px-[45px]">
+                  <img
+                    width={70}
+                    height={70}
+                    className="rounded-full cursor-pointer"
+                    src={user?.image}
+                    alt=""
+                  />
+                </div>
               </Link>
             </div>
             <div className="bar__bottom flex flex-col items-center">
@@ -81,21 +85,24 @@ const Sidebar = () => {
                 <img
                   className="px-[45px] py-[25px] cursor-pointer"
                   src={Home}
-                  alt="image"
+                  alt=""
                 />
               </Link>
-              <Link to="/dashboard/nodeInfo" className="img-wrapper mb-[12px]">
+              <Link to="/dashboard/nodeInfo" className={user?.role === "administrator" ?  "block img-wrapper mb-[12px]" : "hidden" }>
                 <img
                   className="px-[45px] py-[25px] cursor-pointer"
                   src={Info}
-                  alt="image"
+                  alt=""
                 />
               </Link>
-              <Link to="/dashboard/manageUser" className="img-wrapper mb-[62px]">
+              <Link
+                to="/dashboard/manageUser"
+                className="img-wrapper mb-[62px]"
+              >
                 <img
                   className="px-[45px] py-[25px] cursor-pointer"
                   src={User}
-                  alt="image"
+                  alt=""
                 />
               </Link>
             </div>

@@ -28,6 +28,14 @@ const NodeInfo = () => {
       <h1 className="text-3xl font-[600] mb-8">Node Information</h1>
 
       <table className="w-[1032px]">
+        <thead className="bg-gray-300 h-[60px]">
+          <th>Host name</th>
+          <th>IP</th>
+          <th>Memory</th>
+          <th>CPU</th>
+          <th>Started Time</th>
+          <th>Status</th>
+        </thead>
         {node?.map((i) => (
           <tr>
             <td> {i.hostname}</td>

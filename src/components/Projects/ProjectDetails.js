@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import BlueButton from "../../utils/BlueButton";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -175,6 +175,26 @@ const ProjectDetails = () => {
 
   console.log(userList, "userlist");
 
+  // change image part
+
+  const [files, setFile] = useState(null);
+  const inputRef = useRef();
+  const inputHandler = () => {
+    inputRef.current.click();
+  };
+
+  const [base64Image, setBase64Image] = useState("");
+  const onFileChangeCapture = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setBase64Image(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  };
+
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
       <div className="max-w-[1091px]">
@@ -299,18 +319,41 @@ const ProjectDetails = () => {
                 </label>
               </label>
 
-              <button className="bg-[#3853A4] py-[17px] text-white text-[16px] font-[500] rounded-[5px]">
+              {/* <button className="bg-[#3853A4] py-[17px] text-white text-[16px] font-[500] rounded-[5px]">
                 Change image
-              </button>
+              </button> */}
+
+              <div>
+                <input
+                  type="file"
+                  ref={inputRef}
+                  accept="image/*"
+                  onChangeCapture={onFileChangeCapture}
+                  className="file-input w-full hidden  border-0 bg-white"
+                />
+                <button
+                  onClick={inputHandler}
+                  className="bg-[#3853A4] px-6 py-[17px] text-white text-[16px] font-[500] rounded-[5px]"
+                >
+                  Change image
+                </button>
+              </div>
             </div>
           </div>
           <div>
-            <img
-              className="rounded-[12px] h-[305px] w-full"
-              src={project?.image}
-              // src={girl}
-              alt=""
-            />
+            {files === null ? (
+              <img
+                className="rounded-[12px] h-[305px] w-full"
+                src={project?.image}
+                alt=""
+              />
+            ) : (
+              <img
+                className="rounded-[12px] h-[305px] w-full"
+                src={files}
+                alt=""
+              />
+            )}
           </div>
         </div>
 

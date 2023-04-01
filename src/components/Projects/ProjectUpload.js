@@ -14,7 +14,7 @@ const ProjectUpload = ({ myModal }) => {
   const [base64Image, setBase64Image] = useState("");
   const [base64File, setBase64File] = useState("");
 
-  //  base64 conver start
+  // img base64 convert start
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -25,7 +25,7 @@ const ProjectUpload = ({ myModal }) => {
 
     reader.readAsDataURL(file);
   };
-  //  base64 conver end
+  // img base64 convert end
 
   // file convert to base64 start
   const handleFileConvertToBase64 = (event) => {
@@ -54,7 +54,6 @@ const ProjectUpload = ({ myModal }) => {
       project_image: base64Image,
       project_path_to_execute,
       project_description,
-      // project_image: base64Image,
     };
     console.log(info, "click");
 

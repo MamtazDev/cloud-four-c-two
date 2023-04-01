@@ -333,7 +333,7 @@ const ProjectDetails = () => {
                 />
                 <button
                   onClick={inputHandler}
-                  className="bg-[#3853A4] px-6 py-[17px] text-white text-[16px] font-[500] rounded-[5px]"
+                  className="bg-[#3853A4] w-full py-[17px] text-white text-[16px] font-[500] rounded-[5px]"
                 >
                   Change image
                 </button>

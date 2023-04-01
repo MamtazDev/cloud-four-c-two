@@ -7,6 +7,7 @@ import StartSession from "./StartSession";
 import AddUser from "./AddUser";
 import { BiEdit } from "react-icons/bi";
 import { UserContext } from "../../context/AuthProvider";
+import ProjectUpload from "./ProjectUpload";
 
 const ProjectDetails = () => {
   const [name, setName] = useState(false);
@@ -267,9 +268,37 @@ const ProjectDetails = () => {
                 </label>
               </label>
 
-              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+              {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 Edit project
-              </button>
+              </button> */}
+
+              {/* The button to open modal */}
+              <label
+                htmlFor="my-modal-edit"
+                className="bg-[#3853A4] text-center py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
+              >
+                {" "}
+                Edit project
+              </label>
+
+              {/* Put this part before </body> tag */}
+              <input
+                type="checkbox"
+                id="my-modal-edit"
+                className="modal-toggle"
+              />
+              <label htmlFor="my-modal-edit" className="modal cursor-pointer">
+                <label className="modal-box relative" htmlFor="">
+                  <label
+                    htmlFor="my-modal-edit"
+                    className="btn btn-sm btn-circle absolute right-2 top-2"
+                  >
+                    ✕
+                  </label>
+                  <ProjectUpload />
+                </label>
+              </label>
+
               <button className="bg-[#3853A4] py-[17px] text-white text-[16px] font-[500] rounded-[5px]">
                 Change image
               </button>
@@ -470,7 +499,11 @@ const ProjectDetails = () => {
 
                 <p
                   className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
-                  onClick={() => handleUserRemove(puser.user_id)}
+                  onClick={() =>
+                    puser.user_id === user?.user_id
+                      ? handleUserRemove(puser.user_id)
+                      : handleLeave(project.project_id)
+                  }
                 >
                   {puser.user_id === user?.user_id ? "Leave" : "Remove"}
 

@@ -211,7 +211,7 @@ const ProjectUpload = ({ myModal }) => {
 
             <button
               type="submit"
-              className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
+              className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px] my-4"
             >
               Accept
             </button>

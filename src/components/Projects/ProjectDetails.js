@@ -291,8 +291,9 @@ const ProjectDetails = () => {
               id="my-modal-session"
               className="modal-toggle"
             />
-            <div className="modal">
-              <div className="modal-box relative">
+
+            <label htmlFor="my-modal-session" className="modal cursor-pointer">
+              <label className="modal-box relative" htmlFor="">
                 <label
                   htmlFor="my-modal-session"
                   className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -300,8 +301,8 @@ const ProjectDetails = () => {
                   ✕
                 </label>
                 <StartSession myModal={"my-modal-session"} />
-              </div>
-            </div>
+              </label>
+            </label>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
             {project?.sessions?.map((session, index) => (

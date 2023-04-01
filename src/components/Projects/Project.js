@@ -168,8 +168,8 @@ const Project = () => {
 
           {/* Put this part before </body> tag */}
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-          <div className="modal">
-            <div className="modal-box relative">
+          <label htmlFor="my-modal-3" className="modal">
+            <label htmlFor="" className="modal-box relative">
               <label
                 htmlFor="my-modal-3"
                 className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -177,8 +177,8 @@ const Project = () => {
                 ✕
               </label>
               <CreateProject />
-            </div>
-          </div>
+            </label>
+          </label>
 
           {/* <Link to="/dashboard/projectUpload">
             <BlueButton>Upload Project</BlueButton>
@@ -325,6 +325,17 @@ const Project = () => {
                           >
                             Start session
                           </Link>
+
+
+
+
+
+
+
+
+
+
+                          
                         </li>
                         {/* <li>
                           <Link
@@ -373,15 +384,19 @@ const Project = () => {
                     </div>
                   </div>
                   <div>
-                    <img
+                    <div
+                      className="cursor-pointer"
                       onClick={() => navigateToItemDetails(project.project_id)}
-                      className="h-[150px] w-full cursor-pointer mx-auto"
-                      src={project.image}
-                      alt=""
-                    />
-                    <p className="commissioner text-[16px] font-[500] mt-2 mb-[8px] text-center">
-                      {project.name}
-                    </p>
+                    >
+                      <img
+                        className="h-[150px] w-full  mx-auto"
+                        src={project.image}
+                        alt=""
+                      />
+                      <p className="commissioner text-[16px] font-[500] mt-2 mb-[8px] text-center">
+                        {project.name}
+                      </p>
+                    </div>
                     <p className="commissioner text-[14px] font-[400] text-center pb-2">
                       {project.description}
                     </p>

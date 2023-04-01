@@ -39,7 +39,8 @@ const StartSession = ({ myModal }) => {
   return (
     <div className="bg-white lg:rounded-l-[50px] start__session h-full w-full flex justify-center items-center">
       <div className="session__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-[593px]">
-        <ProjectButton>Start Session</ProjectButton>
+       
+        <h1 className="text-center text-3xl font-bold mb-5">Start Session</h1>
         {/* <ProjectButton2>Session Name</ProjectButton2> */}
 
         <input

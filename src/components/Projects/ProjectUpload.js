@@ -108,7 +108,7 @@ const ProjectUpload = ({ myModal }) => {
   // console.log(base64File,"file")
   // console.log(base64Image,"image")
   return (
-    <div className="bg-white lg:rounded-l-[50px] project__copy w-full h-full flex justify-center items-center">
+    <div className="bg-white lg:rounded-l-[50px] project__copy max-w-[700px] mx-auto h-full flex justify-center items-center">
       <div className="copy__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-full">
         <ProjectButton>New Project</ProjectButton>
         <form onSubmit={handleSubmit}>

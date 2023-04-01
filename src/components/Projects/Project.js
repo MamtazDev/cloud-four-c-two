@@ -15,6 +15,7 @@ import ProjectUpload from "./ProjectUpload";
 import AddUser from "./AddUser";
 
 const Project = () => {
+  const [user, setUser] = useState();
   const [projects, setProjects] = useState([]);
   const [filter, setFilter] = useState("");
   const [return_deactivated, setReturn_deactivated] = useState(false);
@@ -129,6 +130,21 @@ const Project = () => {
         }
       });
   };
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/user/", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setUser(response.data.user))
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  }, [navigate]);
 
   return (
     <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px] h-[100vh] overflow-y-scroll">
@@ -196,6 +212,7 @@ const Project = () => {
           </div>
         </div>
       </div>
+      {user === ""}
       <div className="flex gap-[20px] mb-[20px]">
         <button
           className={`outfit outline_btn py-[8px] px-[33px] ${
@@ -225,9 +242,12 @@ const Project = () => {
             <p className="commissioner text-[16px] font-[500] text-center mb-[27px]">
               Create a project
             </p>
-            <div className="text-center">
-              <BlueButton> Create a project</BlueButton>
-            </div>
+            <p
+              className="text-center mx-4 outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[25px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              type=""
+            >
+              Create a project
+            </p>
           </div>
         </label>
 
@@ -276,19 +296,21 @@ const Project = () => {
                         </li> */}
                         <li>
                           {/* <a className="commissioner">Share</a> */}
-                             {/* The button to open modal */}
-            <label
-              htmlFor="my-modal-user"
-              className="commissioner"
-            >
-              {" "}
-              Share
-            </label>
-
-           
-           
+                          {/* The button to open modal */}
+                          <label
+                            htmlFor="my-modal-user"
+                            className="commissioner"
+                          >
+                            {" "}
+                            Share
+                          </label>
                         </li>
-                        <li>
+
+                        <li
+                          className={
+                            user?.role === "administrator" ? "hidden" : "block"
+                          }
+                        >
                           <button
                             className="commissioner"
                             onClick={() => handleLeave(project.project_id)}
@@ -328,21 +350,25 @@ const Project = () => {
                             Log
                           </Link>
                         </li>
-                        <li onClick={() => handleDisabled(project)}>
-                          <a className="commissioner">
-                            {project.active === true
-                              ? "Disable project"
-                              : "Active project"}{" "}
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            onClick={() => handleDelete(project.project_id)}
-                            className="commissioner"
-                          >
-                            Delete project
-                          </a>
-                        </li>
+                        {user?.role === "administrator" && (
+                          <>
+                            <li onClick={() => handleDisabled(project)}>
+                              <a className="commissioner">
+                                {project.active === true
+                                  ? "Disable project"
+                                  : "Active project"}{" "}
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                onClick={() => handleDelete(project.project_id)}
+                                className="commissioner"
+                              >
+                                Delete project
+                              </a>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </div>
                   </div>
@@ -350,7 +376,6 @@ const Project = () => {
                     <img
                       onClick={() => navigateToItemDetails(project.project_id)}
                       className="h-[150px] w-full cursor-pointer mx-auto"
-                    
                       src={project.image}
                       alt=""
                     />
@@ -370,23 +395,19 @@ const Project = () => {
         ) : (
           <div>Loading...</div>
         )}
-         {/* Put this part before </body> tag */}
-         <input
-              type="checkbox"
-              id="my-modal-user"
-              className="modal-toggle"
-            />
-         <div className="modal">
-              <div className="modal-box relative max-w-4xl rounded-[16px]">
-                <label
-                  htmlFor="my-modal-user"
-                  className="btn btn-sm btn-circle absolute right-2 top-2"
-                >
-                  ✕
-                </label>
-                <AddUser />
-              </div>
-            </div>
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my-modal-user" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box relative max-w-4xl rounded-[16px]">
+            <label
+              htmlFor="my-modal-user"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            <AddUser />
+          </div>
+        </div>
       </div>
     </div>
   );

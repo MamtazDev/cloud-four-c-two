@@ -97,7 +97,7 @@ const Sidebar = () => {
               </Link>
               <Link
                 to="/dashboard/manageUser"
-                className="img-wrapper mb-[62px]"
+                className={user?.role === "administrator" ?  "block img-wrapper mb-[12px]" : "hidden" }
               >
                 <img
                   className="px-[45px] py-[25px] cursor-pointer"

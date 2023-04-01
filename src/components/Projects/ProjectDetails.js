@@ -210,21 +210,24 @@ const ProjectDetails = () => {
             >
               Edit description
             </button> */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px] mb-[20px]">
-              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
-                Disable project
-              </button>
-              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
-                Delete project
-              </button>
-            </div>
+            {user.role === "administrator" && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px] mb-[20px]">
+                <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+                  Disable project
+                </button>
+                <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+                  Delete project
+                </button>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
               {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 <Link to={`/dashboard/projectCopy/${id}`}>Copy project</Link>
               </button> */}
               {/* The button to open modal */}
               <label
-                htmlFor="my-modal-3"
+                htmlFor="my-modal-copy"
                 className="text-center bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
               >
                 {" "}
@@ -232,18 +235,22 @@ const ProjectDetails = () => {
               </label>
 
               {/* Put this part before </body> tag */}
-              <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-              <div className="modal">
-                <div className="modal-box relative">
+              <input
+                type="checkbox"
+                id="my-modal-copy"
+                className="modal-toggle"
+              />
+              <label htmlFor="my-modal-copy" className="modal">
+                <label htmlFor="" className="modal-box relative">
                   <label
-                    htmlFor="my-modal-3"
+                    htmlFor="my-modal-copy"
                     className="btn btn-sm btn-circle absolute right-2 top-2"
                   >
                     ✕
                   </label>
                   <ProjectCopy myModal={"my-modal-3"} />
-                </div>
-              </div>
+                </label>
+              </label>
 
               <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 Edit project
@@ -304,10 +311,10 @@ const ProjectDetails = () => {
               </label>
             </label>
           </div>
-          <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
+          <div className="border border-[#3853A4] rounded-[5px]">
             {project?.sessions?.map((session, index) => (
               <div className="flex ">
-                <p className="commissioner font-[500] w-[210px] pl-[17px] py-[20px]">
+                <p className="commissioner font-[500] p-2 lg:w-[210px] lg:pl-[17px] lg:py-[20px]">
                   Sessions {index + 1}{" "}
                 </p>
 
@@ -315,13 +322,13 @@ const ProjectDetails = () => {
                   target="_blank"
                   rel="noreferrer"
                   href={`https://cloud4c2.com/map/?sessionID=${session.session_id}`}
-                  className="commissioner session_bg w-[111px] py-[20px] text-center font-[400]"
+                  className="commissioner session_bg p-2 lg:w-[111px] lg:py-[20px] text-center font-[400]"
                 >
                   Join
                 </a>
                 <button
                   onClick={() => handleDeleteSession(session.session_id)}
-                  className="commissioner session_bg w-[226px] py-[20px] text-center font-[400]"
+                  className="commissioner session_bg p-2 lg:w-[226px] lg:py-[20px] text-center font-[400]"
                 >
                   Delete (ANALYST)
                 </button>
@@ -330,7 +337,7 @@ const ProjectDetails = () => {
                 {/* The button to open modal */}
                 <label
                   onClick={() => handleSessionDetails(session.session_id)}
-                  className="commissioner session_bg px-5 py-[20px] text-center font-[400]"
+                  className="commissioner session_bg p-2 lg:px-5 lg:py-[20px] text-center font-[400]"
                   htmlFor={"my-modal" + session.session_id}
                 >
                   {" "}
@@ -359,7 +366,7 @@ const ProjectDetails = () => {
                   </label>
                 </label>
                 <Link to={`/dashboard/session-log/${session.session_id}`}>
-                  <button className="commissioner session_bg w-[111px] py-[20px] text-center font-[400]">
+                  <button className="commissioner session_bg lg:w-[111px] lg:py-[20px] p-2 text-center font-[400]">
                     Log
                   </button>
                 </Link>
@@ -408,7 +415,10 @@ const ProjectDetails = () => {
               className="modal-toggle"
             />
             <label htmlFor="my-modal-user" className="modal">
-              <label htmlFor="" className="modal-box relative max-w-4xl rounded-[16px]">
+              <label
+                htmlFor=""
+                className="modal-box relative max-w-4xl rounded-[16px]"
+              >
                 <label
                   htmlFor="my-modal-user"
                   className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -419,20 +429,20 @@ const ProjectDetails = () => {
               </label>
             </label>
           </div>
-          <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
+          <div className="border border-[#3853A4] rounded-[5px]">
             {project?.users?.map((user) => (
               <div key={user.user_id} className="flex ">
-                <p className="flex items-center gap-[11px] font-[500] w-[210px] pl-[17px] py-[20px]">
+                <p className="flex items-center gap-[11px] font-[500] lg:w-[210px] lg:pl-[17px] lg:py-[20px] p-2">
                   <img width={36} src={user.image} alt="" /> {user.username}
                 </p>
 
                 <p
-                  className=" session_bg w-[257px] py-[20px] text-center font-[400] cursor-pointer"
+                  className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
                   onClick={() => handleUserRemove(user.user_id)}
                 >
                   Remove (ANALYST)
                 </p>
-                <select className=" session_bg w-[257px] py-[20px] text-center font-[400]">
+                <select className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400]">
                   <option disabled selected>
                     {" "}
                     Change role (ANALYST)

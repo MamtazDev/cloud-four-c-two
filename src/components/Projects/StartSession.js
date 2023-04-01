@@ -18,11 +18,13 @@ const StartSession = ({ myModal }) => {
   const handleCreateSession = () => {
     axios
       .post(`https://app.cloud4c2.com/api/session/create/${id}`, {
-        name: sessionName,
-        description: sessionDescription,
+        session_name: sessionName,
+        session_description: sessionDescription,
       })
+     
       .then((res) => {
         if (res.data.message === "session created") {
+          
           setSessionNameShow(false);
           setSessionDescriptionShow(false);
           window.location.reload(true);

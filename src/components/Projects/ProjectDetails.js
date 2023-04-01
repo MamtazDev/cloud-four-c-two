@@ -345,7 +345,7 @@ const ProjectDetails = () => {
                   onClick={() => handleDeleteSession(session.session_id)}
                   className="commissioner session_bg p-2 lg:w-[226px] lg:py-[20px] text-center font-[400]"
                 >
-                  Delete (ANALYST)
+                  Delete {user?.role === "analyst" ? "(ANALYST)" : ""}
                 </button>
                 <button></button>
 
@@ -385,7 +385,16 @@ const ProjectDetails = () => {
                     <p className="py-4">
                       Project Name: {handleProjectName(session.project_id)}
                     </p>
-                    <p className="py-4">Session Id: {session.session_id}</p>
+                    <p className="py-4">
+                      Session Name :{" "}
+                      {session.session_name ? session.session_name : "unset"}
+                    </p>
+                    <p className="py-4">
+                      Description :{" "}
+                      {session.session_description
+                        ? session.session_description
+                        : "unset"}
+                    </p>
                   </label>
                 </label>
                 <Link to={`/dashboard/session-log/${session.session_id}`}>

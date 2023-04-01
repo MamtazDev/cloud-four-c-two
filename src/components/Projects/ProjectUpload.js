@@ -75,7 +75,7 @@ const ProjectUpload = ({ myModal }) => {
       })
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };
@@ -108,9 +108,10 @@ const ProjectUpload = ({ myModal }) => {
   // console.log(base64File,"file")
   // console.log(base64Image,"image")
   return (
-    <div className="bg-white lg:rounded-l-[50px] project__copy w-full h-full flex justify-center items-center">
+    <div className="bg-white lg:rounded-l-[50px] project__copy max-w-[700px] mx-auto h-full flex justify-center items-center">
       <div className="copy__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-full">
-        <ProjectButton>New Project</ProjectButton>
+        {/* <ProjectButton>New Project</ProjectButton> */}
+        <h1 className="text-center text-3xl font-bold mb-5">Upload Project</h1>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-3/4 mx-auto my-[20px]">
             <input
@@ -204,18 +205,19 @@ const ProjectUpload = ({ myModal }) => {
             )}
           </div>
 
-          <div className="mx-auto cencelation flex justify-between w-[253px] mt-[20px]">
-            <ProjectButton3>
+          {/* <div className="mx-auto cencelation flex justify-between w-[253px] mt-[20px]"> */}
+          {/* <ProjectButton3>
               <label htmlFor={myModal}>Cancel</label>{" "}
-            </ProjectButton3>
-
+            </ProjectButton3> */}
+          <div className="text-center">
             <button
               type="submit"
-              className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
+              className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px] my-4"
             >
               Accept
             </button>
           </div>
+          {/* </div> */}
         </form>
       </div>
     </div>

@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BlueButton from "../../utils/BlueButton";
-import girl from "../../assets/girl.png";
-import bob from "../../assets/bob.png";
-import sarah from "../../assets/sarah.png";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectCopy from "./ProjectCopy";
 import StartSession from "./StartSession";
 import AddUser from "./AddUser";
 import { BiEdit } from "react-icons/bi";
+import { UserContext } from "../../context/AuthProvider";
 
 const ProjectDetails = () => {
   const [name, setName] = useState(false);
   const [user, setUser] = useState();
+  const { userList, setUserList } = useContext(UserContext);
   const [description, setDescription] = useState(false);
   const [project, setProject] = useState();
   const [projectLog, setProjectLog] = useState([]);
@@ -157,7 +156,23 @@ const ProjectDetails = () => {
         }
       });
   }, [navigate]);
-  console.log("neww", user);
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/user/list", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setUserList(response.data.users))
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  }, [navigate, setUserList]);
+
+  console.log(userList, "userlist");
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
@@ -210,21 +225,24 @@ const ProjectDetails = () => {
             >
               Edit description
             </button> */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px] mb-[20px]">
-              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
-                Disable project
-              </button>
-              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
-                Delete project
-              </button>
-            </div>
+            {user?.role === "administrator" && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px] mb-[20px]">
+                <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+                  Disable project
+                </button>
+                <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+                  Delete project
+                </button>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
               {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 <Link to={`/dashboard/projectCopy/${id}`}>Copy project</Link>
               </button> */}
               {/* The button to open modal */}
               <label
-                htmlFor="my-modal-3"
+                htmlFor="my-modal-copy"
                 className="text-center bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
               >
                 {" "}
@@ -232,18 +250,22 @@ const ProjectDetails = () => {
               </label>
 
               {/* Put this part before </body> tag */}
-              <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-              <div className="modal">
-                <div className="modal-box relative">
+              <input
+                type="checkbox"
+                id="my-modal-copy"
+                className="modal-toggle"
+              />
+              <label htmlFor="my-modal-copy" className="modal">
+                <label htmlFor="" className="modal-box relative">
                   <label
-                    htmlFor="my-modal-3"
+                    htmlFor="my-modal-copy"
                     className="btn btn-sm btn-circle absolute right-2 top-2"
                   >
                     ✕
                   </label>
                   <ProjectCopy myModal={"my-modal-3"} />
-                </div>
-              </div>
+                </label>
+              </label>
 
               <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 Edit project
@@ -291,8 +313,9 @@ const ProjectDetails = () => {
               id="my-modal-session"
               className="modal-toggle"
             />
-            <div className="modal">
-              <div className="modal-box relative">
+
+            <label htmlFor="my-modal-session" className="modal cursor-pointer">
+              <label className="modal-box relative" htmlFor="">
                 <label
                   htmlFor="my-modal-session"
                   className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -300,13 +323,13 @@ const ProjectDetails = () => {
                   ✕
                 </label>
                 <StartSession myModal={"my-modal-session"} />
-              </div>
-            </div>
+              </label>
+            </label>
           </div>
-          <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
+          <div className="border border-[#3853A4] rounded-[5px]">
             {project?.sessions?.map((session, index) => (
               <div className="flex ">
-                <p className="commissioner font-[500] w-[210px] pl-[17px] py-[20px]">
+                <p className="commissioner font-[500] p-2 lg:w-[210px] lg:pl-[17px] lg:py-[20px]">
                   Sessions {index + 1}{" "}
                 </p>
 
@@ -314,22 +337,22 @@ const ProjectDetails = () => {
                   target="_blank"
                   rel="noreferrer"
                   href={`https://cloud4c2.com/map/?sessionID=${session.session_id}`}
-                  className="commissioner session_bg w-[111px] py-[20px] text-center font-[400]"
+                  className="commissioner session_bg p-2 lg:w-[111px] lg:py-[20px] text-center font-[400]"
                 >
                   Join
                 </a>
                 <button
                   onClick={() => handleDeleteSession(session.session_id)}
-                  className="commissioner session_bg w-[226px] py-[20px] text-center font-[400]"
+                  className="commissioner session_bg p-2 lg:w-[226px] lg:py-[20px] text-center font-[400]"
                 >
-                  Delete (ANALYST)
+                  Delete {user?.role === "analyst" ? "(ANALYST)" : ""}
                 </button>
                 <button></button>
 
                 {/* The button to open modal */}
                 <label
                   onClick={() => handleSessionDetails(session.session_id)}
-                  className="commissioner session_bg px-5 py-[20px] text-center font-[400]"
+                  className="commissioner session_bg p-2 lg:px-5 lg:py-[20px] text-center font-[400]"
                   htmlFor={"my-modal" + session.session_id}
                 >
                   {" "}
@@ -347,18 +370,35 @@ const ProjectDetails = () => {
                   className="modal cursor-pointer"
                 >
                   <label className="modal-box relative" htmlFor="">
-                    <h3 className="text-lg font-bold">
+                    <h3 className="text-lg font-bold mb-4">
                       Creation Time: {dateFormat(session.creation_time)}
                     </h3>
-                    <p className="py-4">Creator: {session.creator}</p>
+                    {userList.map((creator, index) => (
+                      <p className="" key={index}>
+                        {" "}
+                        {session.creator === creator.user_id
+                          ? " Creator : " + creator.username
+                          : ""}
+                      </p>
+                    ))}
+                    {/* <p className="py-4">Creator: {session.creator}</p> */}
                     <p className="py-4">
                       Project Name: {handleProjectName(session.project_id)}
                     </p>
-                    <p className="py-4">Session Id: {session.session_id}</p>
+                    <p className="py-4">
+                      Session Name :{" "}
+                      {session.session_name ? session.session_name : "unset"}
+                    </p>
+                    <p className="py-4">
+                      Description :{" "}
+                      {session.session_description
+                        ? session.session_description
+                        : "unset"}
+                    </p>
                   </label>
                 </label>
                 <Link to={`/dashboard/session-log/${session.session_id}`}>
-                  <button className="commissioner session_bg w-[111px] py-[20px] text-center font-[400]">
+                  <button className="commissioner session_bg lg:w-[111px] lg:py-[20px] p-2 text-center font-[400]">
                     Log
                   </button>
                 </Link>
@@ -406,8 +446,11 @@ const ProjectDetails = () => {
               id="my-modal-user"
               className="modal-toggle"
             />
-            <div className="modal">
-              <div className="modal-box relative max-w-4xl rounded-[16px]">
+            <label htmlFor="my-modal-user" className="modal">
+              <label
+                htmlFor=""
+                className="modal-box relative max-w-4xl rounded-[16px]"
+              >
                 <label
                   htmlFor="my-modal-user"
                   className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -415,23 +458,25 @@ const ProjectDetails = () => {
                   ✕
                 </label>
                 <AddUser />
-              </div>
-            </div>
+              </label>
+            </label>
           </div>
-          <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
-            {project?.users?.map((user) => (
-              <div key={user.user_id} className="flex ">
-                <p className="flex items-center gap-[11px] font-[500] w-[210px] pl-[17px] py-[20px]">
-                  <img width={36} src={user.image} alt="" /> {user.username}
+          <div className="border border-[#3853A4] rounded-[5px]">
+            {project?.users?.map((puser) => (
+              <div key={puser.user_id} className="flex ">
+                <p className="flex items-center gap-[11px] font-[500] lg:w-[210px] lg:pl-[17px] lg:py-[20px] p-2">
+                  <img width={36} src={puser.image} alt="" /> {puser.username}
                 </p>
 
                 <p
-                  className=" session_bg w-[257px] py-[20px] text-center font-[400] cursor-pointer"
-                  onClick={() => handleUserRemove(user.user_id)}
+                  className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
+                  onClick={() => handleUserRemove(puser.user_id)}
                 >
-                  Remove (ANALYST)
+                  {puser.user_id === user?.user_id ? "Leave" : "Remove"}
+
+                  {/* Remove (ANALYST) */}
                 </p>
-                <select className=" session_bg w-[257px] py-[20px] text-center font-[400]">
+                <select className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400]">
                   <option disabled selected>
                     {" "}
                     Change role (ANALYST)

@@ -56,6 +56,7 @@ const CreateProject = () => {
 
   return (
     <div>
+      <h1 className="text-center text-3xl font-bold mb-5">New Project</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-[33px]">
           <label className="outfit text-[20px] font-[300] mb-[10px] block">

@@ -30,10 +30,10 @@ const NodeInfo = () => {
       <table className="w-[1032px]">
         <thead className="bg-gray-300 h-[60px]">
           <th>Host name</th>
-          <th>IP</th>
-          <th>Memory</th>
-          <th>CPU</th>
-          <th>Started Time</th>
+          <th>Address</th>
+          <th>Memory mibytes</th>
+          <th>No of CPU</th>
+          <th>Creation Time</th>
           <th>Status</th>
         </thead>
         {node?.map((i) => (

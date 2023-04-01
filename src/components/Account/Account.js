@@ -45,7 +45,7 @@ const Account = () => {
       .then((response) => setUser(response.data.user))
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   }, [navigate]);
@@ -85,11 +85,12 @@ const Account = () => {
           setFirstShow(false);
           setLastShow(false);
           setEmailShow(false);
+          window.location.reload(true);
         }
       })
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };

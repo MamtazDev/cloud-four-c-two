@@ -13,8 +13,10 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import ProjectUpload from "./ProjectUpload";
 import AddUser from "./AddUser";
+import StartSession from "./StartSession";
 
 const Project = () => {
+  const [user, setUser] = useState();
   const [projects, setProjects] = useState([]);
   const [filter, setFilter] = useState("");
   const [return_deactivated, setReturn_deactivated] = useState(false);
@@ -129,6 +131,21 @@ const Project = () => {
         }
       });
   };
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/user/", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setUser(response.data.user))
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  }, [navigate]);
 
   return (
     <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px] h-[100vh] overflow-y-scroll">
@@ -152,8 +169,8 @@ const Project = () => {
 
           {/* Put this part before </body> tag */}
           <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-          <div className="modal">
-            <div className="modal-box relative">
+          <label htmlFor="my-modal-3" className="modal">
+            <label htmlFor="" className="modal-box relative">
               <label
                 htmlFor="my-modal-3"
                 className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -161,41 +178,20 @@ const Project = () => {
                 ✕
               </label>
               <CreateProject />
-            </div>
-          </div>
-
-          {/* <Link to="/dashboard/projectUpload">
-            <BlueButton>Upload Project</BlueButton>
-          </Link> */}
+            </label>
+          </label>
 
           {/* The button to open modal */}
           <label
-            htmlFor="my-modal-upload"
+            htmlFor="my-modal-edit"
             className="outfit bg-[#3853A4] p-3 
            text-white text-[15px]  font-[500] rounded-[5px]"
           >
             Upload Project
           </label>
-
-          {/* Put this part before </body> tag */}
-          <input
-            type="checkbox"
-            id="my-modal-upload"
-            className="modal-toggle"
-          />
-          <div className="modal">
-            <div className="modal-box relative">
-              <label
-                htmlFor="my-modal-upload"
-                className="btn btn-sm btn-circle absolute right-2 top-2"
-              >
-                ✕
-              </label>
-              <ProjectUpload myModal={"my-modal-upload"} />
-            </div>
-          </div>
         </div>
       </div>
+      {user === ""}
       <div className="flex gap-[20px] mb-[20px]">
         <button
           className={`outfit outline_btn py-[8px] px-[33px] ${
@@ -225,9 +221,12 @@ const Project = () => {
             <p className="commissioner text-[16px] font-[500] text-center mb-[27px]">
               Create a project
             </p>
-            <div className="text-center">
-              <BlueButton> Create a project</BlueButton>
-            </div>
+            <p
+              className="text-center mx-4 outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[25px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              type=""
+            >
+              Create a project
+            </p>
           </div>
         </label>
 
@@ -276,19 +275,21 @@ const Project = () => {
                         </li> */}
                         <li>
                           {/* <a className="commissioner">Share</a> */}
-                             {/* The button to open modal */}
-            <label
-              htmlFor="my-modal-user"
-              className="commissioner"
-            >
-              {" "}
-              Share
-            </label>
-
-           
-           
+                          {/* The button to open modal */}
+                          <label
+                            htmlFor="my-modal-user"
+                            className="commissioner"
+                          >
+                            {" "}
+                            Share
+                          </label>
                         </li>
-                        <li>
+
+                        <li
+                          className={
+                            user?.role === "administrator" ? "hidden" : "block"
+                          }
+                        >
                           <button
                             className="commissioner"
                             onClick={() => handleLeave(project.project_id)}
@@ -297,12 +298,21 @@ const Project = () => {
                           </button>
                         </li>
                         <li>
-                          <Link
+                          {/* <Link
                             className="commissioner"
                             to={`/dashboard/startSession/${project.project_id}`}
                           >
                             Start session
-                          </Link>
+                          </Link> */}
+
+                          {/* The button to open modal */}
+                          <label
+                            htmlFor="my-modal-session"
+                            className="commissioner"
+                          >
+                            {" "}
+                            Start session
+                          </label>
                         </li>
                         {/* <li>
                           <Link
@@ -313,12 +323,21 @@ const Project = () => {
                           </Link>
                         </li> */}
                         <li>
-                          <Link
+                          {/* <Link
                             className="commissioner"
                             to="/dashboard/projectUpload"
                           >
                             Edit project
-                          </Link>
+                          </Link> */}
+
+                          {/* The button to open modal */}
+                          <label
+                            htmlFor="my-modal-edit"
+                            className="commissioner"
+                          >
+                            {" "}
+                            Edit project
+                          </label>
                         </li>
                         <li>
                           <Link
@@ -328,35 +347,42 @@ const Project = () => {
                             Log
                           </Link>
                         </li>
-                        <li onClick={() => handleDisabled(project)}>
-                          <a className="commissioner">
-                            {project.active === true
-                              ? "Disable project"
-                              : "Active project"}{" "}
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            onClick={() => handleDelete(project.project_id)}
-                            className="commissioner"
-                          >
-                            Delete project
-                          </a>
-                        </li>
+                        {user?.role === "administrator" && (
+                          <>
+                            <li onClick={() => handleDisabled(project)}>
+                              <a className="commissioner">
+                                {project.active === true
+                                  ? "Disable project"
+                                  : "Active project"}{" "}
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                onClick={() => handleDelete(project.project_id)}
+                                className="commissioner"
+                              >
+                                Delete project
+                              </a>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </div>
                   </div>
                   <div>
-                    <img
+                    <div
+                      className="cursor-pointer"
                       onClick={() => navigateToItemDetails(project.project_id)}
-                      className="h-[150px] w-full cursor-pointer mx-auto"
-                    
-                      src={project.image}
-                      alt=""
-                    />
-                    <p className="commissioner text-[16px] font-[500] mt-2 mb-[8px] text-center">
-                      {project.name}
-                    </p>
+                    >
+                      <img
+                        className="h-[150px] w-full  mx-auto"
+                        src={project.image}
+                        alt=""
+                      />
+                      <p className="commissioner text-[16px] font-[500] mt-2 mb-[8px] text-center">
+                        {project.name}
+                      </p>
+                    </div>
                     <p className="commissioner text-[14px] font-[400] text-center pb-2">
                       {project.description}
                     </p>
@@ -370,23 +396,49 @@ const Project = () => {
         ) : (
           <div>Loading...</div>
         )}
-         {/* Put this part before </body> tag */}
-         <input
-              type="checkbox"
-              id="my-modal-user"
-              className="modal-toggle"
-            />
-         <div className="modal">
-              <div className="modal-box relative max-w-4xl rounded-[16px]">
-                <label
-                  htmlFor="my-modal-user"
-                  className="btn btn-sm btn-circle absolute right-2 top-2"
-                >
-                  ✕
-                </label>
-                <AddUser />
-              </div>
-            </div>
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my-modal-user" className="modal-toggle" />
+        <label htmlFor="my-modal-user" className="modal">
+          <label
+            htmlFor=""
+            className="modal-box relative max-w-4xl rounded-[16px]"
+          >
+            <label
+              htmlFor="my-modal-user"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            <AddUser />
+          </label>
+        </label>
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my-modal-session" className="modal-toggle" />
+
+        <label htmlFor="my-modal-session" className="modal cursor-pointer">
+          <label className="modal-box relative" htmlFor="">
+            <label
+              htmlFor="my-modal-session"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            <StartSession myModal={"my-modal-session"} />
+          </label>
+        </label>
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my-modal-edit" className="modal-toggle" />
+        <label htmlFor="my-modal-edit" className="modal cursor-pointer">
+          <label className="modal-box relative" htmlFor="">
+            <label
+              htmlFor="my-modal-edit"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            <ProjectUpload />
+          </label>
+        </label>
       </div>
     </div>
   );

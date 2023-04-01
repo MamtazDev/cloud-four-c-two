@@ -7,7 +7,7 @@ import copyImg from "../../assets/copyproject.png";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const ProjectCopy = ({myModal}) => {
+const ProjectCopy = ({ myModal }) => {
   const navigate = useNavigate();
   const [files, setFile] = useState(null);
   const inputRef = useRef();
@@ -39,7 +39,6 @@ const ProjectCopy = ({myModal}) => {
       project_picture: base64Image,
     };
 
-
     axios
       .post(`https://app.cloud4c2.com/api/project/copy/${id}`, data, {
         headers: {
@@ -47,7 +46,7 @@ const ProjectCopy = ({myModal}) => {
           "Access-Control-Allow-Credentials": true,
         },
       })
-      .then((res) =>{
+      .then((res) => {
         if (res.data.message === "New project successfully created") {
           alert(res.data.message);
           window.location.reload(true);
@@ -55,7 +54,7 @@ const ProjectCopy = ({myModal}) => {
       })
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };
@@ -79,27 +78,22 @@ const ProjectCopy = ({myModal}) => {
   return (
     <div className="bg-white lg:rounded-l-[50px] project__copy w-full h-full flex justify-center items-center">
       <div className="copy__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-[593px]">
-        <ProjectButton>Copy this porject</ProjectButton>
-        {/* <ProjectButton2>New project Name</ProjectButton2> */}
-       
-          <input
-            className="block pl-4 border h-[40px] w-[288px] rounded-[7px] mb-[12px]"
-            type="text"
-            onChange={(e) => setProjectName(e.target.value)}
-            Value={project.name}
-          />
-     
+        {/* <ProjectButton>Copy this project</ProjectButton> */}
+        <h1 className="text-3xl font-bold mb-5 ">Copy this project</h1>
 
-        {/* <ProjectButton2>New project description</ProjectButton2> */}
-     
-          <input
-            className="block pl-4 border h-[40px] w-[288px] rounded-[7px] mb-[12px] "
-            type="text"
-            Value={project.description}
-            onChange={(e) => setDescription(e.target.value)}
-          
-          />
-     
+        <input
+          className="block pl-4 border h-[40px] w-[288px] rounded-[7px] mb-[12px]"
+          type="text"
+          onChange={(e) => setProjectName(e.target.value)}
+          Value={project.name}
+        />
+
+        <input
+          className="block pl-4 border h-[40px] w-[288px] rounded-[7px] mb-[12px] "
+          type="text"
+          Value={project.description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
 
         <div className="copy__img border-[1px] overflow-hidden w-[302px] bordered rounded-[8px]">
           <input
@@ -145,22 +139,22 @@ const ProjectCopy = ({myModal}) => {
           </button> */}
         </div>
 
-        <div className="cencelation flex justify-between w-[253px] mt-[20px]">
-          {/* <ProjectButton3>Cancel</ProjectButton3> */}
-          {/* <ProjectButton3>
+        {/* <div className="cencelation flex justify-between w-[253px] mt-[20px]"> */}
+        {/* <ProjectButton3>Cancel</ProjectButton3> */}
+        {/* <ProjectButton3>
             <span>Cancel</span>
           </ProjectButton3> */}
-          <label htmlFor={myModal} className="text-center commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]">
+        {/* <label htmlFor={myModal} className="text-center commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]">
             Cancel
-          </label>
-          {/* <ProjectButton3>Accept</ProjectButton3> */}
-          <button
-            onClick={handleAccept}
-            className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
-          >
-            Accept
-          </button>
-        </div>
+          </label> */}
+        {/* <ProjectButton3>Accept</ProjectButton3> */}
+        <button
+          onClick={handleAccept}
+          className="mt-4 commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
+        >
+          Accept
+        </button>
+        {/* </div> */}
       </div>
     </div>
   );

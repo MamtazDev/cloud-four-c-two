@@ -204,10 +204,10 @@ const ProjectUpload = ({ myModal }) => {
             )}
           </div>
 
-          <div className="mx-auto cencelation flex justify-between w-[253px] mt-[20px]">
-            <ProjectButton3>
+          {/* <div className="mx-auto cencelation flex justify-between w-[253px] mt-[20px]"> */}
+            {/* <ProjectButton3>
               <label htmlFor={myModal}>Cancel</label>{" "}
-            </ProjectButton3>
+            </ProjectButton3> */}
 
             <button
               type="submit"
@@ -215,7 +215,7 @@ const ProjectUpload = ({ myModal }) => {
             >
               Accept
             </button>
-          </div>
+          {/* </div> */}
         </form>
       </div>
     </div>

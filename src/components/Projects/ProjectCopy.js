@@ -145,14 +145,14 @@ const ProjectCopy = ({myModal}) => {
           </button> */}
         </div>
 
-        <div className="cencelation flex justify-between w-[253px] mt-[20px]">
+        {/* <div className="cencelation flex justify-between w-[253px] mt-[20px]"> */}
           {/* <ProjectButton3>Cancel</ProjectButton3> */}
           {/* <ProjectButton3>
             <span>Cancel</span>
           </ProjectButton3> */}
-          <label htmlFor={myModal} className="text-center commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]">
+          {/* <label htmlFor={myModal} className="text-center commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]">
             Cancel
-          </label>
+          </label> */}
           {/* <ProjectButton3>Accept</ProjectButton3> */}
           <button
             onClick={handleAccept}
@@ -160,7 +160,7 @@ const ProjectCopy = ({myModal}) => {
           >
             Accept
           </button>
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

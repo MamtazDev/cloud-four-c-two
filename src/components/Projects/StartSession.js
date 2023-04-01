@@ -31,7 +31,7 @@ const StartSession = ({ myModal }) => {
       })
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };
@@ -58,10 +58,10 @@ const StartSession = ({ myModal }) => {
           onChange={(e) => setSessionDescription(e.target.value)}
         />
 
-        <div className="cencelation  flex justify-between w-[253px] mt-[20px]">
-          <ProjectButton3>
+        {/* <div className="cencelation  flex justify-between w-[253px] mt-[20px]"> */}
+          {/* <ProjectButton3>
             <label htmlFor={myModal}>Cancel</label>{" "}
-          </ProjectButton3>
+          </ProjectButton3> */}
           {/* <ProjectButton3>Accept</ProjectButton3> */}
           <button
             onClick={handleCreateSession}
@@ -69,7 +69,7 @@ const StartSession = ({ myModal }) => {
           >
             Accept
           </button>
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

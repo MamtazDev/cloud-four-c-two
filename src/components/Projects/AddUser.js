@@ -178,14 +178,14 @@ const AddUser = () => {
                 {/* <label>{role}</label> */}
               </div>
 
-              <div className="cencelation flex flex-col items-center">
+              {/* <div className="cencelation flex flex-col items-center"> */}
                 {/* <ProjectButton3>Cancel</ProjectButton3> */}
-                <button
+                {/* <button
                   onClick={handleCancel}
                   className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
                 >
                   Cancel
-                </button>
+                </button> */}
                 {/* <ProjectButton3>Accept</ProjectButton3> */}
 
                 <button
@@ -194,7 +194,7 @@ const AddUser = () => {
                 >
                   Accept
                 </button>
-              </div>
+              {/* </div> */}
             </div>
           </div>
         </div>

@@ -76,7 +76,8 @@ const AddUser = () => {
   return (
     <div className="addUser bg-white lg:rounded-l-[50px]  w-full  xl:h-full flex justify-center items-center">
       <div className="addUser__inner p-3 lg:p-12 max-w-[900px] border-[1px] rounded-[16px] border-[#d5d5d5]">
-        <ProjectButton>Add User</ProjectButton>
+        {/* <ProjectButton>Add User</ProjectButton> */}
+        <h1 className="text-center text-3xl font-bold mb-8">Add User</h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-[#F8FAFF] p-3 lg:p-6 rounded-lg lg:rounded-[40px] overflow-hidden">
             <input

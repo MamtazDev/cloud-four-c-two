@@ -13,6 +13,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import ProjectUpload from "./ProjectUpload";
 import AddUser from "./AddUser";
+import StartSession from "./StartSession";
 
 const Project = () => {
   const [user, setUser] = useState();
@@ -180,36 +181,14 @@ const Project = () => {
             </label>
           </label>
 
-          {/* <Link to="/dashboard/projectUpload">
-            <BlueButton>Upload Project</BlueButton>
-          </Link> */}
-
           {/* The button to open modal */}
           <label
-            htmlFor="my-modal-upload"
+            htmlFor="my-modal-edit"
             className="outfit bg-[#3853A4] p-3 
            text-white text-[15px]  font-[500] rounded-[5px]"
           >
             Upload Project
           </label>
-
-          {/* Put this part before </body> tag */}
-          <input
-            type="checkbox"
-            id="my-modal-upload"
-            className="modal-toggle"
-          />
-          <div className="modal">
-            <div className="modal-box relative">
-              <label
-                htmlFor="my-modal-upload"
-                className="btn btn-sm btn-circle absolute right-2 top-2"
-              >
-                ✕
-              </label>
-              <ProjectUpload myModal={"my-modal-upload"} />
-            </div>
-          </div>
         </div>
       </div>
       {user === ""}
@@ -319,23 +298,21 @@ const Project = () => {
                           </button>
                         </li>
                         <li>
-                          <Link
+                          {/* <Link
                             className="commissioner"
                             to={`/dashboard/startSession/${project.project_id}`}
                           >
                             Start session
-                          </Link>
+                          </Link> */}
 
-
-
-
-
-
-
-
-
-
-                          
+                          {/* The button to open modal */}
+                          <label
+                            htmlFor="my-modal-session"
+                            className="commissioner"
+                          >
+                            {" "}
+                            Start session
+                          </label>
                         </li>
                         {/* <li>
                           <Link
@@ -346,12 +323,21 @@ const Project = () => {
                           </Link>
                         </li> */}
                         <li>
-                          <Link
+                          {/* <Link
                             className="commissioner"
                             to="/dashboard/projectUpload"
                           >
                             Edit project
-                          </Link>
+                          </Link> */}
+
+                          {/* The button to open modal */}
+                          <label
+                            htmlFor="my-modal-edit"
+                            className="commissioner"
+                          >
+                            {" "}
+                            Edit project
+                          </label>
                         </li>
                         <li>
                           <Link
@@ -412,8 +398,11 @@ const Project = () => {
         )}
         {/* Put this part before </body> tag */}
         <input type="checkbox" id="my-modal-user" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box relative max-w-4xl rounded-[16px]">
+        <label htmlFor="my-modal-user" className="modal">
+          <label
+            htmlFor=""
+            className="modal-box relative max-w-4xl rounded-[16px]"
+          >
             <label
               htmlFor="my-modal-user"
               className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -421,8 +410,35 @@ const Project = () => {
               ✕
             </label>
             <AddUser />
-          </div>
-        </div>
+          </label>
+        </label>
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my-modal-session" className="modal-toggle" />
+
+        <label htmlFor="my-modal-session" className="modal cursor-pointer">
+          <label className="modal-box relative" htmlFor="">
+            <label
+              htmlFor="my-modal-session"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            <StartSession myModal={"my-modal-session"} />
+          </label>
+        </label>
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id="my-modal-edit" className="modal-toggle" />
+        <label htmlFor="my-modal-edit" className="modal cursor-pointer">
+          <label className="modal-box relative" htmlFor="">
+            <label
+              htmlFor="my-modal-edit"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            <ProjectUpload />
+          </label>
+        </label>
       </div>
     </div>
   );

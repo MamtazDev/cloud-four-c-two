@@ -75,7 +75,7 @@ const ProjectUpload = ({ myModal }) => {
       })
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };
@@ -205,16 +205,17 @@ const ProjectUpload = ({ myModal }) => {
           </div>
 
           {/* <div className="mx-auto cencelation flex justify-between w-[253px] mt-[20px]"> */}
-            {/* <ProjectButton3>
+          {/* <ProjectButton3>
               <label htmlFor={myModal}>Cancel</label>{" "}
             </ProjectButton3> */}
-
+          <div className="text-center">
             <button
               type="submit"
               className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px] my-4"
             >
               Accept
             </button>
+          </div>
           {/* </div> */}
         </form>
       </div>

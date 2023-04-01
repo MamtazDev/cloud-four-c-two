@@ -21,10 +21,9 @@ const StartSession = ({ myModal }) => {
         session_name: sessionName,
         session_description: sessionDescription,
       })
-     
+
       .then((res) => {
         if (res.data.message === "session created") {
-          
           setSessionNameShow(false);
           setSessionDescriptionShow(false);
           window.location.reload(true);
@@ -41,7 +40,6 @@ const StartSession = ({ myModal }) => {
   return (
     <div className="bg-white lg:rounded-l-[50px] start__session h-full w-full flex justify-center items-center">
       <div className="session__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-[593px]">
-       
         <h1 className="text-center text-3xl font-bold mb-5">Start Session</h1>
         {/* <ProjectButton2>Session Name</ProjectButton2> */}
 
@@ -62,16 +60,16 @@ const StartSession = ({ myModal }) => {
         />
 
         {/* <div className="cencelation  flex justify-between w-[253px] mt-[20px]"> */}
-          {/* <ProjectButton3>
+        {/* <ProjectButton3>
             <label htmlFor={myModal}>Cancel</label>{" "}
           </ProjectButton3> */}
-          {/* <ProjectButton3>Accept</ProjectButton3> */}
-          <button
-            onClick={handleCreateSession}
-            className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
-          >
-            Accept
-          </button>
+        {/* <ProjectButton3>Accept</ProjectButton3> */}
+        <button
+          onClick={handleCreateSession}
+          className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
+        >
+          Start
+        </button>
         {/* </div> */}
       </div>
     </div>

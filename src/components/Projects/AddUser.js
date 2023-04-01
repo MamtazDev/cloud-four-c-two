@@ -30,10 +30,10 @@ const AddUser = () => {
       .then((response) => setUserList(response.data.users))
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
-  }, [navigate,setUserList]);
+  }, [navigate, setUserList]);
 
   const handleUserSearchFilter = (user) => {
     if (searchText) {
@@ -67,7 +67,7 @@ const AddUser = () => {
       })
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };
@@ -110,7 +110,7 @@ const AddUser = () => {
                   >
                     <div className="avatar online">
                       <div className="w-8 lg:w-16 rounded-full">
-                        <img src={i.image}     alt=""/>
+                        <img src={i.image} alt="" />
                       </div>
                     </div>
 
@@ -132,8 +132,8 @@ const AddUser = () => {
             </div>
           </div>
 
-          <div className="">
-            <div className="flex flex-col w-[121px] ">
+          <div className="my-auto">
+            <div className="flex  flex-col w-[121px] ">
               {/* <button className="commissioner w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px  font-[500] rounded-[8px] p-[8px] mb-[10px]">
                 Filter
               </button> */}
@@ -149,12 +149,12 @@ const AddUser = () => {
                   className="dropdown-content menu p-2  bg-base-100 rounded-box w-52 right-[0]"
                 >
                   <li>
-                    <a className="commissioner text-[#3853A4] ">
+                    <a className="commissioner text-[#3853A4] hover:bg-transparent ">
                       {/* <ProjectButton3>Analyst</ProjectButton3> */}
                       <button
                         className={`${
                           role === "analyst" && "bg-gray-300"
-                        } commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]`}
+                        } commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px] `}
                         onClick={() => setRole("analyst")}
                       >
                         Analyst
@@ -162,7 +162,7 @@ const AddUser = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="commissioner text-[#3853A4]">
+                    <a className="commissioner text-[#3853A4] hover:bg-transparent">
                       {" "}
                       {/* <ProjectButton3>Viewer</ProjectButton3> */}
                       <button
@@ -180,21 +180,21 @@ const AddUser = () => {
               </div>
 
               {/* <div className="cencelation flex flex-col items-center"> */}
-                {/* <ProjectButton3>Cancel</ProjectButton3> */}
-                {/* <button
+              {/* <ProjectButton3>Cancel</ProjectButton3> */}
+              {/* <button
                   onClick={handleCancel}
                   className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
                 >
                   Cancel
                 </button> */}
-                {/* <ProjectButton3>Accept</ProjectButton3> */}
+              {/* <ProjectButton3>Accept</ProjectButton3> */}
 
-                <button
-                  onClick={handleAccept}
-                  className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
-                >
-                  Accept
-                </button>
+              <button
+                onClick={handleAccept}
+                className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
+              >
+                Accept
+              </button>
               {/* </div> */}
             </div>
           </div>

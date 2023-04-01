@@ -462,17 +462,19 @@ const ProjectDetails = () => {
             </label>
           </div>
           <div className="border border-[#3853A4] rounded-[5px]">
-            {project?.users?.map((user) => (
-              <div key={user.user_id} className="flex ">
+            {project?.users?.map((puser) => (
+              <div key={puser.user_id} className="flex ">
                 <p className="flex items-center gap-[11px] font-[500] lg:w-[210px] lg:pl-[17px] lg:py-[20px] p-2">
-                  <img width={36} src={user.image} alt="" /> {user.username}
+                  <img width={36} src={puser.image} alt="" /> {puser.username}
                 </p>
 
                 <p
                   className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
-                  onClick={() => handleUserRemove(user.user_id)}
+                  onClick={() => handleUserRemove(puser.user_id)}
                 >
-                  Remove (ANALYST)
+                  {puser.user_id === user?.user_id ? "Leave" : "Remove"}
+
+                  {/* Remove (ANALYST) */}
                 </p>
                 <select className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400]">
                   <option disabled selected>

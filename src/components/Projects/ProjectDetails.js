@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import BlueButton from "../../utils/BlueButton";
-import girl from "../../assets/girl.png";
-import bob from "../../assets/bob.png";
-import sarah from "../../assets/sarah.png";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectCopy from "./ProjectCopy";
 import StartSession from "./StartSession";
 import AddUser from "./AddUser";
 import { BiEdit } from "react-icons/bi";
+import { UserContext } from "../../context/AuthProvider";
 
 const ProjectDetails = () => {
   const [name, setName] = useState(false);
   const [user, setUser] = useState();
+  const { userList, setUserList } = useContext(UserContext);
   const [description, setDescription] = useState(false);
   const [project, setProject] = useState();
   const [projectLog, setProjectLog] = useState([]);
@@ -157,7 +156,23 @@ const ProjectDetails = () => {
         }
       });
   }, [navigate]);
-  console.log("neww", user);
+  useEffect(() => {
+    axios
+      .post("https://app.cloud4c2.com/api/user/list", {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setUserList(response.data.users))
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  }, [navigate, setUserList]);
+
+  console.log(userList, "userlist");
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
@@ -210,7 +225,7 @@ const ProjectDetails = () => {
             >
               Edit description
             </button> */}
-            {user.role === "administrator" && (
+            {user?.role === "administrator" && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px] mb-[20px]">
                 <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                   Disable project
@@ -355,10 +370,18 @@ const ProjectDetails = () => {
                   className="modal cursor-pointer"
                 >
                   <label className="modal-box relative" htmlFor="">
-                    <h3 className="text-lg font-bold">
+                    <h3 className="text-lg font-bold mb-4">
                       Creation Time: {dateFormat(session.creation_time)}
                     </h3>
-                    <p className="py-4">Creator: {session.creator}</p>
+                    {userList.map((creator, index) => (
+                      <p className="" key={index}>
+                        {" "}
+                        {session.creator === creator.user_id
+                          ? " Creator : " + creator.username
+                          : ""}
+                      </p>
+                    ))}
+                    {/* <p className="py-4">Creator: {session.creator}</p> */}
                     <p className="py-4">
                       Project Name: {handleProjectName(session.project_id)}
                     </p>

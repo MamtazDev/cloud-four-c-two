@@ -407,8 +407,8 @@ const ProjectDetails = () => {
               id="my-modal-user"
               className="modal-toggle"
             />
-            <div className="modal">
-              <div className="modal-box relative max-w-4xl rounded-[16px]">
+            <label htmlFor="my-modal-user" className="modal">
+              <label htmlFor="" className="modal-box relative max-w-4xl rounded-[16px]">
                 <label
                   htmlFor="my-modal-user"
                   className="btn btn-sm btn-circle absolute right-2 top-2"
@@ -416,8 +416,8 @@ const ProjectDetails = () => {
                   ✕
                 </label>
                 <AddUser />
-              </div>
-            </div>
+              </label>
+            </label>
           </div>
           <div className="border border-[#3853A4] rounded-[5px] pb-[56px]">
             {project?.users?.map((user) => (

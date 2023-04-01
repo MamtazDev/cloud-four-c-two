@@ -110,7 +110,8 @@ const ProjectUpload = ({ myModal }) => {
   return (
     <div className="bg-white lg:rounded-l-[50px] project__copy max-w-[700px] mx-auto h-full flex justify-center items-center">
       <div className="copy__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-full">
-        <ProjectButton>New Project</ProjectButton>
+        {/* <ProjectButton>New Project</ProjectButton> */}
+        <h1 className="text-center text-3xl font-bold mb-5">Upload Project</h1>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-3/4 mx-auto my-[20px]">
             <input

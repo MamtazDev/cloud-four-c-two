@@ -8,6 +8,7 @@ import AddUser from "./AddUser";
 import { BiEdit } from "react-icons/bi";
 import { UserContext } from "../../context/AuthProvider";
 import ProjectUpload from "./ProjectUpload";
+import EditProject from "./EditProject";
 
 const ProjectDetails = () => {
   const [name, setName] = useState(false);
@@ -194,6 +195,33 @@ const ProjectDetails = () => {
     reader.readAsDataURL(file);
     setFile(URL.createObjectURL(e.target.files[0]));
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const project_name = e.target.project_name.value;
+    const project_description = e.target.project_description.value;
+
+    const info = {
+      project_name,
+      project_description,
+      project_image: base64Image,
+    };
+
+    axios.defaults.withCredentials = true;
+
+    axios
+      .post(`https://app.cloud4c2.com/api/project/edit/${id}`, info, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((res) => {
+        if (res.data.message === "Project successfully edited") {
+          e.target.reset();
+          window.location.reload(true);
+        }
+      });
+  };
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
@@ -213,6 +241,7 @@ const ProjectDetails = () => {
             {name ? (
               <input
                 type="text"
+                name="project_name"
                 className="border w-full py-4 mb-4 px-3 rounded-md"
               />
             ) : (
@@ -226,6 +255,7 @@ const ProjectDetails = () => {
             {description ? (
               <input
                 type="text"
+                name="project_description"
                 className="border w-full py-4 mb-4 px-3 rounded-md"
               />
             ) : (
@@ -258,9 +288,9 @@ const ProjectDetails = () => {
             )}
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
-              {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
-                <Link to={`/dashboard/projectCopy/${id}`}>Copy project</Link>
-              </button> */}
+              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+                Open in Editor
+              </button>
               {/* The button to open modal */}
               <label
                 htmlFor="my-modal-copy"
@@ -269,7 +299,6 @@ const ProjectDetails = () => {
                 {" "}
                 Copy project
               </label>
-
               {/* Put this part before </body> tag */}
               <input
                 type="checkbox"
@@ -287,11 +316,9 @@ const ProjectDetails = () => {
                   <ProjectCopy myModal={"my-modal-3"} />
                 </label>
               </label>
-
               {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 Edit project
               </button> */}
-
               {/* The button to open modal */}
               <label
                 htmlFor="my-modal-edit"
@@ -300,7 +327,6 @@ const ProjectDetails = () => {
                 {" "}
                 Edit project
               </label>
-
               {/* Put this part before </body> tag */}
               <input
                 type="checkbox"
@@ -315,14 +341,13 @@ const ProjectDetails = () => {
                   >
                     ✕
                   </label>
-                  <ProjectUpload />
+                  {/* <ProjectUpload /> */}
+                  <EditProject id={project?.project_id}/>
                 </label>
               </label>
-
               {/* <button className="bg-[#3853A4] py-[17px] text-white text-[16px] font-[500] rounded-[5px]">
                 Change image
               </button> */}
-
               <div>
                 <input
                   type="file"

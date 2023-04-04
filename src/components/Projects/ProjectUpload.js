@@ -148,7 +148,7 @@ const ProjectUpload = ({ myModal }) => {
               </div>
             </ProjectButton3>
           </div>
-          <div >
+          <div>
             <input
               className="border px-3 w-full  py-2 rounded-lg mb-[20px]"
               type="text"

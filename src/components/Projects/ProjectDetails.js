@@ -195,33 +195,6 @@ const ProjectDetails = () => {
     reader.readAsDataURL(file);
     setFile(URL.createObjectURL(e.target.files[0]));
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const project_name = e.target.project_name.value;
-    const project_description = e.target.project_description.value;
-
-    const info = {
-      project_name,
-      project_description,
-      project_image: base64Image,
-    };
-
-    axios.defaults.withCredentials = true;
-
-    axios
-      .post(`https://app.cloud4c2.com/api/project/edit/${id}`, info, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-      .then((res) => {
-        if (res.data.message === "Project successfully edited") {
-          e.target.reset();
-          window.location.reload(true);
-        }
-      });
-  };
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">

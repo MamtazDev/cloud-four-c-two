@@ -72,7 +72,6 @@ const AddUser = () => {
       });
   };
 
-  console.log(userList, "useress");
   return (
     <div className="addUser bg-white lg:rounded-l-[50px]  w-full  xl:h-full flex justify-center items-center">
       <div className="addUser__inner p-3 lg:p-12 max-w-[900px] border-[1px] rounded-[16px] border-[#d5d5d5]">

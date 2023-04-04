@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import BlueButton from "../../utils/BlueButton";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -7,6 +7,7 @@ import StartSession from "./StartSession";
 import AddUser from "./AddUser";
 import { BiEdit } from "react-icons/bi";
 import { UserContext } from "../../context/AuthProvider";
+import ProjectUpload from "./ProjectUpload";
 
 const ProjectDetails = () => {
   const [name, setName] = useState(false);
@@ -174,6 +175,26 @@ const ProjectDetails = () => {
 
   console.log(userList, "userlist");
 
+  // change image part
+
+  const [files, setFile] = useState(null);
+  const inputRef = useRef();
+  const inputHandler = () => {
+    inputRef.current.click();
+  };
+
+  const [base64Image, setBase64Image] = useState("");
+  const onFileChangeCapture = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setBase64Image(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  };
+
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
       <div className="max-w-[1091px]">
@@ -267,21 +288,72 @@ const ProjectDetails = () => {
                 </label>
               </label>
 
-              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+              {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
                 Edit project
-              </button>
-              <button className="bg-[#3853A4] py-[17px] text-white text-[16px] font-[500] rounded-[5px]">
+              </button> */}
+
+              {/* The button to open modal */}
+              <label
+                htmlFor="my-modal-edit"
+                className="bg-[#3853A4] text-center py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
+              >
+                {" "}
+                Edit project
+              </label>
+
+              {/* Put this part before </body> tag */}
+              <input
+                type="checkbox"
+                id="my-modal-edit"
+                className="modal-toggle"
+              />
+              <label htmlFor="my-modal-edit" className="modal cursor-pointer">
+                <label className="modal-box relative" htmlFor="">
+                  <label
+                    htmlFor="my-modal-edit"
+                    className="btn btn-sm btn-circle absolute right-2 top-2"
+                  >
+                    ✕
+                  </label>
+                  <ProjectUpload />
+                </label>
+              </label>
+
+              {/* <button className="bg-[#3853A4] py-[17px] text-white text-[16px] font-[500] rounded-[5px]">
                 Change image
-              </button>
+              </button> */}
+
+              <div>
+                <input
+                  type="file"
+                  ref={inputRef}
+                  accept="image/*"
+                  onChangeCapture={onFileChangeCapture}
+                  className="file-input w-full hidden  border-0 bg-white"
+                />
+                <button
+                  onClick={inputHandler}
+                  className="bg-[#3853A4] w-full py-[17px] text-white text-[16px] font-[500] rounded-[5px]"
+                >
+                  Change image
+                </button>
+              </div>
             </div>
           </div>
           <div>
-            <img
-              className="rounded-[12px] h-[305px] w-full"
-              src={project?.image}
-              // src={girl}
-              alt=""
-            />
+            {files === null ? (
+              <img
+                className="rounded-[12px] h-[305px] w-full"
+                src={project?.image}
+                alt=""
+              />
+            ) : (
+              <img
+                className="rounded-[12px] h-[305px] w-full"
+                src={files}
+                alt=""
+              />
+            )}
           </div>
         </div>
 
@@ -470,7 +542,11 @@ const ProjectDetails = () => {
 
                 <p
                   className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
-                  onClick={() => handleUserRemove(puser.user_id)}
+                  onClick={() =>
+                    puser.user_id === user?.user_id
+                      ? handleUserRemove(puser.user_id)
+                      : handleLeave(project.project_id)
+                  }
                 >
                   {puser.user_id === user?.user_id ? "Leave" : "Remove"}
 

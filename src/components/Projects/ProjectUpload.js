@@ -14,7 +14,7 @@ const ProjectUpload = ({ myModal }) => {
   const [base64Image, setBase64Image] = useState("");
   const [base64File, setBase64File] = useState("");
 
-  //  base64 conver start
+  // img base64 convert start
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -25,7 +25,7 @@ const ProjectUpload = ({ myModal }) => {
 
     reader.readAsDataURL(file);
   };
-  //  base64 conver end
+  // img base64 convert end
 
   // file convert to base64 start
   const handleFileConvertToBase64 = (event) => {
@@ -54,7 +54,6 @@ const ProjectUpload = ({ myModal }) => {
       project_image: base64Image,
       project_path_to_execute,
       project_description,
-      // project_image: base64Image,
     };
     console.log(info, "click");
 
@@ -113,7 +112,7 @@ const ProjectUpload = ({ myModal }) => {
         {/* <ProjectButton>New Project</ProjectButton> */}
         <h1 className="text-center text-3xl font-bold mb-5">Upload Project</h1>
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-3/4 mx-auto my-[20px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3  my-[20px]">
             <input
               className="border px-3 w-full rounded-lg"
               type="text"
@@ -149,7 +148,7 @@ const ProjectUpload = ({ myModal }) => {
               </div>
             </ProjectButton3>
           </div>
-          <div className="w-3/4 mx-auto">
+          <div>
             <input
               className="border px-3 w-full  py-2 rounded-lg mb-[20px]"
               type="text"

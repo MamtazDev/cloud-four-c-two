@@ -1,10 +1,20 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 const CreateProject = () => {
+  const [file, setFile] = useState(null);
   const [base64Image, setBase64Image] = useState("");
+  const inputRef = useRef();
+  // image upload start
+  const onFileChangeCapture = (e) => {
+    setFile(URL.createObjectURL(e.target.files[0]));
+  };
 
+  const inputHandler = () => {
+    inputRef.current.click();
+  };
+  // image upload end
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -20,16 +30,15 @@ const CreateProject = () => {
     e.preventDefault();
     const project_name = e.target.project_name.value;
     const project_description = e.target.project_description.value;
-    const project_path_to_execute = e.target.project_path_to_execute.value;
 
     const info = {
       project_name,
-      file_data: base64Image,
-      project_path_to_execute,
+      file_data: "data:text/plain;base64,",
+      project_path_to_execute: "project/project.360",
       project_description,
-      // project_image: base64Image,
+      project_image: base64Image,
     };
-    console.log(info, "click");
+    // console.log(info, "click");
 
     axios.defaults.withCredentials = true;
 
@@ -41,8 +50,19 @@ const CreateProject = () => {
         },
       })
       .then((res) => {
-        console.log(res, "hello");
         if (res.data.message === "New project successfully created") {
+          debugger;
+          fetch(
+            "https://app.cloud4c2.com/api/project/start_editing/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=55d03128-d2a5-11ed-a528-b728a3ff4366",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Credentials": true,
+                credentials: "include",
+              },
+            }
+          ).then((response) => console.log(response, "start editing"));
           e.target.reset();
           window.location.reload(true);
         }
@@ -88,7 +108,46 @@ const CreateProject = () => {
             onChange={handleImageChange}
           />
         </div> */}
-        <div className="mb-[33px]">
+        <div className="copy__img border-[1px] overflow-hidden w-3/4 mx-auto bordered rounded-[8px] mb-4">
+          <input
+            type="file"
+            ref={inputRef}
+            accept="image/*"
+            onChangeCapture={onFileChangeCapture}
+            onChange={handleImageChange}
+            className="file-input w-full hidden  border-0 bg-white"
+          />
+          {file === null ? (
+            <div
+              onClick={inputHandler}
+              className="profile relative cursor-pointer "
+            >
+              <img
+                className="relative z-[99] h-[192px] w-full"
+                src="https://lppm.upnjatim.ac.id/assets/img/nophoto.png"
+                alt=""
+              />
+              <button className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
+                Pick new image
+              </button>
+            </div>
+          ) : (
+            <div
+              onClick={inputHandler}
+              className="profile relative cursor-pointer "
+            >
+              <img
+                className="relative z-[99] w-full h-[192px] "
+                src={file}
+                alt=""
+              />
+              <button className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
+                Pick new image
+              </button>
+            </div>
+          )}
+        </div>
+        {/* <div className="mb-[33px]">
           <label className="outfit text-[20px] font-[300] mb-[10px] block">
             File Data <sup className="text-[#C9312E]">*</sup>
           </label>
@@ -99,8 +158,8 @@ const CreateProject = () => {
             className="file-input w-full bg-white"
             onChange={handleImageChange}
           />
-        </div>
-        <div className="mb-[33px]">
+        </div> */}
+        {/* <div className="mb-[33px]">
           <label className="outfit text-[20px] font-[300] mb-[10px] block">
             Project Path to Execute <sup className="text-[#C9312E]">*</sup>
           </label>
@@ -109,7 +168,7 @@ const CreateProject = () => {
             className="input input-bordered w-full h-[56px]"
             name="project_path_to_execute"
           />
-        </div>
+        </div> */}
 
         <div className="flex justify-center gap-[30px] mb-[30px]">
           <button

@@ -288,9 +288,33 @@ const ProjectDetails = () => {
             )}
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
-              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+              {/* <!-- The button to open modal --> */}
+              <label
+                for="my-modal-editor"
+                className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
+              >
+                {" "}
                 Open in Editor
-              </button>
+              </label>
+
+              {/* <!-- Put this part before </body> tag --> */}
+              <input
+                type="checkbox"
+                id="my-modal-editor"
+                class="modal-toggle"
+              />
+              <label for="my-modal-editor" class="modal">
+                <label class="modal-box relative">
+                  <label
+                    for="my-modal-editor"
+                    class="btn btn-sm btn-circle absolute right-2 top-2"
+                  >
+                    ✕
+                  </label>
+                  <ProjectUpload />
+                </label>
+              </label>
+
               {/* The button to open modal */}
               <label
                 htmlFor="my-modal-copy"
@@ -342,7 +366,7 @@ const ProjectDetails = () => {
                     ✕
                   </label>
                   {/* <ProjectUpload /> */}
-                  <EditProject id={project?.project_id}/>
+                  <EditProject id={project?.project_id} />
                 </label>
               </label>
               {/* <button className="bg-[#3853A4] py-[17px] text-white text-[16px] font-[500] rounded-[5px]">

@@ -85,23 +85,13 @@ const AddUser = () => {
               placeholder="Search"
               onChange={(e) => SetSearchText(e.target.value)}
             />
-            {/* <div className="flex gap-[6px] overflow-x-scroll overflow-auto mb-[25px]">
-              {userList &&
-                userList.length > 0 &&
-                userList?.map((user) => (
-                  <div className="avatar online">
-                    <div className="w-16 rounded-full">
-                      <img src={user?.image} />
-                    </div>
-                  </div>
-                ))}
-            </div> */}
 
             <div className="h-[368px] overflow-y-scroll">
               {userList &&
                 userList.length > 0 &&
-                userList?.filter(handleUserSearchFilter).map((i) => (
+                userList?.filter(handleUserSearchFilter).map((i, index) => (
                   <div
+                    key={index}
                     className={`flex items-center gap-4 relative mb-[12px] hover:bg-gray-200 cursor-pointer ${
                       user?.user_id === i.user_id && "bg-gray-200"
                     }`}

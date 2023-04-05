@@ -349,8 +349,13 @@ const ProjectDetails = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
               {/* <!-- The button to open modal --> */}
               <button
+                disabled={user?.role === "viewer"}
                 onClick={() => handleEditor(project.project_id)}
-                className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
+                className={
+                  user?.role === "viewer"
+                    ? "bg-red-500"
+                    : "bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
+                }
               >
                 {" "}
                 Open in Editor
@@ -389,7 +394,11 @@ const ProjectDetails = () => {
               {/* The button to open modal */}
               <label
                 htmlFor="my-modal-edit"
-                className="bg-[#3853A4] text-center py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
+                className={
+                  user?.role === "viewer"
+                    ? "bg-red-500"
+                    : "bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
+                }
               >
                 {" "}
                 Edit project
@@ -434,7 +443,11 @@ const ProjectDetails = () => {
             {/* The button to open modal */}
             <label
               htmlFor="my-modal-session"
-              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              className={
+                user?.role === "viewer"
+                  ? "bg-red-500"
+                  : "outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              }
             >
               {" "}
               New session
@@ -476,7 +489,11 @@ const ProjectDetails = () => {
                 </a>
                 <button
                   onClick={() => handleDeleteSession(session.session_id)}
-                  className="commissioner session_bg p-2 lg:w-[226px] lg:py-[20px] text-center font-[400]"
+                  className={
+                    user?.role === "viewer"
+                      ? "bg-red-200"
+                      : "commissioner session_bg p-2 lg:px-5 lg:py-[20px] text-center font-[400]"
+                  }
                 >
                   Delete {user?.role === "analyst" ? "(ANALYST)" : ""}
                 </button>
@@ -559,7 +576,11 @@ const ProjectDetails = () => {
             {/* The button to open modal */}
             <label
               htmlFor="my-modal-user"
-              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              className={
+                user?.role === "viewer"
+                  ? "bg-red-500"
+                  : "outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              }
             >
               {" "}
               Add user
@@ -594,7 +615,11 @@ const ProjectDetails = () => {
                 </p>
 
                 <p
-                  className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
+                  className={
+                    user?.role === "viewer"
+                      ? "bg-red-200"
+                      : " session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
+                  }
                   onClick={() =>
                     puser.user_id === user?.user_id
                       ? handleLeave(project.project_id)

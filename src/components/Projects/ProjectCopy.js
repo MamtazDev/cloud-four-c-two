@@ -52,7 +52,7 @@ const ProjectCopy = ({ myModal, closeRef }) => {
           alert(res.data.message);
           // window.location.reload(true);
           navigate(`/dashboard/projectDetails/${res.data.project_id}`);
-          closeRef()
+          closeRef();
         }
       })
       .catch((err) => {
@@ -71,9 +71,7 @@ const ProjectCopy = ({ myModal, closeRef }) => {
         },
       })
       .then((response) => setProject(response.data.project));
-  }, []);
-
-  console.log(project, "project");
+  }, [id]);
 
   const inputHandler = () => {
     inputRef.current.click();

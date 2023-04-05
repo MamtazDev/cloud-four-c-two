@@ -43,10 +43,11 @@ const ProjectDetails = () => {
       });
   };
 
-  const handleUserRemove = (UserId) => {
+  const handleUserRemove = (projectId, userId) => {
+    console.log(projectId, userId, "user project");
     axios
-      .post(`https://app.cloud4c2.com/api/project/remove_user/${id}`, {
-        user_id: UserId,
+      .post(`https://app.cloud4c2.com/api/project/remove_user/${projectId}`, {
+        user_id: userId,
       })
       .then((res) => {
         if (res.data.message === "you removed someone from the project") {
@@ -93,7 +94,7 @@ const ProjectDetails = () => {
         }
       });
   }, [deletesession, id, navigate]);
-  console.log(project);
+
   const handleLeave = (id) => {
     axios
       .post(`https://app.cloud4c2.com/api/project/leave/${id}`, {
@@ -180,8 +181,6 @@ const ProjectDetails = () => {
       });
   }, [navigate, setUserList]);
 
-  console.log(userList, "userlist");
-
   // change image part
 
   const [files, setFile] = useState(null);
@@ -257,8 +256,7 @@ const ProjectDetails = () => {
   };
 
   const handleEditor = (projectId) => {
-
-    console.log("clicked on handleEditor")
+    console.log("clicked on handleEditor");
 
     fetch(
       `app.cloud4c2.com/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=${projectId}`,
@@ -271,37 +269,26 @@ const ProjectDetails = () => {
         },
       }
     ).then((res) => {
-      console.log( "start editing" , res);
+      console.log("start editing", res);
       const fullUrl = res.url;
       console.log("URL:", fullUrl);
-      // const startIndex = fullUrl.indexOf('/dashboard/projectDetails');
-      // const slicedUrl = fullUrl.slice(startIndex);
+      const domain = fullUrl.split("/projectDetails/")[1];
 
-      // const domainIndex = slicedUrl.indexOf('/');
-      const domain = fullUrl.split('/projectDetails/')[1];
-
-
-      console.log(domain, "domain");
-
-      // if(domain) return redirectHandler(domain)
-
-      setTimeout( () => {
-        redirectHandler(domain)
-      }, 2000)
-
+      setTimeout(() => {
+        redirectHandler(domain);
+      }, 2000);
 
       // if (res.ok === true) {
-        // navigate(`/${domain}`);
+      // navigate(`/${domain}`);
       // }
     });
   };
 
   const redirectHandler = (domain) => {
+    console.log("Redirect function is triggered", domain);
 
-    console.log("Redirect function is triggered", domain)
-
-    window.open(` ${"http://"+domain}`, '_blank')
-  }
+    window.open(` ${"http://" + domain}`, "_blank");
+  };
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
@@ -443,14 +430,6 @@ const ProjectDetails = () => {
         <div className="mb-[22px]">
           <div className="flex items-center justify-between mb-[12px]">
             <p className="commissioner text-[16px] font-[500]">Sessions</p>
-            {/* <BlueButton>New session</BlueButton> */}
-            {/* <Link
-              to={`/dashboard/startSession/${project?.project_id}`}
-              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
-              type="submit"
-            >
-              New session
-            </Link> */}
 
             {/* The button to open modal */}
             <label
@@ -576,14 +555,6 @@ const ProjectDetails = () => {
         <div className="mb-[22px]">
           <div className="flex items-center justify-between mb-[12px]">
             <p className="text-[16px] font-[500]">Users</p>
-            {/* <BlueButton>Add user</BlueButton> */}
-            {/* <Link
-              to={`/dashboard/addUser/${project?.project_id}`}
-              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
-              type="submit"
-            >
-              Add user
-            </Link> */}
 
             {/* The button to open modal */}
             <label
@@ -626,8 +597,8 @@ const ProjectDetails = () => {
                   className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
                   onClick={() =>
                     puser.user_id === user?.user_id
-                      ? handleUserRemove(puser.user_id)
-                      : handleLeave(project.project_id)
+                      ? handleLeave(project.project_id)
+                      : handleUserRemove(project.project_id, puser.user_id)
                   }
                 >
                   {puser.user_id === user?.user_id ? "Leave" : "Remove"}

@@ -22,6 +22,12 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
 
+  const closeRef = useRef();
+
+  const closeHandler = () => {
+    closeRef.current.click();
+  };
+
   const handleDeleteSession = (id) => {
     axios
       .post(`https://app.cloud4c2.com/api/session/delete/${id}`)
@@ -37,10 +43,11 @@ const ProjectDetails = () => {
       });
   };
 
-  const handleUserRemove = (UserId) => {
+  const handleUserRemove = (projectId, userId) => {
+    console.log(projectId, userId, "user project");
     axios
-      .post(`https://app.cloud4c2.com/api/project/remove_user/${id}`, {
-        user_id: UserId,
+      .post(`https://app.cloud4c2.com/api/project/remove_user/${projectId}`, {
+        user_id: userId,
       })
       .then((res) => {
         if (res.data.message === "you removed someone from the project") {
@@ -87,7 +94,7 @@ const ProjectDetails = () => {
         }
       });
   }, [deletesession, id, navigate]);
-  console.log(project);
+
   const handleLeave = (id) => {
     axios
       .post(`https://app.cloud4c2.com/api/project/leave/${id}`, {
@@ -174,8 +181,6 @@ const ProjectDetails = () => {
       });
   }, [navigate, setUserList]);
 
-  console.log(userList, "userlist");
-
   // change image part
 
   const [files, setFile] = useState(null);
@@ -196,6 +201,95 @@ const ProjectDetails = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
 
+  const handleDelete = (id) => {
+    axios
+      .post(`https://app.cloud4c2.com/api/project/delete/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+
+      .then((res) => {
+        console.log(res);
+        // setProjects(projects.filter((item) => item.project_id !== res.data.user));
+        if (res.data.message === "project successfully deleted.") {
+          // window.location.reload(true);
+          navigate("/dashboard/project");
+        } else {
+          alert(res.data.message);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  };
+
+  const handleDisabled = (project) => {
+    const activation = {
+      activate: project.active === true ? "false" : "true",
+    };
+    axios
+      .post(
+        `https://app.cloud4c2.com/api/project/activate/${project.project_id}`,
+        activation,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.message === "Project activation changed") {
+          alert(res.data.message);
+          // window.location.reload(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  };
+
+  const handleEditor = (projectId) => {
+    console.log("clicked on handleEditor");
+
+    fetch(
+      `app.cloud4c2.com/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=${projectId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          credentials: "include",
+        },
+      }
+    ).then((res) => {
+      console.log("start editing", res);
+      const fullUrl = res.url;
+      console.log("URL:", fullUrl);
+      const domain = fullUrl.split("/projectDetails/")[1];
+
+      setTimeout(() => {
+        redirectHandler(domain);
+      }, 2000);
+
+      // if (res.ok === true) {
+      // navigate(`/${domain}`);
+      // }
+    });
+  };
+
+  const redirectHandler = (domain) => {
+    console.log("Redirect function is triggered", domain);
+
+    window.open(` ${"http://" + domain}`, "_blank");
+  };
+
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
       <div className="max-w-[1091px]">
@@ -211,37 +305,21 @@ const ProjectDetails = () => {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px] mb-[40px]">
           <div>
-            {name ? (
-              <input
-                type="text"
-                name="project_name"
-                className="border w-full py-4 mb-4 px-3 rounded-md"
-              />
-            ) : (
-              <button
-                className="flex items-center justify-between px-4 commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
-                type=""
-              >
-                {project?.name} <BiEdit onClick={() => setName(true)} />
-              </button>
-            )}
-            {description ? (
-              <input
-                type="text"
-                name="project_description"
-                className="border w-full py-4 mb-4 px-3 rounded-md"
-              />
-            ) : (
-              <button
-                className="flex items-center justify-between px-4 commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
-                type=""
-              >
-                {project?.description
-                  ? project?.description
-                  : "Project Description"}{" "}
-                <BiEdit onClick={() => setDescription(true)} />
-              </button>
-            )}
+            <p
+              className="flex items-center justify-between px-4 commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
+              type=""
+            >
+              {project?.name}
+            </p>
+
+            <p
+              className="flex items-center justify-between px-4 commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
+              type=""
+            >
+              {project?.description
+                ? project?.description
+                : "Project Description"}{" "}
+            </p>
 
             {/* <button
               className="commissioner outline_btn w-full py-[18px] font-[500] mb-[20px]"
@@ -251,10 +329,18 @@ const ProjectDetails = () => {
             </button> */}
             {user?.role === "administrator" && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px] mb-[20px]">
-                <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
-                  Disable project
+                <button
+                  onClick={() => handleDisabled(project)}
+                  className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
+                >
+                  {project?.active === true
+                    ? "Disable project"
+                    : "Active project"}{" "}
                 </button>
-                <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+                <button
+                  onClick={() => handleDelete(project.project_id)}
+                  className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
+                >
                   Delete project
                 </button>
               </div>
@@ -262,31 +348,18 @@ const ProjectDetails = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
               {/* <!-- The button to open modal --> */}
-              <label
-                for="my-modal-editor"
-                className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
+              <button
+                disabled={user?.role === "viewer"}
+                onClick={() => handleEditor(project.project_id)}
+                className={
+                  user?.role === "viewer"
+                    ? "bg-red-500"
+                    : "bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
+                }
               >
                 {" "}
                 Open in Editor
-              </label>
-
-              {/* <!-- Put this part before </body> tag --> */}
-              <input
-                type="checkbox"
-                id="my-modal-editor"
-                class="modal-toggle"
-              />
-              <label for="my-modal-editor" class="modal">
-                <label class="modal-box relative">
-                  <label
-                    for="my-modal-editor"
-                    class="btn btn-sm btn-circle absolute right-2 top-2"
-                  >
-                    ✕
-                  </label>
-                  <ProjectUpload />
-                </label>
-              </label>
+              </button>
 
               {/* The button to open modal */}
               <label
@@ -305,12 +378,14 @@ const ProjectDetails = () => {
               <label htmlFor="my-modal-copy" className="modal">
                 <label htmlFor="" className="modal-box relative">
                   <label
+                    ref={closeRef}
                     htmlFor="my-modal-copy"
                     className="btn btn-sm btn-circle absolute right-2 top-2"
                   >
                     ✕
                   </label>
-                  <ProjectCopy myModal={"my-modal-3"} />
+                  <ProjectCopy closeRef={closeHandler} myModal={"my-modal-3"} />
+                  {/* <p onClick={() => closeHandler()}>Dihan</p> */}
                 </label>
               </label>
               {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
@@ -319,7 +394,11 @@ const ProjectDetails = () => {
               {/* The button to open modal */}
               <label
                 htmlFor="my-modal-edit"
-                className="bg-[#3853A4] text-center py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
+                className={
+                  user?.role === "viewer"
+                    ? "bg-red-500"
+                    : "bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
+                }
               >
                 {" "}
                 Edit project
@@ -345,37 +424,14 @@ const ProjectDetails = () => {
               {/* <button className="bg-[#3853A4] py-[17px] text-white text-[16px] font-[500] rounded-[5px]">
                 Change image
               </button> */}
-              <div>
-                <input
-                  type="file"
-                  ref={inputRef}
-                  accept="image/*"
-                  onChangeCapture={onFileChangeCapture}
-                  className="file-input w-full hidden  border-0 bg-white"
-                />
-                <button
-                  onClick={inputHandler}
-                  className="bg-[#3853A4] w-full py-[17px] text-white text-[16px] font-[500] rounded-[5px]"
-                >
-                  Change image
-                </button>
-              </div>
             </div>
           </div>
           <div>
-            {files === null ? (
-              <img
-                className="rounded-[12px] h-[305px] w-full"
-                src={project?.image}
-                alt=""
-              />
-            ) : (
-              <img
-                className="rounded-[12px] h-[305px] w-full"
-                src={files}
-                alt=""
-              />
-            )}
+            <img
+              className="rounded-[12px] h-[305px] w-full"
+              src={project?.image}
+              alt=""
+            />
           </div>
         </div>
 
@@ -383,19 +439,15 @@ const ProjectDetails = () => {
         <div className="mb-[22px]">
           <div className="flex items-center justify-between mb-[12px]">
             <p className="commissioner text-[16px] font-[500]">Sessions</p>
-            {/* <BlueButton>New session</BlueButton> */}
-            {/* <Link
-              to={`/dashboard/startSession/${project?.project_id}`}
-              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
-              type="submit"
-            >
-              New session
-            </Link> */}
 
             {/* The button to open modal */}
             <label
               htmlFor="my-modal-session"
-              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              className={
+                user?.role === "viewer"
+                  ? "bg-red-500"
+                  : "outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              }
             >
               {" "}
               New session
@@ -424,7 +476,7 @@ const ProjectDetails = () => {
             {project?.sessions?.map((session, index) => (
               <div className="flex ">
                 <p className="commissioner font-[500] p-2 lg:w-[210px] lg:pl-[17px] lg:py-[20px]">
-                  Sessions {index + 1}{" "}
+                  {session.session_name ? session.session_name : "No Name"}
                 </p>
 
                 <a
@@ -437,7 +489,11 @@ const ProjectDetails = () => {
                 </a>
                 <button
                   onClick={() => handleDeleteSession(session.session_id)}
-                  className="commissioner session_bg p-2 lg:w-[226px] lg:py-[20px] text-center font-[400]"
+                  className={
+                    user?.role === "viewer"
+                      ? "bg-red-200"
+                      : "commissioner session_bg p-2 lg:px-5 lg:py-[20px] text-center font-[400]"
+                  }
                 >
                   Delete {user?.role === "analyst" ? "(ANALYST)" : ""}
                 </button>
@@ -516,19 +572,15 @@ const ProjectDetails = () => {
         <div className="mb-[22px]">
           <div className="flex items-center justify-between mb-[12px]">
             <p className="text-[16px] font-[500]">Users</p>
-            {/* <BlueButton>Add user</BlueButton> */}
-            {/* <Link
-              to={`/dashboard/addUser/${project?.project_id}`}
-              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
-              type="submit"
-            >
-              Add user
-            </Link> */}
 
             {/* The button to open modal */}
             <label
               htmlFor="my-modal-user"
-              className="outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              className={
+                user?.role === "viewer"
+                  ? "bg-red-500"
+                  : "outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
+              }
             >
               {" "}
               Add user
@@ -563,11 +615,15 @@ const ProjectDetails = () => {
                 </p>
 
                 <p
-                  className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
+                  className={
+                    user?.role === "viewer"
+                      ? "bg-red-200"
+                      : " session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
+                  }
                   onClick={() =>
                     puser.user_id === user?.user_id
-                      ? handleUserRemove(puser.user_id)
-                      : handleLeave(project.project_id)
+                      ? handleLeave(project.project_id)
+                      : handleUserRemove(project.project_id, puser.user_id)
                   }
                 >
                   {puser.user_id === user?.user_id ? "Leave" : "Remove"}

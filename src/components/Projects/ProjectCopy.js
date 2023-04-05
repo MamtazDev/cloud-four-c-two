@@ -7,7 +7,7 @@ import copyImg from "../../assets/copyproject.png";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const ProjectCopy = ({ myModal }) => {
+const ProjectCopy = ({ myModal, closeRef }) => {
   const navigate = useNavigate();
   const [files, setFile] = useState(null);
   const inputRef = useRef();
@@ -47,9 +47,12 @@ const ProjectCopy = ({ myModal }) => {
         },
       })
       .then((res) => {
+        console.log(res);
         if (res.data.message === "New project successfully created") {
           alert(res.data.message);
-          window.location.reload(true);
+          // window.location.reload(true);
+          navigate(`/dashboard/projectDetails/${res.data.project_id}`);
+          closeRef();
         }
       })
       .catch((err) => {
@@ -68,9 +71,7 @@ const ProjectCopy = ({ myModal }) => {
         },
       })
       .then((response) => setProject(response.data.project));
-  }, []);
-
-  console.log(project, "project");
+  }, [id]);
 
   const inputHandler = () => {
     inputRef.current.click();

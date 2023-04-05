@@ -53,7 +53,7 @@ const CreateProject = () => {
       .then((res) => {
         if (res.data.message === "New project successfully created") {
           fetch(
-            "https://app.cloud4c2.com/api/project/start_editing/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=55d03128-d2a5-11ed-a528-b728a3ff4366",
+            `app.cloud4c2.com/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=5s `,
             {
               method: "POST",
               headers: {
@@ -63,6 +63,7 @@ const CreateProject = () => {
               },
             }
           ).then((response) => console.log(response, "start editing"));
+
           e.target.reset();
           window.location.reload(true);
         }
@@ -73,7 +74,40 @@ const CreateProject = () => {
         }
       });
   };
+  const handleEditor = (projectId) => {
+    console.log("clicked on handleEditor");
 
+    fetch(
+      `app.cloud4c2.com/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=${projectId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          credentials: "include",
+        },
+      }
+    ).then((res) => {
+      console.log("start editing", res);
+      const fullUrl = res.url;
+      console.log("URL:", fullUrl);
+      const domain = fullUrl.split("/projectDetails/")[1];
+
+      setTimeout(() => {
+        redirectHandler(domain);
+      }, 2000);
+
+      // if (res.ok === true) {
+      // navigate(`/${domain}`);
+      // }
+    });
+  };
+
+  const redirectHandler = (domain) => {
+    console.log("Redirect function is triggered", domain);
+
+    window.open(` ${"http://" + domain}`, "_blank");
+  };
   return (
     <div>
       <h1 className="text-center text-3xl font-bold mb-5">New Project</h1>

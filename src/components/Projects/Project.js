@@ -94,7 +94,9 @@ const Project = () => {
         console.log(res);
         // setProjects(projects.filter((item) => item.project_id !== res.data.user));
         if (res.data.message === "project successfully deleted.") {
-          window.location.reload(true);
+          // window.location.reload(true);
+          const updatedProjects = projects.filter((item) => item.project_id !== id);
+          setProjects(updatedProjects);
         }
       })
       .catch((err) => {
@@ -146,6 +148,40 @@ const Project = () => {
         }
       });
   }, [navigate]);
+  const handleEditor = (projectId) => {
+    console.log("clicked on handleEditor");
+
+    fetch(
+      `app.cloud4c2.com/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=${projectId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          credentials: "include",
+        },
+      }
+    ).then((res) => {
+      console.log("start editing", res);
+      const fullUrl = res.url;
+      console.log("URL:", fullUrl);
+      const domain = fullUrl.split("/projectDetails/")[1];
+
+      setTimeout(() => {
+        redirectHandler(domain);
+      }, 2000);
+
+      // if (res.ok === true) {
+      // navigate(`/${domain}`);
+      // }
+    });
+  };
+
+  const redirectHandler = (domain) => {
+    console.log("Redirect function is triggered", domain);
+
+    window.open(` ${"http://" + domain}`, "_blank");
+  };
 
   return (
     <div className="bg-[#FFFBFB] p-5 lg:py-[61px] lg:px-[57px] lg:rounded-l-[50px] h-[100vh] overflow-y-scroll">
@@ -191,27 +227,28 @@ const Project = () => {
           </label>
         </div>
       </div>
-      {user === ""}
-      <div className="flex gap-[20px] mb-[20px]">
-        <button
-          className={`outfit outline_btn py-[8px] px-[33px] ${
-            return_deactivated && "bg-primary text-white"
-          }`}
-          type=""
-          onClick={() => setReturn_deactivated(!return_deactivated)}
-        >
-          Disabled
-        </button>
-        <button
-          className={`outfit outline_btn py-[8px] px-[33px] ${
-            return_deleted && "bg-primary text-white"
-          }`}
-          type=""
-          onClick={() => setReturn_deleted(!return_deleted)}
-        >
-          Deleted
-        </button>
-      </div>
+      {user?.role === "administrator" && (
+        <div className="flex gap-[20px] mb-[20px]">
+          <button
+            className={`outfit outline_btn py-[8px] px-[33px] ${
+              return_deactivated && "bg-primary text-white"
+            }`}
+            type=""
+            onClick={() => setReturn_deactivated(!return_deactivated)}
+          >
+            Disabled
+          </button>
+          <button
+            className={`outfit outline_btn py-[8px] px-[33px] ${
+              return_deleted && "bg-primary text-white"
+            }`}
+            type=""
+            onClick={() => setReturn_deleted(!return_deleted)}
+          >
+            Deleted
+          </button>
+        </div>
+      )}
 
       <div className="flex flex-wrap gap-[21px]">
         {/* The button to open modal */}
@@ -273,14 +310,18 @@ const Project = () => {
                         >
                           <span className="commissioner">Project details</span>
                         </li> */}
+
                         <li>
                           {/* <a className="commissioner">Share</a> */}
                           {/* The button to open modal */}
                           <label
                             htmlFor="my-modal-user"
-                            className="commissioner"
+                            className={
+                              user?.role === "viewer"
+                                ? "hidden"
+                                : "commissioner"
+                            }
                           >
-                            {" "}
                             Share
                           </label>
                         </li>
@@ -308,9 +349,12 @@ const Project = () => {
                           {/* The button to open modal */}
                           <label
                             htmlFor="my-modal-session"
-                            className="commissioner"
+                            className={
+                              user?.role === "viewer"
+                                ? "hidden"
+                                : "commissioner"
+                            }
                           >
-                            {" "}
                             Start session
                           </label>
                         </li>
@@ -331,13 +375,17 @@ const Project = () => {
                           </Link> */}
 
                           {/* The button to open modal */}
-                          <label
-                            htmlFor="my-modal-edit"
-                            className="commissioner"
+                          <p
+                            onClick={() => handleEditor(project.project_id)}
+                            className={
+                              user?.role === "viewer"
+                                ? "hidden"
+                                : "commissioner"
+                            }
                           >
                             {" "}
                             Edit project
-                          </label>
+                          </p>
                         </li>
                         <li>
                           <Link
@@ -351,7 +399,7 @@ const Project = () => {
                           <>
                             <li onClick={() => handleDisabled(project)}>
                               <a className="commissioner">
-                                {project.active === true
+                                {project?.active === true
                                   ? "Disable project"
                                   : "Active project"}{" "}
                               </a>
@@ -424,19 +472,6 @@ const Project = () => {
               ✕
             </label>
             <StartSession myModal={"my-modal-session"} />
-          </label>
-        </label>
-        {/* Put this part before </body> tag */}
-        <input type="checkbox" id="my-modal-edit" className="modal-toggle" />
-        <label htmlFor="my-modal-edit" className="modal cursor-pointer">
-          <label className="modal-box relative" htmlFor="">
-            <label
-              htmlFor="my-modal-edit"
-              className="btn btn-sm btn-circle absolute right-2 top-2"
-            >
-              ✕
-            </label>
-            <ProjectUpload />
           </label>
         </label>
       </div>

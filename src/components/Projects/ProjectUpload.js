@@ -1,13 +1,11 @@
 import React, { useRef, useState } from "react";
-import ProjectButton from "../../utils/ProjectButton";
-import ProjectButton2 from "../../utils/ProjectButton2";
 import ProjectButton3 from "../../utils/ProjectButton3";
-import uploadImg from "../../assets/uploadproject.png";
 import Dataimg from "../../assets/Data.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import JSZip from "jszip";
 
-const ProjectUpload = ({ myModal }) => {
+const ProjectUpload = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const inputRef = useRef();
@@ -37,6 +35,21 @@ const ProjectUpload = ({ myModal }) => {
     };
 
     reader.readAsDataURL(file);
+  };
+
+  // JSZip convert function
+
+  const handleFileInputChange = async (event) => {
+    console.log('start')
+    const files = event.target.files;
+    const zip = new JSZip();
+    files.forEach((file) => {
+      zip.file(file.name, file);
+    });
+    console.log('middle')
+    const zipBlob = await zip.generateAsync({ type: "blob" });
+    console.log('l')
+    console.log(zipBlob,"hhhhhhhhhhh"); 
   };
 
   // file convert to base64 end
@@ -127,12 +140,14 @@ const ProjectUpload = ({ myModal }) => {
                   ref={filenameRef}
                   onChangeCapture={onFileChange}
                   className="file-input w-full hidden  border-0 bg-white"
-                  onChange={handleFileConvertToBase64}
+                  onChange={handleFileInputChange}
+                  multiple
+                  directory="" webkitdirectory="" mozdirectory=""
                 />
                 {filename === "" ? (
                   <div
                     onClick={filenameHandler}
-                    className="flex items-center justify-between"
+                    className="flex gap-4 items-center"
                   >
                     <img className="mr-[5px]" src={Dataimg} alt="" /> File
                     Picker
@@ -204,10 +219,6 @@ const ProjectUpload = ({ myModal }) => {
             )}
           </div>
 
-          {/* <div className="mx-auto cencelation flex justify-between w-[253px] mt-[20px]"> */}
-          {/* <ProjectButton3>
-              <label htmlFor={myModal}>Cancel</label>{" "}
-            </ProjectButton3> */}
           <div className="text-center">
             <button
               type="submit"

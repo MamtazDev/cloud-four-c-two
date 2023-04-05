@@ -43,10 +43,6 @@ const AddUser = () => {
     }
   };
 
-  const handleCancel = () => {
-    navigate(`/dashboard/projectDetails/${id}`);
-  };
-
   const handleAccept = () => {
     const data = {
       user_id: user?.user_id,
@@ -64,13 +60,21 @@ const AddUser = () => {
           alert(res.data.message);
           navigate(`/dashboard/projectDetails/${id}`);
         }
+        if (role === "") {
+          alert("Please select a role");
+        }
       })
       .catch((err) => {
         if (err.response.status === 403) {
           navigate("/");
         }
       });
+    console.log(data, "add user");
   };
+
+  const AlertHandler= () => {
+    alert("You have to select a role first! ")
+  }
 
   return (
     <div className="addUser bg-white lg:rounded-l-[50px]  w-full  xl:h-full flex justify-center items-center">
@@ -107,14 +111,7 @@ const AddUser = () => {
                       <p className="poppins text-[15px] lg:text-[20px] font-[600]">
                         {i.username}
                       </p>
-                      {/* <p className="poppins text-[12px] font-[400]">
-                      You: Hello... &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.18
-                    </p> */}
-                      {/* <img
-                      className="right-[10px] top-[50%] h-[18px] w-[18px] rounded-[50%] absolute"
-                      src={imgSeen}
-                      alt="image"
-                    /> */}
+                    
                     </div>
                   </div>
                 ))}
@@ -123,9 +120,7 @@ const AddUser = () => {
 
           <div className="my-auto">
             <div className="flex  flex-col w-[121px] ">
-              {/* <button className="commissioner w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px  font-[500] rounded-[8px] p-[8px] mb-[10px]">
-                Filter
-              </button> */}
+             
               <div className="dropdown dropdown-right">
                 <label tabIndex={0}>
                   {" "}
@@ -179,7 +174,8 @@ const AddUser = () => {
               {/* <ProjectButton3>Accept</ProjectButton3> */}
 
               <button
-                onClick={handleAccept}
+                onClick={role === "" ? AlertHandler : handleAccept}
+                // disabled={role === ""}
                 className="commissioner min-w-[121px] bg-[#F1F6FF] text-[20px] leading-[38px font-[500] rounded-[8px] p-[8px] mb-[10px]"
               >
                 Accept

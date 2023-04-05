@@ -53,7 +53,7 @@ const CreateProject = () => {
       .then((res) => {
         if (res.data.message === "New project successfully created") {
           fetch(
-            "https://app.cloud4c2.com/api/project/start_editing/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=55d03128-d2a5-11ed-a528-b728a3ff4366",
+            `https://app.cloud4c2.com/api/project/start_editing/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=5 `,
             {
               method: "POST",
               headers: {

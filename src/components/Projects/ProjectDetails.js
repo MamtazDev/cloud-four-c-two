@@ -196,6 +196,61 @@ const ProjectDetails = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
 
+  const handleDelete = (id) => {
+    axios
+      .post(`https://app.cloud4c2.com/api/project/delete/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+
+      .then((res) => {
+        console.log(res);
+        // setProjects(projects.filter((item) => item.project_id !== res.data.user));
+        if (res.data.message === "project successfully deleted.") {
+          // window.location.reload(true);
+          navigate("/dashboard/project");
+        }
+        else{
+          alert(res.data.message)
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  };
+
+  const handleDisabled = (project) => {
+    const activation = {
+      activate: project.active === true ? "false" : "true",
+    };
+    axios
+      .post(
+        `https://app.cloud4c2.com/api/project/activate/${project.project_id}`,
+        activation,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.message === "Project activation changed") {
+          alert(res.data.message);
+          // window.location.reload(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  };
+
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
       <div className="max-w-[1091px]">
@@ -211,37 +266,21 @@ const ProjectDetails = () => {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px] mb-[40px]">
           <div>
-            {name ? (
-              <input
-                type="text"
-                name="project_name"
-                className="border w-full py-4 mb-4 px-3 rounded-md"
-              />
-            ) : (
-              <button
-                className="flex items-center justify-between px-4 commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
-                type=""
-              >
-                {project?.name} <BiEdit onClick={() => setName(true)} />
-              </button>
-            )}
-            {description ? (
-              <input
-                type="text"
-                name="project_description"
-                className="border w-full py-4 mb-4 px-3 rounded-md"
-              />
-            ) : (
-              <button
-                className="flex items-center justify-between px-4 commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
-                type=""
-              >
-                {project?.description
-                  ? project?.description
-                  : "Project Description"}{" "}
-                <BiEdit onClick={() => setDescription(true)} />
-              </button>
-            )}
+            <p
+              className="flex items-center justify-between px-4 commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
+              type=""
+            >
+              {project?.name}
+            </p>
+
+            <p
+              className="flex items-center justify-between px-4 commissioner outline_btn w-full mb-[20px] py-[18px] font-[500]"
+              type=""
+            >
+              {project?.description
+                ? project?.description
+                : "Project Description"}{" "}
+            </p>
 
             {/* <button
               className="commissioner outline_btn w-full py-[18px] font-[500] mb-[20px]"
@@ -251,10 +290,18 @@ const ProjectDetails = () => {
             </button> */}
             {user?.role === "administrator" && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px] mb-[20px]">
-                <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
-                  Disable project
+                <button
+                  onClick={() => handleDisabled(project)}
+                  className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
+                >
+                  {project?.active === true
+                    ? "Disable project"
+                    : "Active project"}{" "}
                 </button>
-                <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
+                <button
+                  onClick={() => handleDelete(project.project_id)}
+                  className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]"
+                >
                   Delete project
                 </button>
               </div>
@@ -345,37 +392,14 @@ const ProjectDetails = () => {
               {/* <button className="bg-[#3853A4] py-[17px] text-white text-[16px] font-[500] rounded-[5px]">
                 Change image
               </button> */}
-              <div>
-                <input
-                  type="file"
-                  ref={inputRef}
-                  accept="image/*"
-                  onChangeCapture={onFileChangeCapture}
-                  className="file-input w-full hidden  border-0 bg-white"
-                />
-                <button
-                  onClick={inputHandler}
-                  className="bg-[#3853A4] w-full py-[17px] text-white text-[16px] font-[500] rounded-[5px]"
-                >
-                  Change image
-                </button>
-              </div>
             </div>
           </div>
           <div>
-            {files === null ? (
-              <img
-                className="rounded-[12px] h-[305px] w-full"
-                src={project?.image}
-                alt=""
-              />
-            ) : (
-              <img
-                className="rounded-[12px] h-[305px] w-full"
-                src={files}
-                alt=""
-              />
-            )}
+            <img
+              className="rounded-[12px] h-[305px] w-full"
+              src={project?.image}
+              alt=""
+            />
           </div>
         </div>
 

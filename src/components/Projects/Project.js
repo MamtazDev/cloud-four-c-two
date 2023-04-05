@@ -95,7 +95,9 @@ const Project = () => {
         // setProjects(projects.filter((item) => item.project_id !== res.data.user));
         if (res.data.message === "project successfully deleted.") {
           window.location.reload(true);
+      
         }
+      
       })
       .catch((err) => {
         if (err.response.status === 403) {
@@ -351,7 +353,7 @@ const Project = () => {
                           <>
                             <li onClick={() => handleDisabled(project)}>
                               <a className="commissioner">
-                                {project.active === true
+                                {project?.active === true
                                   ? "Disable project"
                                   : "Active project"}{" "}
                               </a>

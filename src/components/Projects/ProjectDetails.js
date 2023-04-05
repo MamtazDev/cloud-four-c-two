@@ -57,7 +57,8 @@ const ProjectDetails = () => {
       .then((res) => {
         if (res.data.message === "you removed someone from the project") {
           alert(res.data.message);
-          window.location.reload(true);
+          // window.location.reload(true);
+          getProjects()
         }
       })
       .catch((err) => {

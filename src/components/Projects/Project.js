@@ -167,7 +167,9 @@ const Project = () => {
       console.log("start editing", res);
       const fullUrl = res.url;
       console.log("URL:", fullUrl);
-      const domain = fullUrl.split("/projectDetails/")[1];
+      const domain = fullUrl.split("/dashboard/")[1];
+
+      console.log("domain", domain)
 
       setTimeout(() => {
         redirectHandler(domain);

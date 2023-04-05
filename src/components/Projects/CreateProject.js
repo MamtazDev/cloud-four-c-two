@@ -74,34 +74,6 @@ const CreateProject = () => {
         }
       });
   };
-  const handleEditor = (projectId) => {
-    console.log("clicked on handleEditor");
-
-    fetch(
-      `app.cloud4c2.com/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=${projectId}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-          credentials: "include",
-        },
-      }
-    ).then((res) => {
-      console.log("start editing", res);
-      const fullUrl = res.url;
-      console.log("URL:", fullUrl);
-      const domain = fullUrl.split("/projectDetails/")[1];
-
-      setTimeout(() => {
-        redirectHandler(domain);
-      }, 2000);
-
-      // if (res.ok === true) {
-      // navigate(`/${domain}`);
-      // }
-    });
-  };
 
   const redirectHandler = (domain) => {
     console.log("Redirect function is triggered", domain);

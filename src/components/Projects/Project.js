@@ -169,15 +169,11 @@ const Project = () => {
       console.log("URL:", fullUrl);
       const domain = fullUrl.split("/dashboard/")[1];
 
-      console.log("domain", domain)
+      console.log("domain", domain);
 
       setTimeout(() => {
         redirectHandler(domain);
       }, 2000);
-
-      // if (res.ok === true) {
-      // navigate(`/${domain}`);
-      // }
     });
   };
 

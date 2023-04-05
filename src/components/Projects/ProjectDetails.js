@@ -27,6 +27,11 @@ const ProjectDetails = () => {
   const closeHandler = () => {
     closeRef.current.click();
   };
+  const usercloseRef = useRef();
+
+  const usercloseHandler = () => {
+    usercloseRef.current.click();
+  };
 
   const handleDeleteSession = (id) => {
     axios
@@ -598,12 +603,13 @@ const ProjectDetails = () => {
                 className="modal-box relative max-w-4xl rounded-[16px]"
               >
                 <label
+                  ref={usercloseRef}
                   htmlFor="my-modal-user"
                   className="btn btn-sm btn-circle absolute right-2 top-2"
                 >
                   ✕
                 </label>
-                <AddUser />
+                <AddUser closeRef={usercloseHandler}  />
               </label>
             </label>
           </div>

@@ -91,11 +91,11 @@ const EditProject = ({ id }) => {
               onClick={inputHandler}
               className="profile relative cursor-pointer "
             >
-              <img
+              {/* <img
                 className="relative z-[99] h-[192px] w-full"
                 src="https://lppm.upnjatim.ac.id/assets/img/nophoto.png"
                 alt=""
-              />
+              /> */}
               <button className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
                 Pick new image
               </button>

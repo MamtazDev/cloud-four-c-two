@@ -257,6 +257,9 @@ const ProjectDetails = () => {
   };
 
   const handleEditor = (projectId) => {
+
+    console.log("clicked on handleEditor")
+
     fetch(
       `app.cloud4c2.com/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=${projectId}`,
       {
@@ -267,8 +270,38 @@ const ProjectDetails = () => {
           credentials: "include",
         },
       }
-    ).then((response) => console.log(response, "start editing"));
+    ).then((res) => {
+      console.log( "start editing" , res);
+      const fullUrl = res.url;
+      console.log("URL:", fullUrl);
+      // const startIndex = fullUrl.indexOf('/dashboard/projectDetails');
+      // const slicedUrl = fullUrl.slice(startIndex);
+
+      // const domainIndex = slicedUrl.indexOf('/');
+      const domain = fullUrl.split('/projectDetails/')[1];
+
+
+      console.log(domain, "domain");
+
+      // if(domain) return redirectHandler(domain)
+
+      setTimeout( () => {
+        redirectHandler(domain)
+      }, 2000)
+
+
+      // if (res.ok === true) {
+        // navigate(`/${domain}`);
+      // }
+    });
   };
+
+  const redirectHandler = (domain) => {
+
+    console.log("Redirect function is triggered", domain)
+
+    window.open(` ${"http://"+domain}`, '_blank')
+  }
 
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
@@ -451,7 +484,7 @@ const ProjectDetails = () => {
             {project?.sessions?.map((session, index) => (
               <div className="flex ">
                 <p className="commissioner font-[500] p-2 lg:w-[210px] lg:pl-[17px] lg:py-[20px]">
-                  Sessions {index + 1}{" "}
+                  {session.session_name ? session.session_name : "No Name"}
                 </p>
 
                 <a

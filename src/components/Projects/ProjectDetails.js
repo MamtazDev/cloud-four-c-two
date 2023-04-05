@@ -22,6 +22,12 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
 
+  const closeRef = useRef();
+
+  const closeHandler = () => {
+    closeRef.current.click();
+  };
+
   const handleDeleteSession = (id) => {
     axios
       .post(`https://app.cloud4c2.com/api/session/delete/${id}`)
@@ -211,9 +217,8 @@ const ProjectDetails = () => {
         if (res.data.message === "project successfully deleted.") {
           // window.location.reload(true);
           navigate("/dashboard/project");
-        }
-        else{
-          alert(res.data.message)
+        } else {
+          alert(res.data.message);
         }
       })
       .catch((err) => {
@@ -309,31 +314,10 @@ const ProjectDetails = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
               {/* <!-- The button to open modal --> */}
-              <label
-                for="my-modal-editor"
-                className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
-              >
+              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center">
                 {" "}
                 Open in Editor
-              </label>
-
-              {/* <!-- Put this part before </body> tag --> */}
-              <input
-                type="checkbox"
-                id="my-modal-editor"
-                class="modal-toggle"
-              />
-              <label for="my-modal-editor" class="modal">
-                <label class="modal-box relative">
-                  <label
-                    for="my-modal-editor"
-                    class="btn btn-sm btn-circle absolute right-2 top-2"
-                  >
-                    ✕
-                  </label>
-                  <ProjectUpload />
-                </label>
-              </label>
+              </button>
 
               {/* The button to open modal */}
               <label
@@ -352,12 +336,14 @@ const ProjectDetails = () => {
               <label htmlFor="my-modal-copy" className="modal">
                 <label htmlFor="" className="modal-box relative">
                   <label
+                    ref={closeRef}
                     htmlFor="my-modal-copy"
                     className="btn btn-sm btn-circle absolute right-2 top-2"
                   >
                     ✕
                   </label>
-                  <ProjectCopy myModal={"my-modal-3"} />
+                  <ProjectCopy closeRef={closeHandler} myModal={"my-modal-3"} />
+                  {/* <p onClick={() => closeHandler()}>Dihan</p> */}
                 </label>
               </label>
               {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">

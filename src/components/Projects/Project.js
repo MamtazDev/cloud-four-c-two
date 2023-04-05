@@ -282,7 +282,6 @@ const Project = () => {
                             htmlFor="my-modal-user"
                             className="commissioner"
                           >
-                            {" "}
                             Share
                           </label>
                         </li>
@@ -312,7 +311,6 @@ const Project = () => {
                             htmlFor="my-modal-session"
                             className="commissioner"
                           >
-                            {" "}
                             Start session
                           </label>
                         </li>

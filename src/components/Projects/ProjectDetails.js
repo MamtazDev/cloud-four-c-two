@@ -256,6 +256,20 @@ const ProjectDetails = () => {
       });
   };
 
+  const handleEditor = (projectId) => {
+    fetch(
+      `app.cloud4c2.com/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=${projectId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          credentials: "include",
+        },
+      }
+    ).then((response) => console.log(response, "start editing"));
+  };
+
   return (
     <div className="bg-[#FFFBFB] lg:py-[61px] lg:px-[57px] lg:rounded-[50px] p-4">
       <div className="max-w-[1091px]">
@@ -314,7 +328,10 @@ const ProjectDetails = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
               {/* <!-- The button to open modal --> */}
-              <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center">
+              <button
+                onClick={() => handleEditor(project.project_id)}
+                className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
+              >
                 {" "}
                 Open in Editor
               </button>

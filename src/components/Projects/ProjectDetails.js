@@ -84,21 +84,26 @@ const ProjectDetails = () => {
       });
   };
 
-  useEffect(() => {
+
+  const getProjects = () =>{
     axios
-      .post(`https://app.cloud4c2.com/api/project/details/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-      .then((response) => setProject(response.data.project))
-      .catch((err) => {
-        if (err.response.status === 403) {
-          navigate("/");
-        }
-      });
-  }, [deletesession, id, navigate]);
+    .post(`https://app.cloud4c2.com/api/project/details/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
+    })
+    .then((response) => setProject(response.data.project))
+    .catch((err) => {
+      if (err.response.status === 403) {
+        navigate("/");
+      }
+    });
+  }
+
+  useEffect(() => {
+    getProjects()
+  }, []);
 
   const handleLeave = (id) => {
     axios
@@ -609,7 +614,7 @@ const ProjectDetails = () => {
                 >
                   ✕
                 </label>
-                <AddUser closeRef={usercloseHandler}  />
+                <AddUser getProjects={getProjects} closeRef={usercloseHandler}  />
               </label>
             </label>
           </div>

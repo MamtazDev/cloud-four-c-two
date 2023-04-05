@@ -73,7 +73,7 @@ const AddUser = () => {
   };
 
   const AlertHandler= () => {
-    alert("You have to select an role first! ")
+    alert("You have to select a role first! ")
   }
 
   return (

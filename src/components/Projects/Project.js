@@ -94,7 +94,9 @@ const Project = () => {
         console.log(res);
         // setProjects(projects.filter((item) => item.project_id !== res.data.user));
         if (res.data.message === "project successfully deleted.") {
-          window.location.reload(true);
+          // window.location.reload(true);
+          const updatedProjects = projects.filter((item) => item.project_id !== id);
+          setProjects(updatedProjects);
         }
       })
       .catch((err) => {
@@ -374,7 +376,7 @@ const Project = () => {
 
                           {/* The button to open modal */}
                           <p
-                              onClick={() => handleEditor(project.project_id)}
+                            onClick={() => handleEditor(project.project_id)}
                             className={
                               user?.role === "viewer"
                                 ? "hidden"

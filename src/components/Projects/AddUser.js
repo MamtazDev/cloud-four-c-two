@@ -7,7 +7,7 @@ import { UserContext } from "../../context/AuthProvider";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-const AddUser = () => {
+const AddUser = ({ closeRef }) => {
   const { userList, setUserList } = useContext(UserContext);
 
   const [searchText, SetSearchText] = useState("");
@@ -59,9 +59,7 @@ const AddUser = () => {
         if (res.data.message === "user added to project") {
           alert(res.data.message);
           navigate(`/dashboard/projectDetails/${id}`);
-        }
-        if (role === "") {
-          alert("Please select a role");
+          closeRef();
         }
       })
       .catch((err) => {
@@ -72,9 +70,9 @@ const AddUser = () => {
     console.log(data, "add user");
   };
 
-  const AlertHandler= () => {
-    alert("You have to select a role first! ")
-  }
+  const AlertHandler = () => {
+    alert("You have to select a role first! ");
+  };
 
   return (
     <div className="addUser bg-white lg:rounded-l-[50px]  w-full  xl:h-full flex justify-center items-center">
@@ -111,7 +109,6 @@ const AddUser = () => {
                       <p className="poppins text-[15px] lg:text-[20px] font-[600]">
                         {i.username}
                       </p>
-                    
                     </div>
                   </div>
                 ))}
@@ -120,7 +117,6 @@ const AddUser = () => {
 
           <div className="my-auto">
             <div className="flex  flex-col w-[121px] ">
-             
               <div className="dropdown dropdown-right">
                 <label tabIndex={0}>
                   {" "}

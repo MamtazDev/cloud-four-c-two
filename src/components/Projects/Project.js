@@ -95,7 +95,9 @@ const Project = () => {
         // setProjects(projects.filter((item) => item.project_id !== res.data.user));
         if (res.data.message === "project successfully deleted.") {
           // window.location.reload(true);
-          const updatedProjects = projects.filter((item) => item.project_id !== id);
+          const updatedProjects = projects.filter(
+            (item) => item.project_id !== id
+          );
           setProjects(updatedProjects);
         }
       })

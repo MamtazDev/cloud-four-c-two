@@ -44,7 +44,7 @@ const ProjectDetails = () => {
       .then((res) => {
         if (res.data.message === "session deleted") {
           setDelete(!deletesession);
-          getProjects()
+          getProjects();
         }
       })
       .catch((err) => {
@@ -64,7 +64,7 @@ const ProjectDetails = () => {
         if (res.data.message === "you removed someone from the project") {
           alert(res.data.message);
           // window.location.reload(true);
-          getProjects()
+          getProjects();
         }
       })
       .catch((err) => {
@@ -91,25 +91,24 @@ const ProjectDetails = () => {
       });
   };
 
-
-  const getProjects = () =>{
+  const getProjects = () => {
     axios
-    .post(`https://app.cloud4c2.com/api/project/details/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
-      },
-    })
-    .then((response) => setProject(response.data.project))
-    .catch((err) => {
-      if (err.response.status === 403) {
-        navigate("/");
-      }
-    });
-  }
+      .post(`https://app.cloud4c2.com/api/project/details/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+      .then((response) => setProject(response.data.project))
+      .catch((err) => {
+        if (err.response.status === 403) {
+          navigate("/");
+        }
+      });
+  };
 
   useEffect(() => {
-    getProjects()
+    getProjects();
   }, []);
 
   const handleLeave = (id) => {
@@ -480,13 +479,16 @@ const ProjectDetails = () => {
             <label htmlFor="my-modal-session" className="modal cursor-pointer">
               <label className="modal-box relative" htmlFor="">
                 <label
-                ref={sessioncloseRef}
+                  ref={sessioncloseRef}
                   htmlFor="my-modal-session"
                   className="btn btn-sm btn-circle absolute right-2 top-2"
                 >
                   ✕
                 </label>
-                <StartSession closeRef={sessioncloseHandler} myModal={"my-modal-session"} />
+                <StartSession
+                  closeRef={sessioncloseHandler}
+                  myModal={"my-modal-session"}
+                />
               </label>
             </label>
           </div>
@@ -622,7 +624,10 @@ const ProjectDetails = () => {
                 >
                   ✕
                 </label>
-                <AddUser getProjects={getProjects} closeRef={usercloseHandler}  />
+                <AddUser
+                  getProjects={getProjects}
+                  closeRef={usercloseHandler}
+                />
               </label>
             </label>
           </div>
@@ -649,7 +654,13 @@ const ProjectDetails = () => {
 
                   {/* Remove (ANALYST) */}
                 </p>
-                <select className=" session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400]">
+                <select
+                  className={
+                    user?.role === "viewer"
+                      ? "bg-red-200"
+                      : " session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
+                  }
+                >
                   <option disabled selected>
                     {" "}
                     Change role (ANALYST)

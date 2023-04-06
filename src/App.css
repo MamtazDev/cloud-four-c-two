@@ -19,3 +19,15 @@ label.commissioner:active{
   background-color: unset;
   color: black;
 }
+button.commissioner:active{
+  background-color: unset;
+  color: black;
+}
+p.commissioner:active{
+  background-color: unset;
+  color: black;
+}
+a.commissioner:active{
+  background-color: unset;
+  color: black;
+}

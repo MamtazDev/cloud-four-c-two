@@ -327,8 +327,7 @@ const Project = () => {
                         </li> */}
 
                         <li>
-                          {/* <a className="commissioner">Share</a> */}
-                          {/* The button to open modal */}
+                        
 
                           
                           <label

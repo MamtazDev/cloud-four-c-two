@@ -167,15 +167,13 @@ const Project = () => {
       console.log("start editing", res);
       const fullUrl = res.url;
       console.log("URL:", fullUrl);
-      const domain = fullUrl.split("/projectDetails/")[1];
+      const domain = fullUrl.split("/dashboard/")[1];
+
+      console.log("domain", domain);
 
       setTimeout(() => {
         redirectHandler(domain);
       }, 2000);
-
-      // if (res.ok === true) {
-      // navigate(`/${domain}`);
-      // }
     });
   };
 
@@ -226,6 +224,19 @@ const Project = () => {
            text-white text-[15px]  font-[500] rounded-[5px]"
           >
             Upload Project
+          </label>
+          {/* Put this part before </body> tag */}
+          <input type="checkbox" id="my-modal-edit" className="modal-toggle" />
+          <label htmlFor="my-modal-edit" className="modal">
+            <label htmlFor="" className="modal-box relative">
+              <label
+                htmlFor="my-modal-edit"
+                className="btn btn-sm btn-circle absolute right-2 top-2"
+              >
+                ✕
+              </label>
+              <ProjectUpload />
+            </label>
           </label>
         </div>
       </div>

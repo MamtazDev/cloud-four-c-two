@@ -7,8 +7,10 @@ const CreateProject = () => {
   const [file, setFile] = useState(null);
   const [base64Image, setBase64Image] = useState("");
   const inputRef = useRef();
+
   // image upload start
   const onFileChangeCapture = (e) => {
+    e.preventDefault();
     setFile(URL.createObjectURL(e.target.files[0]));
   };
 
@@ -17,6 +19,7 @@ const CreateProject = () => {
   };
   // image upload end
   const handleImageChange = (event) => {
+    event.preventDefault();
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -73,34 +76,6 @@ const CreateProject = () => {
           navigate("/");
         }
       });
-  };
-  const handleEditor = (projectId) => {
-    console.log("clicked on handleEditor");
-
-    fetch(
-      `app.cloud4c2.com/editor/?editorID=124ebb02-8d9c-4d28-a6c1-da523dbda0ee&projectID=${projectId}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-          credentials: "include",
-        },
-      }
-    ).then((res) => {
-      console.log("start editing", res);
-      const fullUrl = res.url;
-      console.log("URL:", fullUrl);
-      const domain = fullUrl.split("/projectDetails/")[1];
-
-      setTimeout(() => {
-        redirectHandler(domain);
-      }, 2000);
-
-      // if (res.ok === true) {
-      // navigate(`/${domain}`);
-      // }
-    });
   };
 
   const redirectHandler = (domain) => {
@@ -161,7 +136,7 @@ const CreateProject = () => {
                 src="https://lppm.upnjatim.ac.id/assets/img/nophoto.png"
                 alt=""
               />
-              <button className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
+              <button type="button" className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
                 Pick new image
               </button>
             </div>

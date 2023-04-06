@@ -96,7 +96,10 @@ const EditProject = ({ id }) => {
                 src="https://lppm.upnjatim.ac.id/assets/img/nophoto.png"
                 alt=""
               /> */}
-              <button className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]">
+              <button
+                type="button"
+                className="underline commissioner w-full bg-[#F8FAFF] text-[18px] font-[500] text-center py-[15px] mt-[-10px] z-[9]"
+              >
                 Pick new image
               </button>
             </div>

@@ -7,7 +7,7 @@ import { UserContext } from "../../context/AuthProvider";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-const AddUser = ({ closeRef }) => {
+const AddUser = ({ closeRef,getProjects }) => {
   const { userList, setUserList } = useContext(UserContext);
 
   const [searchText, SetSearchText] = useState("");
@@ -59,6 +59,7 @@ const AddUser = ({ closeRef }) => {
         if (res.data.message === "user added to project") {
           alert(res.data.message);
           navigate(`/dashboard/projectDetails/${id}`);
+          getProjects()
           closeRef();
         }
       })

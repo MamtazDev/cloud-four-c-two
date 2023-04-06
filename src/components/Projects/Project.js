@@ -22,6 +22,8 @@ const Project = () => {
   const [return_deactivated, setReturn_deactivated] = useState(false);
   const [return_deleted, setReturn_deleted] = useState(false);
   const [base64Image, setBase64Image] = useState("");
+
+  const [projectShareID, setProjectShareID]= useState("")
   const navigate = useNavigate();
   const navigateToItemDetails = (id) => {
     navigate(`/dashboard/projectDetails/${id}`);
@@ -327,6 +329,8 @@ const Project = () => {
                         <li>
                           {/* <a className="commissioner">Share</a> */}
                           {/* The button to open modal */}
+
+                          
                           <label
                             htmlFor="my-modal-user"
                             className={
@@ -334,6 +338,7 @@ const Project = () => {
                                 ? "hidden"
                                 : "commissioner"
                             }
+                            onClick={()=>setProjectShareID(project.project_id)}
                           >
                             Share
                           </label>
@@ -367,6 +372,7 @@ const Project = () => {
                                 ? "hidden"
                                 : "commissioner"
                             }
+                            onClick={()=>setProjectShareID(project.project_id)}
                           >
                             Start session
                           </label>
@@ -470,7 +476,7 @@ const Project = () => {
             >
               ✕
             </label>
-            <AddUser />
+            <AddUser projectId={projectShareID} />
           </label>
         </label>
         {/* Put this part before </body> tag */}
@@ -484,7 +490,7 @@ const Project = () => {
             >
               ✕
             </label>
-            <StartSession myModal={"my-modal-session"} />
+            <StartSession projectId={projectShareID}  />
           </label>
         </label>
       </div>

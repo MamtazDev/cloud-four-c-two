@@ -1,33 +1,30 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ProjectButton from "../../utils/ProjectButton";
-import ProjectButton2 from "../../utils/ProjectButton2";
-import ProjectButton3 from "../../utils/ProjectButton3";
 
-const StartSession = ({ myModal }) => {
-  const [sessionNameShow, setSessionNameShow] = useState(false);
-  const [sessionDescriptionShow, setSessionDescriptionShow] = useState(false);
+const StartSession = ({ projectId, closeRef }) => {
   const [sessionName, setSessionName] = useState("");
   const [sessionDescription, setSessionDescription] = useState("");
   const { id } = useParams();
+  const newId = id ? id : projectId;
 
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
   const handleCreateSession = () => {
     axios
-      .post(`https://app.cloud4c2.com/api/session/create/${id}`, {
+      .post(`https://app.cloud4c2.com/api/session/create/${newId}`, {
         session_name: sessionName,
         session_description: sessionDescription,
       })
 
       .then((res) => {
         if (res.data.message === "session created") {
-          setSessionNameShow(false);
-          setSessionDescriptionShow(false);
+          alert(res.data.message);
+          navigate(`/dashboard/projectDetails/${newId}`);
           window.location.reload(true);
-          // navigate("/dashboard/project");
+          closeRef();
         }
       })
       .catch((err) => {

@@ -39,6 +39,7 @@ const ProjectDetails = () => {
       .then((res) => {
         if (res.data.message === "session deleted") {
           setDelete(!deletesession);
+          getProjects()
         }
       })
       .catch((err) => {

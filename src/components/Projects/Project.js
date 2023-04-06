@@ -225,6 +225,19 @@ const Project = () => {
           >
             Upload Project
           </label>
+          {/* Put this part before </body> tag */}
+          <input type="checkbox" id="my-modal-edit" className="modal-toggle" />
+          <label htmlFor="my-modal-edit" className="modal">
+            <label htmlFor="" className="modal-box relative">
+              <label
+                htmlFor="my-modal-edit"
+                className="btn btn-sm btn-circle absolute right-2 top-2"
+              >
+                ✕
+              </label>
+              <ProjectUpload />
+            </label>
+          </label>
         </div>
       </div>
       {user?.role === "administrator" && (

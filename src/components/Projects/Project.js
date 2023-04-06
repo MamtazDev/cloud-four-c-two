@@ -372,6 +372,7 @@ const Project = () => {
                                 ? "hidden"
                                 : "commissioner"
                             }
+                            onClick={()=>setProjectShareID(project.project_id)}
                           >
                             Start session
                           </label>
@@ -489,7 +490,7 @@ const Project = () => {
             >
               ✕
             </label>
-            <StartSession myModal={"my-modal-session"} />
+            <StartSession projectId={projectShareID}  />
           </label>
         </label>
       </div>

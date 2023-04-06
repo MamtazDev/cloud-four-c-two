@@ -32,6 +32,11 @@ const ProjectDetails = () => {
   const usercloseHandler = () => {
     usercloseRef.current.click();
   };
+  const sessioncloseRef = useRef();
+
+  const sessioncloseHandler = () => {
+    sessioncloseRef.current.click();
+  };
 
   const handleDeleteSession = (id) => {
     axios
@@ -475,12 +480,13 @@ const ProjectDetails = () => {
             <label htmlFor="my-modal-session" className="modal cursor-pointer">
               <label className="modal-box relative" htmlFor="">
                 <label
+                ref={sessioncloseRef}
                   htmlFor="my-modal-session"
                   className="btn btn-sm btn-circle absolute right-2 top-2"
                 >
                   ✕
                 </label>
-                <StartSession myModal={"my-modal-session"} />
+                <StartSession closeRef={sessioncloseHandler} myModal={"my-modal-session"} />
               </label>
             </label>
           </div>

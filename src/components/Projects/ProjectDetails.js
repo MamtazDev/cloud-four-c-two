@@ -5,16 +5,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectCopy from "./ProjectCopy";
 import StartSession from "./StartSession";
 import AddUser from "./AddUser";
-import { BiEdit } from "react-icons/bi";
 import { UserContext } from "../../context/AuthProvider";
-import ProjectUpload from "./ProjectUpload";
 import EditProject from "./EditProject";
 
 const ProjectDetails = () => {
-  const [name, setName] = useState(false);
   const [user, setUser] = useState();
   const { userList, setUserList } = useContext(UserContext);
-  const [description, setDescription] = useState(false);
   const [project, setProject] = useState();
   const [projectLog, setProjectLog] = useState([]);
   const { id } = useParams();
@@ -337,12 +333,6 @@ const ProjectDetails = () => {
                 : "Project Description"}{" "}
             </p>
 
-            {/* <button
-              className="commissioner outline_btn w-full py-[18px] font-[500] mb-[20px]"
-              type=""
-            >
-              Edit description
-            </button> */}
             {user?.role === "administrator" && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px] mb-[20px]">
                 <button
@@ -365,11 +355,10 @@ const ProjectDetails = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-[15px]">
               {/* <!-- The button to open modal --> */}
               <button
-                disabled={user?.role === "viewer"}
                 onClick={() => handleEditor(project.project_id)}
                 className={
                   user?.role === "viewer"
-                    ? "bg-red-500"
+                    ? "hidden"
                     : "bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
                 }
               >
@@ -401,18 +390,14 @@ const ProjectDetails = () => {
                     ✕
                   </label>
                   <ProjectCopy closeRef={closeHandler} myModal={"my-modal-3"} />
-                  {/* <p onClick={() => closeHandler()}>Dihan</p> */}
                 </label>
               </label>
-              {/* <button className="bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px]">
-                Edit project
-              </button> */}
-              {/* The button to open modal */}
+
               <label
                 htmlFor="my-modal-edit"
                 className={
                   user?.role === "viewer"
-                    ? "bg-red-500"
+                    ? "hidden"
                     : "bg-[#3853A4] py-[17px]  text-white text-[16px] font-[500] rounded-[5px] text-center"
                 }
               >
@@ -437,9 +422,6 @@ const ProjectDetails = () => {
                   <EditProject id={project?.project_id} />
                 </label>
               </label>
-              {/* <button className="bg-[#3853A4] py-[17px] text-white text-[16px] font-[500] rounded-[5px]">
-                Change image
-              </button> */}
             </div>
           </div>
           <div>
@@ -461,7 +443,7 @@ const ProjectDetails = () => {
               htmlFor="my-modal-session"
               className={
                 user?.role === "viewer"
-                  ? "bg-red-500"
+                  ? "hidden"
                   : "outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
               }
             >
@@ -511,13 +493,12 @@ const ProjectDetails = () => {
                   onClick={() => handleDeleteSession(session.session_id)}
                   className={
                     user?.role === "viewer"
-                      ? "bg-red-200"
+                      ? "hidden"
                       : "commissioner session_bg p-2 lg:px-5 lg:py-[20px] text-center font-[400]"
                   }
                 >
                   Delete {user?.role === "analyst" ? "(ANALYST)" : ""}
                 </button>
-                <button></button>
 
                 {/* The button to open modal */}
                 <label
@@ -574,18 +555,6 @@ const ProjectDetails = () => {
                 </Link>
               </div>
             ))}
-            {/* <div className="flex text-[16px]">
-              <p className="commissioner w-[210px] font-[500] pl-[17px] py-[20px]">
-                Sessions 02{" "}
-              </p>
-
-              <p className="commissioner session_bg  w-[111px] py-[20px] text-center font-[400]">
-                Join
-              </p>
-              <p className="commissioner session_bg  w-[226px] py-[20px] text-center font-[400]">
-                Delete (ANALYST)
-              </p>
-            </div> */}
           </div>
         </div>
         {/* user part */}
@@ -598,7 +567,7 @@ const ProjectDetails = () => {
               htmlFor="my-modal-user"
               className={
                 user?.role === "viewer"
-                  ? "bg-red-500"
+                  ? "hidden"
                   : "outfit bg-[#3853A4] p-3 lg:py-[17px] lg:px-[50px] text-white text-[15px] lg:text-[20px] font-[500] rounded-[5px]"
               }
             >
@@ -641,7 +610,7 @@ const ProjectDetails = () => {
                 <p
                   className={
                     user?.role === "viewer"
-                      ? "bg-red-200"
+                      ? "hidden"
                       : " session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
                   }
                   onClick={() =>
@@ -657,7 +626,7 @@ const ProjectDetails = () => {
                 <select
                   className={
                     user?.role === "viewer"
-                      ? "bg-red-200"
+                      ? "hidden"
                       : " session_bg lg:w-[257px] lg:py-[20px] p-2 text-center font-[400] cursor-pointer"
                   }
                 >
@@ -670,19 +639,6 @@ const ProjectDetails = () => {
                 </select>
               </div>
             ))}
-
-            {/* <div className="flex text-[16px]">
-              <p className="flex items-center gap-[11px] font-[500] w-[210px] pl-[17px] py-[20px]">
-                <img width={36} src={sarah} alt="" /> Sarah
-              </p>
-
-              <p className=" session_bg  w-[257px] py-[20px] text-center font-[400]">
-                Remove (ANALYST)
-              </p>
-              <p className=" session_bg  w-[257px] py-[20px] text-center font-[400]">
-                Change role (ANALYST)
-              </p>
-            </div> */}
           </div>
         </div>
         {/* recent activity part */}

@@ -1,15 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import BlueButton from "../../utils/BlueButton";
+import React, { useEffect, useState } from "react";
 import "./Project.css";
 import picture from "../../assets/upload-img.png";
-import code from "../../assets/code.png";
-import close from "../../assets/close.png";
 import more from "../../assets/more.png";
-import staff from "../../assets/staff.png";
-import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import CreateProject from "./CreateProject";
-import { useCookies } from "react-cookie";
 import axios from "axios";
 import ProjectUpload from "./ProjectUpload";
 import AddUser from "./AddUser";
@@ -23,7 +17,7 @@ const Project = () => {
   const [return_deleted, setReturn_deleted] = useState(false);
   const [base64Image, setBase64Image] = useState("");
 
-  const [projectShareID, setProjectShareID]= useState("")
+  const [projectShareID, setProjectShareID] = useState("");
   const navigate = useNavigate();
   const navigateToItemDetails = (id) => {
     navigate(`/dashboard/projectDetails/${id}`);
@@ -42,7 +36,8 @@ const Project = () => {
   // console.log(base64Image);
 
   axios.defaults.withCredentials = true;
-  useEffect(() => {
+
+  const handleMyprojects = () => {
     const info = {
       filter: filter,
       return_deactivated: return_deactivated,
@@ -61,7 +56,11 @@ const Project = () => {
           navigate("/");
         }
       });
-  }, [filter, return_deactivated, return_deleted, navigate]);
+  };
+
+  useEffect(() => {
+    handleMyprojects();
+  }, []);
 
   const handleLeave = (id) => {
     axios
@@ -129,6 +128,7 @@ const Project = () => {
         if (res.data.message === "Project activation changed") {
           alert(res.data.message);
           // window.location.reload(true);
+          handleMyprojects();
         }
       })
       .catch((err) => {
@@ -327,9 +327,6 @@ const Project = () => {
                         </li> */}
 
                         <li>
-                        
-
-                          
                           <label
                             htmlFor="my-modal-user"
                             className={
@@ -337,7 +334,9 @@ const Project = () => {
                                 ? "hidden"
                                 : "commissioner"
                             }
-                            onClick={()=>setProjectShareID(project.project_id)}
+                            onClick={() =>
+                              setProjectShareID(project.project_id)
+                            }
                           >
                             Share
                           </label>
@@ -371,7 +370,9 @@ const Project = () => {
                                 ? "hidden"
                                 : "commissioner"
                             }
-                            onClick={()=>setProjectShareID(project.project_id)}
+                            onClick={() =>
+                              setProjectShareID(project.project_id)
+                            }
                           >
                             Start session
                           </label>
@@ -489,7 +490,7 @@ const Project = () => {
             >
               ✕
             </label>
-            <StartSession projectId={projectShareID}  />
+            <StartSession projectId={projectShareID} />
           </label>
         </label>
       </div>

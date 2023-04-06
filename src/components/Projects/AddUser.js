@@ -7,11 +7,13 @@ import { UserContext } from "../../context/AuthProvider";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-const AddUser = ({ closeRef,getProjects }) => {
+const AddUser = ({ closeRef,getProjects,projectId }) => {
   const { userList, setUserList } = useContext(UserContext);
 
   const [searchText, SetSearchText] = useState("");
   const { id } = useParams();
+
+  const newId = id? id: projectId
 
   const navigate = useNavigate();
 
@@ -49,7 +51,7 @@ const AddUser = ({ closeRef,getProjects }) => {
       role,
     };
     axios
-      .post(`https://app.cloud4c2.com/api/project/add_user/${id}`, data, {
+      .post(`https://app.cloud4c2.com/api/project/add_user/${newId}`, data, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Credentials": true,
@@ -58,7 +60,7 @@ const AddUser = ({ closeRef,getProjects }) => {
       .then((res) => {
         if (res.data.message === "user added to project") {
           alert(res.data.message);
-          navigate(`/dashboard/projectDetails/${id}`);
+          navigate(`/dashboard/projectDetails/${newId}`);
           getProjects()
           closeRef();
         }
@@ -74,6 +76,8 @@ const AddUser = ({ closeRef,getProjects }) => {
   const AlertHandler = () => {
     alert("You have to select a role first! ");
   };
+
+  console.log(newId)
 
   return (
     <div className="addUser bg-white lg:rounded-l-[50px]  w-full  xl:h-full flex justify-center items-center">

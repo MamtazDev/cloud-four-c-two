@@ -3,7 +3,7 @@ import ProjectButton3 from "../../utils/ProjectButton3";
 import Dataimg from "../../assets/Data.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import JSZip from "jszip";
+import UploadFolder from "./UploadFolder";
 
 const ProjectUpload = () => {
   const navigate = useNavigate();
@@ -11,6 +11,9 @@ const ProjectUpload = () => {
   const inputRef = useRef();
   const [base64Image, setBase64Image] = useState("");
   const [base64File, setBase64File] = useState("");
+
+  const [zipFile, setzipFile] = useState("");
+  const [zipFilename, setzipFilename] = useState("");
 
   // img base64 convert start
   const handleImageChange = (event) => {
@@ -38,19 +41,18 @@ const ProjectUpload = () => {
   };
 
   // JSZip convert function
-
-  const handleFileInputChange = async (event) => {
-    console.log('start')
-    const files = event.target.files;
-    const zip = new JSZip();
-    files.forEach((file) => {
-      zip.file(file.name, file);
-    });
-    console.log('middle')
-    const zipBlob = await zip.generateAsync({ type: "blob" });
-    console.log('l')
-    console.log(zipBlob,"hhhhhhhhhhh"); 
-  };
+  // const handleFileInputChange = async (event) => {
+  //   console.log('start')
+  //   const files = event.target.files;
+  //   const zip = new JSZip();
+  //   files.forEach((file) => {
+  //     zip.file(file.name, file);
+  //   });
+  //   console.log('middle')
+  //   const zipBlob = await zip.generateAsync({ type: "blob" });
+  //   console.log('l')
+  //   console.log(zipBlob,"hhhhhhhhhhh");
+  // };
 
   // file convert to base64 end
 
@@ -59,14 +61,17 @@ const ProjectUpload = () => {
     e.preventDefault();
     const project_name = e.target.project_name.value;
     const project_description = e.target.project_description.value;
-    const project_path_to_execute = e.target.project_path_to_execute.value;
+    const project_path_to_execute = zipFilename;
 
     const info = {
       project_name,
-      file_data: base64File,
+      // file_data: "data:text/plain;base64," + zipFile,
+      file_data: zipFile,
       project_image: base64Image,
-      project_path_to_execute,
       project_description,
+
+      // zipped file property
+      project_path_to_execute,
     };
     console.log(info, "click");
 
@@ -119,6 +124,7 @@ const ProjectUpload = () => {
 
   // console.log(base64File,"file")
   // console.log(base64Image,"image")
+
   return (
     <div className="bg-white lg:rounded-l-[50px] project__copy max-w-[700px] mx-auto h-full flex justify-center items-center">
       <div className="copy__inner  border-[1px] rounded-[8px] bordered-[#F8FAFF] shadow-black px-[28px] py-[20px] flex flex-col items-center w-full">
@@ -127,23 +133,29 @@ const ProjectUpload = () => {
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3  my-[20px]">
             <input
-              className="border px-3 w-full rounded-lg"
+              className="border px-3 py-2 w-full rounded-lg"
               type="text"
               placeholder="Project Name"
               name="project_name"
             />
-            <ProjectButton3>
-              {" "}
-              <div className="">
-                <input
-                  type="file"
+
+            <div className="">
+              <UploadFolder
+                setzipFile={setzipFile}
+                setzipFilename={setzipFilename}
+              />
+              {/* <input
+                  type="folder"
                   ref={filenameRef}
                   onChangeCapture={onFileChange}
                   className="file-input w-full hidden  border-0 bg-white"
                   onChange={handleFileInputChange}
                   multiple
-                  directory="" webkitdirectory="" mozdirectory=""
+                  directory=""
+                  webkitdirectory=""
+                  mozdirectory=""
                 />
+
                 {filename === "" ? (
                   <div
                     onClick={filenameHandler}
@@ -159,9 +171,8 @@ const ProjectUpload = () => {
                   >
                     {filename}
                   </div>
-                )}
-              </div>
-            </ProjectButton3>
+                )} */}
+            </div>
           </div>
           <div>
             <input

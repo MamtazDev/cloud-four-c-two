@@ -53,11 +53,11 @@ const EditUser = () => {
       .then((response) => setUser(response.data.user))
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
-  }, [id,navigate]);
-  console.log(user,"newwwwww");
+  }, [id, navigate]);
+  console.log(user, "newwwwww");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -95,7 +95,7 @@ const EditUser = () => {
       })
       .catch((err) => {
         if (err.response.status === 403) {
-        navigate("/")
+          navigate("/");
         }
       });
   };
@@ -149,9 +149,9 @@ const EditUser = () => {
                 </p>
               </div>
             )}
-            <div className="mb-[33px]">
+            <div className="flex items-center gap-8 mb-[33px]">
               <label className="outfit text-[20px] font-[300] mb-[10px] block">
-                Username <sup className="text-[#C9312E]">*</sup>
+                Username
               </label>
               <input
                 type="text"
@@ -160,23 +160,24 @@ const EditUser = () => {
                 Value={user?.username}
               />
             </div>
-            <div className="mb-[33px]">
+            <div className="flex items-center gap-8 mb-[33px]">
               <label className="outfit text-[20px] font-[300] mb-[10px] block">
-                Password <sup className="text-[#C9312E]">*</sup>
+                Password
               </label>
-              <input
-                type="password"
-                className="input input-bordered w-full h-[56px]"
-                name="password"
-           
-              />
-              <p className="outfit text-[12px] font-[400] text-[#767676]">
-                Minimum 8 characters
-              </p>
+              <div className="w-full">
+                <input
+                  type="password"
+                  className="input input-bordered w-full h-[56px]"
+                  name="password"
+                />
+                <p className="outfit text-[12px] font-[400] text-[#767676]">
+                  Minimum 8 characters
+                </p>
+              </div>
             </div>
-            <div className="mb-[42px]">
+            <div className="flex items-center gap-8 mb-[42px]">
               <label className="outfit text-[20px] font-[300] mb-[10px] block">
-                Email <sup className="text-[#C9312E]">*</sup>
+                Email
               </label>
               <input
                 type="email"
@@ -185,7 +186,7 @@ const EditUser = () => {
                 Value={user?.email}
               />
             </div>
-            <div className="mb-[42px]">
+            <div className="flex items-center gap-8 mb-[42px]">
               <label className="outfit text-[20px] font-[300] mb-[10px] block">
                 First
               </label>
@@ -196,7 +197,7 @@ const EditUser = () => {
                 Value={user?.first_name}
               />
             </div>
-            <div className="mb-[42px]">
+            <div className="flex items-center gap-8 mb-[42px]">
               <label className="outfit text-[20px] font-[300] mb-[10px] block">
                 Last
               </label>

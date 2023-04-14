@@ -13,7 +13,7 @@ root.render(
     <BrowserRouter>
       <AuthProvider>
         <CookiesProvider>
-          <App /> 
+          <App />
         </CookiesProvider>
       </AuthProvider>
     </BrowserRouter>

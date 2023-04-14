@@ -18,11 +18,11 @@ const AuthProvider = ({ children }) => {
         },
       })
       .then((response) => setUserList(response.data.users))
-      .catch((err) => {
-        if (err.response.status === 403) {
-        navigate("/")
-        }
-      });
+      // .catch((err) => {
+      //   if (err.response.status === 403) {
+      //   navigate("/")
+      //   }
+      // });
   }, [navigate]);
 
   const userInfo = {

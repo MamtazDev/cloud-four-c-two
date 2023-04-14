@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../Account/account.css";
 import SideLogo from "../../assets/Sidelogo.png";
-import Person from "../../assets/Person.png";
 import Home from "../../assets/Home.png";
 import Info from "../../assets/Info-Square.png";
 import User from "../../assets/User.png";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Sidebar = () => {
@@ -28,7 +28,7 @@ const Sidebar = () => {
       });
   }, []);
   return (
-    <div>
+    <>
       <div className="">
         <label tabIndex="0" htmlFor="dashboard-sidebar" className=" lg:hidden">
           <svg
@@ -63,6 +63,7 @@ const Sidebar = () => {
             <div className="bar__top mb-[180px]">
               <Link to="/dashboard/project">
                 <img
+                  loading="lazy"
                   className="px-[45px] mb-[66px]"
                   src={SideLogo}
                   alt="logo"
@@ -109,7 +110,7 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
 
     // <div className="drawer drawer-mobile">
     //   <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />

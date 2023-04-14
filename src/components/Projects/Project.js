@@ -60,7 +60,7 @@ const Project = () => {
 
   useEffect(() => {
     handleMyprojects();
-  }, []);
+  }, [filter,return_deactivated,return_deleted]);
 
   const handleLeave = (id) => {
     axios
@@ -245,7 +245,7 @@ const Project = () => {
 
 
 
-      
+
       {user?.role === "administrator" && (
         <div className="flex gap-[20px] mb-[20px]">
           <button
